@@ -5,7 +5,7 @@ from tkinter import filedialog
 import csv
 
 # Teams' main file import
-from Team_0 import team_0
+from Team_0.task import team_0
 
 
 class wrapper:
@@ -22,6 +22,13 @@ class wrapper:
         obj_team_0 = team_0(text)
         output_team_0 = obj_team_0.run()
 
+
+
+
+        # Writing all the output logs to the log file
+        with open ("LOGII", "a") as logw:
+            for log in output_team_0:
+                logw.write(log)
 
 obj = wrapper()
 obj.run()
