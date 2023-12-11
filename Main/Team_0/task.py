@@ -3,8 +3,9 @@
 
 class team_0:
 
-    def __init__(self, latex_code):
+    def __init__(self, latex_code, text_begin):
         self.latex_code = latex_code
+        self.text_begin = text_begin
 
     def run(self):  # The function which is going to be invoked in the wrapper class should contain no arguments
 
@@ -39,4 +40,5 @@ class team_0:
                 else:
                     output.append("The first occurrence of acronym " + word[1:-1] + " is not found on the document.\n")
 
+        print(self.text_begin)
         return output
