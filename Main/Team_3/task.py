@@ -15,12 +15,12 @@ class team_3:
     def run(self): # will be invoked by wrapper, shouldn't take arguments
         output = []
         text = self.latex_code
-        scientist_names_used=team_3.scientistName(text,scientist_names_used)
+        # use self
+        scientist_names_used=self.scientistName(text,scientist_names_used)
         print(scientist_names_used)
         
         
         return output
-<<<<<<< Updated upstream
     
     def scientistName(self,text,scientist_names_used):
         scientist_names_used=[]
@@ -35,7 +35,7 @@ class team_3:
                 scientist_names_used.append(word)
         return scientist_names_used
             
-=======
+
         # return output # all output ahould be written in this var
     """
     Make seperate functions for whatever you do and call it in run
@@ -43,9 +43,5 @@ class team_3:
 
     def indexParse(self):
         text = self.latex_code
-<<<<<<< Updated upstream
         start_index = text.find(r"\begin{IEEEkeywords}")
->>>>>>> Stashed changes
-=======
         start_index = text.find(r"\begin{IEEEkeywords}")
->>>>>>> Stashed changes
