@@ -20,6 +20,7 @@ class team_3:
         
         
         return output
+<<<<<<< Updated upstream
     
     def scientistName(self,text,scientist_names_used):
         scientist_names_used=[]
@@ -34,3 +35,17 @@ class team_3:
                 scientist_names_used.append(word)
         return scientist_names_used
             
+=======
+        # return output # all output ahould be written in this var
+    """
+    Make seperate functions for whatever you do and call it in run
+    """
+
+    def indexParse(self):
+        text = self.latex_code
+<<<<<<< Updated upstream
+        start_index = text.find(r"\begin{IEEEkeywords}")
+>>>>>>> Stashed changes
+=======
+        start_index = text.find(r"\begin{IEEEkeywords}")
+>>>>>>> Stashed changes
