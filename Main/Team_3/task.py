@@ -63,14 +63,24 @@ class team_3:
         
         end_index = text.find(r"\end{IEEEkeywords}") 
         
-        index_text = text[start_index+21:end_index-1].rstrip() # 21 is to offset \begin{IEEEkeywords}
+        index_text = text[start_index+21:end_index].rstrip() # 21 is to offset \begin{IEEEkeywords}
+
+        """
+        Checking alphabetical order 
+        """
+        
+        comma_list = [i.strip()[0].lower() for i in index_text.split(",") if i.strip()[0].isalpha()]
+        
+        if comma_list != sorted(comma_list):
+            output.append("Index terms are not in alphabetical order")
+
         index_text_list = index_text.replace(","," ").split(" ")
         reference_text = index_text.capitalize()
         reference_text_list = reference_text.replace(","," ").split(" ")
         
         """
         Checking if index terms are in Sentence case
-        Only exception is Acronyms Considering Acronyms 
+        Only exception is Acronyms. Considering Acronyms 
         as having All capital letters, last alphabet
         can be small
         """
@@ -78,11 +88,11 @@ class team_3:
         for i,j in zip(index_text_list,reference_text_list):
             if not i[:-1].isupper():
                 if i != j:
-                    output.append(f"{i} is not in proper format")
+                    output.append(f"Word {i} is not in proper format")
         """
         Checking for full stop at the end of index terms
         """
         
         if index_text_list[-1][-1] !=".":  # last character should be .
-            output.append(f"full stop not present at the end of index")
+            output.append(f"Full stop not present at the end of index")
         return output
