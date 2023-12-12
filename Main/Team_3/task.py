@@ -19,7 +19,7 @@ class team_3:
         str = '='*50
         self.scientistName(text,output)
         output.append(str+'\n\t\t\t\t\t\tIndex Related Comments\n'+str)
-        output.extend(self.indexParse())
+        output.extend(self.indexCheck())
         
         
         return output
@@ -48,7 +48,7 @@ class team_3:
     Make seperate functions for whatever you do and call it in run
     """
 
-    def indexParse(self):
+    def indexCheck(self):
         text = self.latex_code
         output = []
         
