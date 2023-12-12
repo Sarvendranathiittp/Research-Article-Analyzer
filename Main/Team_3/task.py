@@ -85,7 +85,6 @@ class team_3:
         Checking if index terms are in Sentence case
         Acronyms to be included 
         """
-        print(index_text_list,reference_text_list)
         for i,j in zip(index_text_list,reference_text_list):
             if not i[:-1].isupper():
                 if i != j:
