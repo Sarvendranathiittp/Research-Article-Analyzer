@@ -19,7 +19,7 @@ class team_3:
         str = '='*50
         self.scientistName(text,output)
         output.append(str+'\n\t\t\t\t\t\tIndex Related Comments\n'+str)
-        
+        output.extend(self.indexParse())
         
         
         return output
@@ -44,12 +44,41 @@ class team_3:
         output.append('Scientist Names Used = '+str1+'\n')
             
 
-        # return output # all output ahould be written in this var
     """
     Make seperate functions for whatever you do and call it in run
     """
 
     def indexParse(self):
         text = self.latex_code
+        output = []
+        
         start_index = text.find(r"\begin{IEEEkeywords}")
-        start_index = text.find(r"\begin{IEEEkeywords}")
+        if start_index == -1:
+            output.append("Index Terms not present in document")
+            return output
+        
+        end_index = text.find(r"\end{IEEEkeywords}") 
+        
+        index_text = text[start_index+21:end_index-1].rstrip() # 21 is to offset \begin{IEEEkeywords}
+        index_text_list = index_text.replace(","," ").split(" ")
+        reference_text = index_text.capitalize()
+        reference_text_list = reference_text.replace(","," ").split(" ")
+        
+        """
+        Checking if index terms are in Sentence case
+        Only exception is Acronyms Considering Acronyms 
+        as having All capital letters, last alphabet
+        can be small
+        """
+        
+        for i,j in zip(index_text_list,reference_text_list):
+            if not i[:-1].isupper():
+                if i != j:
+                    output.append(f"{i} is not in proper format")
+        """
+        Checking for full stop at the end of index terms
+        """
+        
+        if index_text_list[-1][-1] !=".":  # last character should be .
+            output.append(f"full stop not present at the end of index")
+        return output
