@@ -59,7 +59,7 @@ class team_3:
         
         end_index = text.find(r"\end{IEEEkeywords}") 
         
-        index_text = text[start_index+21:end_index-1].rstrip() # 21 is to offset \begin{IEEEkeywords}
+        index_text = text[start_index+21:end_index].rstrip() # 21 is to offset \begin{IEEEkeywords}
         index_text_list = index_text.replace(","," ").split(" ")
         reference_text = index_text.capitalize()
         reference_text_list = reference_text.replace(","," ").split(" ")
