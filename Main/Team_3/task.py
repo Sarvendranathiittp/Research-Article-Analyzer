@@ -32,8 +32,9 @@ class team_3:
                          'Faraday','Dmitri Mendeleev','Carl Sagan','Andrei Sakharov','Lise Meitner',
                          'Edwin Hubble','Jocelyn Bell Burnell','Chandrasekhar Subrahmanyan',
                          'Gaussian','Doppler'}
+        scientist_names = {string.lower() for string in scientist_names}
         for word in text.split(' '):
-            if word in scientist_names:
+            if word.lower() in scientist_names:
                 scientist_names_used.add(word)
         str1=''
         for word in scientist_names_used:
@@ -42,8 +43,11 @@ class team_3:
             else:
                 str1=str1+', '+word
         output.append('Scientist Names Used = '+str1+'\n')
+        for word in scientist_names_used:
+            if word[0].islower() is True:
+                output.append(word+" should start with a capital letter as it is a proper name ")
+        
             
-
     """
     Make seperate functions for whatever you do and call it in run
     """
