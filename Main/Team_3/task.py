@@ -76,7 +76,7 @@ class team_3:
         
         """
         Checking if index terms are in Sentence case
-        Only exception is Acronyms Considering Acronyms 
+        Only exception is Acronyms. Considering Acronyms 
         as having All capital letters, last alphabet
         can be small
         """
