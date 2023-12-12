@@ -16,24 +16,32 @@ class team_3:
         output = []
         text = self.latex_code
         # use self
-        scientist_names_used=self.scientistName(text,scientist_names_used)
-        print(scientist_names_used)
+        str = '='*50
+        self.scientistName(text,output)
+        output.append(str+'\n\t\t\t\t\t\tIndex Related Comments\n'+str)
+        
         
         
         return output
     
-    def scientistName(self,text,scientist_names_used):
-        scientist_names_used=[]
-        scientist_names={'Isaac Newton','Albert Einstein','Galileo Galilei','Niels Bohr','Marie Curie',
-                         'Max Planck','James Clerk Maxwell','Werner Heisenberg','Richard Feynman',
-                         'Erwin Schrödinger','Enrico Fermi','Stephen Hawking','Michael Faraday',
-                         'Dmitri Mendeleev','Carl Sagan','Andrei Sakharov','Lise Meitner',
+    def scientistName(self,text,output):
+        scientist_names_used=set()
+        scientist_names={'Isaac Newton','Newton','Albert Einstein','Einstein','Galileo Galilei','Niels Bohr','Bohr','Marie Curie',
+                         'Max Planck','Planck','James Clerk Maxwell','Maxwell','Werner Heisenberg','Heisenberg','Richard Feynman',
+                         'Feynman','Erwin Schrödinger','Schrödinger','Enrico Fermi','Stephen Hawking','Hawking','Michael Faraday',
+                         'Faraday','Dmitri Mendeleev','Carl Sagan','Andrei Sakharov','Lise Meitner',
                          'Edwin Hubble','Jocelyn Bell Burnell','Chandrasekhar Subrahmanyan',
                          'Gaussian','Doppler'}
         for word in text.split(' '):
             if word in scientist_names:
-                scientist_names_used.append(word)
-        return scientist_names_used
+                scientist_names_used.add(word)
+        str1=''
+        for word in scientist_names_used:
+            if str1=='':
+                str1=word
+            else:
+                str1=str1+', '+word
+        output.append('Scientist Names Used = '+str1+'\n')
             
 
         # return output # all output ahould be written in this var
