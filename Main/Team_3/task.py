@@ -51,6 +51,22 @@ class team_3:
     """
     Make seperate functions for whatever you do and call it in run
     """
+    def acron(self,text0):
+        acronym_word = []
+        text=text0.replace(",","")
+        for word in text.split(' '):
+            if len(word)>1:
+                if word[0:2].isupper():  
+                    index = len(acronym_word)
+                    acronym_word.insert(index,word)
+            else:
+                pass
+        uniq=sorted(set(acronym_word))
+        unique_words = []
+        for word in uniq:
+            if word not in unique_words:
+                unique_words.append(word)
+        
 
     def indexCheck(self):
         text = self.latex_code
