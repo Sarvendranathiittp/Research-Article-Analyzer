@@ -139,6 +139,7 @@ class team_3:
             output.append("Index terms are not in alphabetical order")
         
         index_text_list = index_text.replace(","," ").split(" ")
+        full_stop_check_list = [i.strip() for i in index_text_list if len(i)>=1]
         index_text_list = [i.strip(" .") for i in index_text_list if len(i)>=1]
         reference_text = index_text.capitalize()
         reference_text_list = reference_text.replace(","," ").split(" ")
@@ -159,6 +160,6 @@ class team_3:
         Checking for full stop at the end of index terms
         """
         
-        if index_text_list[-1][-1] !=".":  # last character should be .
+        if full_stop_check_list[-1][-1] !=".":  # last character should be .
             output.append(f"Full stop not present at the end of index")
         return output
