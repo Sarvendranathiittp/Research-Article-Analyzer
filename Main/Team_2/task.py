@@ -27,12 +27,17 @@ class team_2:
         # Find the index of \end{abstract}
         end_abstract_index = self.latex_content.find(r'\end{abstract}', begin_abstract_index)
 
-        # Extract the abstract content
+        # Extract the abstract content without \begin{abstract} and \end{abstract}
         if begin_abstract_index != -1 and end_abstract_index != -1:
-            abstract_content = self.latex_content[begin_abstract_index:end_abstract_index + len(r'\end{abstract}')].strip()
+            abstract_content = self.latex_content[begin_abstract_index + len(r'\begin{abstract}'):end_abstract_index].strip()
             return abstract_content
         else:
             return None
+   
+    def count_words(self, text):
+        # Split the text into words and return the count
+        words = text.split()
+        return len(words)
 
 # Example usage:
 latex_file_path = r"C:\Users\Piyush\Github_repo\Research-Article-Analyzer\Resources\Latex_example\AS_in_CR_OC_SPU_cam_ready_v5.tex"
@@ -48,13 +53,9 @@ abstract = obj_team_2.extract_abstract()
 if abstract:
     print("Abstract:")
     print(abstract)
+    
+    # Call the count_words method using the obj_team_2 instance
+    word_count = obj_team_2.count_words(abstract)
+    print(f"Number of words in the abstract: {word_count}")
 else:
     print("No abstract found.")
-
-
-
-
-
-
-
-
