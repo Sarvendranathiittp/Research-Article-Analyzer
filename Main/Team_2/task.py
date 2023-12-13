@@ -33,9 +33,8 @@ class team_2:
             return abstract_content
         else:
             return None
-
 # Example usage:
-latex_file_path = r"C:\Users\Piyush\Github_repo\Research-Article-Analyzer\Resources\Latex_example\AS_in_CR_OC_SPU_cam_ready_v5.tex"
+latex_file_path = r"C:\Users\rashm\Research-Article-Analyzer\Resources\Latex_example\AS_in_CR_OC_SPU_cam_ready_v5.tex"
 begin_document_index =18804 # Replace with the actual index of \begin{document}
 
 with open(latex_file_path, 'r', encoding='utf-8') as latex_file:
