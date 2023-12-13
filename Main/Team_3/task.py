@@ -70,13 +70,34 @@ class team_3:
                 str1=str1+', '+word
         output.append('\nScientist Names Used = '+str1+'\n')
         for word in scientist_names_used:
-            if word[0].islower() is True:
+            if word[0].islower() is True: # can directly check True/False is True not required
                 output.append(word+" should start with a capital letter as it is a proper name ")
         
             
     """
     Make seperate functions for whatever you do and call it in run
     """
+    def acron(self,text,output):
+        start_index = text.find(r"\begin{IEEEkeywords}")        
+        end_index = text.find(r"\end{IEEEkeywords}") 
+        index_text = text[start_index+21:end_index].rstrip() 
+        index_text = index_text.strip()
+        acronym_word = []
+        text1=index_text.replace(","," ")
+        text2=text1.replace("."," ")
+        for word in text2.split(' '):
+            if len(word)>1:
+                if word[0:2].isupper():  
+                    index = len(acronym_word)
+                    acronym_word.insert(index,word)
+            else:
+                pass
+        uniq=sorted(set(acronym_word))
+        unique_words = []
+        for word in uniq:
+            if word not in unique_words:
+                output.append("\n"+word)
+        
 
     def indexCheck(self):
         text = self.latex_code
@@ -90,7 +111,8 @@ class team_3:
         end_index = text.find(r"\end{IEEEkeywords}") 
         
         index_text = text[start_index+21:end_index].rstrip() # 21 is to offset \begin{IEEEkeywords}
-
+        index_text = index_text.strip()
+        
         """
         Checking alphabetical order 
         """
@@ -99,22 +121,24 @@ class team_3:
         
         if comma_list != sorted(comma_list):
             output.append("Index terms are not in alphabetical order")
-
+        
         index_text_list = index_text.replace(","," ").split(" ")
+        index_text_list = [i.strip() for i in index_text_list]
         reference_text = index_text.capitalize()
         reference_text_list = reference_text.replace(","," ").split(" ")
+        reference_text_list = [i.strip() for i in reference_text_list]
         
         """
         Checking if index terms are in Sentence case
-        Only exception is Acronyms. Considering Acronyms 
-        as having All capital letters, last alphabet
-        can be small
+        Acronyms to be included 
         """
-        
         for i,j in zip(index_text_list,reference_text_list):
             if not i[:-1].isupper():
                 if i != j:
-                    output.append(f"Word {i} is not in proper format")
+                    if j[0].isupper():
+                        output.append("First letter of first word must be in Capital Case")
+                    else:
+                        output.append(f"Word {i.strip()} is in the middle of the sentence, so should be in lower case ")
         """
         Checking for full stop at the end of index terms
         """
