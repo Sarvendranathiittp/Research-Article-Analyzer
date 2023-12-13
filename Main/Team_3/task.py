@@ -141,7 +141,8 @@ class team_3:
         
         comma_list = [i.strip()[0].lower() for i in index_text.split(",") if len(i)>=1 and i.strip()[0].isalpha()]
         if comma_list != sorted(comma_list):
-            output.append("Index terms are not in alphabetical order")
+            line = self.lineNumber(start_index+21)
+            output.append(f"At Line {line} : Index terms are not in alphabetical order")
         
         index_text_list = index_text.replace(","," ").split(" ")
         full_stop_check_list = [i.strip() for i in index_text_list if len(i)>=1]
