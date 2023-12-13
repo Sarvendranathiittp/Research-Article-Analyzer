@@ -64,7 +64,7 @@ class team_3:
                 
         for key,value in location.items():
             if text[key:key+len(value)]!=value:
-                output.append(text[key:key+len(value)]+" is not in proper format ")
+                output.append("At line "+self.line_number(text,key)+":"+text[key:key+len(value)]+" is not in proper format ")
         
         for element in scientist_names:
                 # Check if the element is a list
@@ -163,3 +163,12 @@ class team_3:
         if full_stop_check_list[-1][-1] !=".":  # last character should be .
             output.append(f"Full stop not present at the end of index")
         return output
+
+    def line_number(text,target_index):
+        line_count=0
+        current_index=0
+        while current_index<target_index:
+            if text[current_index]=='\n':
+                line_count+=1
+            current_index+=1
+        return line_count
