@@ -30,51 +30,64 @@ class team_3:
         location=dict()
         #set to avoid repeatition
         scientist_names_used=set()
+        scientist_names_used1=set()
+        scientist_names2=[]
         #List is used for ordering       
-        scientist_names=['Isaac Newton','Newton','Albert Einstein','Einstein','Galileo Galilei','Niels Bohr','Bohr','Marie Curie',
-                          'Max Planck','Planck','James Clerk Maxwell','Maxwell','Werner Heisenberg','Heisenberg','Richard Feynman',
-                         'Feynman','Erwin Schrödinger','Schrödinger','Enrico Fermi','Stephen Hawking','Hawking','Michael Faraday',
-                         'Faraday','Dmitri Mendeleev','Carl Sagan','Andrei Sakharov','Lise Meitner',
+        scientist_names=[['Isaac Newton','Newton'],['Albert Einstein','Einstein'],'Galileo Galilei',['Niels Bohr','Bohr'],'Marie Curie',
+                          ['Max Planck','Planck'],['James Clerk Maxwell','Maxwell'],['Werner Heisenberg','Heisenberg'],['Richard Feynman','Feynman'],
+                          ['Erwin Schrödinger','Schrödinger'],'Enrico Fermi','Stephen Hawking','Hawking',['Michael Faraday',
+                         'Faraday'],'Dmitri Mendeleev','Carl Sagan','Andrei Sakharov','Lise Meitner',
                          'Edwin Hubble','Jocelyn Bell Burnell','Chandrasekhar Subrahmanyan',
                          'Gaussian','Doppler']
+        
+        for element in scientist_names:
+            if isinstance(element, list):
+                scientist_names2.extend(element)
+            else:
+                scientist_names2.append(element)
+        #scientist_names2con
         #scientist_names 1 contains all the scientist names in lower case
-        scientist_names1 = [string.lower() for string in scientist_names]
+        scientist_names1 = [string.lower() for string in scientist_names2]
 
         #text1 contains all the latex code in lower case
         text1 = text.lower()
 
-        for word,realword in zip(scientist_names1,scientist_names):
+        """If the scientist names are present in the text it will add 
+        its location in the dictionary along with the real word"""
+        for word,realword in zip(scientist_names1,scientist_names2):
             if text1.find(word)!=-1:
                 location[text1.find(word)]=realword
                 #output.append(str(text1.find(word))+" "+realword)
-                scientist_names_used.add(realword)
+                scientist_names_used.add(text[text1.find(word):text1.find(word)+len(word)])
                 
         for key,value in location.items():
             if text[key:key+len(value)]!=value:
                 output.append(text[key:key+len(value)]+" is not in proper format ")
+        
+        for element in scientist_names:
+                # Check if the element is a list
+            if isinstance(element, list):
+                # Check if any element in the sublist is present in S1
+                if any(sub_element in scientist_names_used for sub_element in element):
+                    # Add the first element of the sublist to the set
+                    scientist_names_used1.add(element[0])
+            else:
+                # Check if the standalone element is present in S1
+                if element in scientist_names_used:
+                    # Add the standalone element to the set
+                    scientist_names_used1.add(element)
 
-
-
-
-        """for word in scientist_names:
-            if text.find(word)!=-1:
-                scientist_names_used.add(word)
-
-        for word in text.split(' '):
-            if word.lower() in scientist_names:
-                scientist_names_used.add(word)"""
         str1=''
-        for word in scientist_names_used:
+        for word in scientist_names_used1:
             if str1=='':
                 str1=word
             else:
                 str1=str1+', '+word
-        output.append('\nScientist Names Used = '+str1+'\n')
         for word in scientist_names_used:
             if word[0].islower() is True: # can directly check True/False is True not required
                 output.append(word+" should start with a capital letter as it is a proper name ")
         
-            
+        output.append('\nScientist Names Used = '+str1+'\n')        
     """
     Make seperate functions for whatever you do and call it in run
     """
