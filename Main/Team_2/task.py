@@ -38,24 +38,23 @@ class team_2:
         # Split the text into words and return the count
         words = text.split()
         return len(words)
-
-# Example usage:
-latex_file_path = r"C:\Users\Piyush\Github_repo\Research-Article-Analyzer\Resources\Latex_example\AS_in_CR_OC_SPU_cam_ready_v5.tex"
-begin_document_index =18804 # Replace with the actual index of \begin{document}
-
-with open(latex_file_path, 'r', encoding='utf-8') as latex_file:
-    latex_content = latex_file.read()
-
-# Assuming you have the begin_document_index
-obj_team_2 = team_2(latex_content, begin_document_index)
-abstract = obj_team_2.extract_abstract()
-
-if abstract:
-    print("Abstract:")
-    print(abstract)
     
-    # Call the count_words method using the obj_team_2 instance
-    word_count = obj_team_2.count_words(abstract)
-    print(f"Number of words in the abstract: {word_count}")
-else:
-    print("No abstract found.")
+    def run(self):
+        abstract = self.extract_abstract()
+        output = [] # The output would be updated with the extracted title and abstract along with the word counts respectively.
+
+        if abstract:
+
+            output.append(f"Abstract: \n{abstract}")
+        
+            # Call the count_words method using the obj_team_2 instance
+            word_count = self.count_words(abstract)
+            print(f"Abstract is found,data is updated in LOGII file")
+
+            output.append(f"\n Number of words in the abstract: {word_count}")
+       
+        else:
+            output.append("No abstract found.")
+
+            print("No abstract found.")
+        return output
