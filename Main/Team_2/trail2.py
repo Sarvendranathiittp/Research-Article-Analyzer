@@ -42,7 +42,7 @@ print("List of words:", word_list)
 
 def count_words(iyn):
     words = iyn.split()
-    return len(words)
+    return (len(words)-1)
 
 
 word_count = count_words(title)
