@@ -157,17 +157,19 @@ class team_3:
         for i,j in zip(index_text_list,reference_text_list):
             if not sum([1 for _ in i if _.isupper()])>=2:
                 if i != j:
+                    line = self.lineNumber(start_index+21 + index_text.find(i))
                     if j[0].isupper():
-                        output.append("First letter of first word must be in Capital Case")
+                        output.append(f"At Line {line} : First letter of first word must be in Capital Case")
                     else:
-                        output.append(f"Word {i.strip()} is in the middle of the sentence, so should be in lower case ")
+                        output.append(f"At Line {line} : Word {i.strip()} is in the middle of the sentence, so should be in lower case ")
         """
         Checking for full stop at the end of index terms
         """
         
         if full_stop_check_list[-1][-1] !=".":  # last character should be .
-            output.append(f"Full stop not present at the end of index")
-        return output if len(output)>=1 else ["No errors in Index"] 
+            line = self.lineNumber(start_index+21 + index_text.find(full_stop_check_list[-1][-1]))
+            output.append(f"At Line {line} : Full stop not present at the end of index")
+        return output if len(output)>=1 else ["No errors in Index"]
 
     def lineNumber(self,target_index):
         line_count=0
