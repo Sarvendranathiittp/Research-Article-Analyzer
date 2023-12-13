@@ -28,9 +28,10 @@ class team_3:
     
     def scientistName(self,text,output):
         location=dict()
-        #set to avoid repeatition
+        # "set" to avoid repeatition
         scientist_names_used=set()
         scientist_names_used1=set()
+        scientist_names_used2=set()
         scientist_names2=[]
         #List is used for ordering       
         scientist_names=[['Isaac Newton','Newton'],['Albert Einstein','Einstein'],'Galileo Galilei',['Niels Bohr','Bohr'],'Marie Curie',
@@ -45,8 +46,8 @@ class team_3:
                 scientist_names2.extend(element)
             else:
                 scientist_names2.append(element)
-        #scientist_names2con
-        #scientist_names 1 contains all the scientist names in lower case
+        #scientist_names2 expands all the sublists and contains only strings and not sublists
+        #scientist_names1 contains all the scientist names in lower case
         scientist_names1 = [string.lower() for string in scientist_names2]
 
         #text1 contains all the latex code in lower case
@@ -59,6 +60,7 @@ class team_3:
                 location[text1.find(word)]=realword
                 #output.append(str(text1.find(word))+" "+realword)
                 scientist_names_used.add(text[text1.find(word):text1.find(word)+len(word)])
+                scientist_names_used2.add(realword)
                 
         for key,value in location.items():
             if text[key:key+len(value)]!=value:
@@ -68,15 +70,14 @@ class team_3:
                 # Check if the element is a list
             if isinstance(element, list):
                 # Check if any element in the sublist is present in S1
-                if any(sub_element in scientist_names_used for sub_element in element):
+                if any(sub_element in scientist_names_used2 for sub_element in element):
                     # Add the first element of the sublist to the set
                     scientist_names_used1.add(element[0])
             else:
                 # Check if the standalone element is present in S1
-                if element in scientist_names_used:
+                if element in scientist_names_used2:
                     # Add the standalone element to the set
                     scientist_names_used1.add(element)
-
         str1=''
         for word in scientist_names_used1:
             if str1=='':
@@ -88,6 +89,8 @@ class team_3:
                 output.append(word+" should start with a capital letter as it is a proper name ")
         
         output.append('\nScientist Names Used = '+str1+'\n')        
+    
+    
     """
     Make seperate functions for whatever you do and call it in run
     """
