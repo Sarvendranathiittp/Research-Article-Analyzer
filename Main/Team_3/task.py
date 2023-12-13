@@ -139,17 +139,17 @@ class team_3:
             output.append("Index terms are not in alphabetical order")
         
         index_text_list = index_text.replace(","," ").split(" ")
-        index_text_list = [i.strip() for i in index_text_list if len(i)>=1] # removing ""
+        index_text_list = [i.strip(" .") for i in index_text_list if len(i)>=1]
         reference_text = index_text.capitalize()
         reference_text_list = reference_text.replace(","," ").split(" ")
         reference_text_list = [i.strip() for i in reference_text_list if len(i)>=1]
         
         """
         Checking if index terms are in Sentence case
-        Acronyms to be included 
+        Considering any word with >=2 upper case characters as Acronyms
         """
         for i,j in zip(index_text_list,reference_text_list):
-            if not i.rstrip(".")[:-1].isupper():
+            if not sum([1 for _ in i if _.isupper()])>=2:
                 if i != j:
                     if j[0].isupper():
                         output.append("First letter of first word must be in Capital Case")
