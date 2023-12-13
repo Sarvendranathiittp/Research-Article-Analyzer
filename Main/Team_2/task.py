@@ -19,6 +19,8 @@ class team_2:
     def __init__(self, latex_content, begin_document_index):
         self.latex_content = latex_content
         self.begin_document_index = begin_document_index
+    
+    
 
     def extract_abstract(self):
         # Find the index of \begin{abstract} using the given begin_document_index
