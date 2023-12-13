@@ -162,4 +162,4 @@ class team_3:
         
         if full_stop_check_list[-1][-1] !=".":  # last character should be .
             output.append(f"Full stop not present at the end of index")
-        return output
+        return output if len(output) >= 1 else ["No errors in Index"] 
