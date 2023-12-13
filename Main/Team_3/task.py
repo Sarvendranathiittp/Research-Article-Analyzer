@@ -61,10 +61,14 @@ class team_3:
                 #output.append(str(text1.find(word))+" "+realword)
                 scientist_names_used.add(text[text1.find(word):text1.find(word)+len(word)])
                 scientist_names_used2.add(realword)
-                
+            
+        #key contains the index number 'character index'
         for key,value in location.items():
             if text[key:key+len(value)]!=value:
-                output.append(text[key:key+len(value)]+" is not in proper format ")
+                
+                line=self.lineNumber(key)
+                output.append("At Line "+str(line)+' : '+text[key:key+len(value)]+" is not in proper format ")
+        output.append('')
         #"At line "+self.line_number(text,key)+":"+
         for element in scientist_names:
                 # Check if the element is a list
@@ -165,11 +169,11 @@ class team_3:
             output.append(f"Full stop not present at the end of index")
         return output if len(output)>=1 else ["No errors in Index"] 
 
-    def line_number(text,target_index):
+    def lineNumber(self,target_index):
         line_count=0
         current_index=0
-        while current_index<target_index:
-            if text[current_index]=='\n':
+        while current_index<=target_index:
+            if self.latex_code[current_index]=='\n':
                 line_count+=1
             current_index+=1
-        return line_count
+        return line_count+1
