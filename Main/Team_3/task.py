@@ -143,7 +143,7 @@ class team_3:
         index_text_list = [i.strip(" .") for i in index_text_list if len(i)>=1]
         reference_text = index_text.capitalize()
         reference_text_list = reference_text.replace(","," ").split(" ")
-        reference_text_list = [i.strip() for i in reference_text_list if len(i)>=1]
+        reference_text_list = [i.strip(" .") for i in reference_text_list if len(i)>=1]
         
         """
         Checking if index terms are in Sentence case
