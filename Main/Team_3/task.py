@@ -17,11 +17,11 @@ class team_3:
         text = self.latex_code
         # use self
         str = '='*50
-        output.append(str+'\n\tScientist Names Related Comments\n'+str)
+        output.append(str+'\n\tScientist Names Related Comments\n'+str+'\n')
         self.scientistName(text,output)
         output.append(str+'\n\tIndex Related Comments\n'+str+'\n')
         output.extend(self.indexCheck())
-        output.append('\n'+str+'\n\tAcronym Related Comments\n'+str)
+        #output.append('\n'+str+'\n\tAcronym Related Comments\n'+str)
         self.acron(text,output)
         
         return output
@@ -64,8 +64,8 @@ class team_3:
                 
         for key,value in location.items():
             if text[key:key+len(value)]!=value:
-                output.append("At line "+self.line_number(text,key)+":"+text[key:key+len(value)]+" is not in proper format ")
-        
+                output.append(text[key:key+len(value)]+" is not in proper format ")
+        #"At line "+self.line_number(text,key)+":"+
         for element in scientist_names:
                 # Check if the element is a list
             if isinstance(element, list):
@@ -111,10 +111,11 @@ class team_3:
             else:
                 pass
         unique_words = []
+        """
         for word in acronym_word:
             if word not in unique_words:
                 output.append("\n"+word)
-        
+        """
 
     def indexCheck(self):
         text = self.latex_code
