@@ -51,10 +51,15 @@ class team_3:
     """
     Make seperate functions for whatever you do and call it in run
     """
-    def acron(self,text0):
+    def acron(self,text,output):
+        start_index = text.find(r"\begin{IEEEkeywords}")        
+        end_index = text.find(r"\end{IEEEkeywords}") 
+        index_text = text[start_index+21:end_index].rstrip() 
+        index_text = index_text.strip()
         acronym_word = []
-        text=text0.replace(",","")
-        for word in text.split(' '):
+        text1=index_text.replace(","," ")
+        text2=text1.replace("."," ")
+        for word in text2.split(' '):
             if len(word)>1:
                 if word[0:2].isupper():  
                     index = len(acronym_word)
@@ -65,7 +70,7 @@ class team_3:
         unique_words = []
         for word in uniq:
             if word not in unique_words:
-                unique_words.append(word)
+                output.append("\n"+word)
         
 
     def indexCheck(self):
