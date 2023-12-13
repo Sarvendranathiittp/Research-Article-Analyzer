@@ -134,23 +134,22 @@ class team_3:
         Checking alphabetical order 
         """
         
-        comma_list = [i.strip()[0].lower() for i in index_text.split(",") if i.strip()[0].isalpha()]
-        
+        comma_list = [i.strip()[0].lower() for i in index_text.split(",") if len(i)>=1 and i.strip()[0].isalpha()]
         if comma_list != sorted(comma_list):
             output.append("Index terms are not in alphabetical order")
         
         index_text_list = index_text.replace(","," ").split(" ")
-        index_text_list = [i.strip() for i in index_text_list]
+        index_text_list = [i.strip() for i in index_text_list if len(i)>=1] # removing ""
         reference_text = index_text.capitalize()
         reference_text_list = reference_text.replace(","," ").split(" ")
-        reference_text_list = [i.strip() for i in reference_text_list]
+        reference_text_list = [i.strip() for i in reference_text_list if len(i)>=1]
         
         """
         Checking if index terms are in Sentence case
         Acronyms to be included 
         """
         for i,j in zip(index_text_list,reference_text_list):
-            if not i[:-1].isupper():
+            if not i.rstrip(".")[:-1].isupper():
                 if i != j:
                     if j[0].isupper():
                         output.append("First letter of first word must be in Capital Case")
