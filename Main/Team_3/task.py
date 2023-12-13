@@ -68,7 +68,6 @@ class team_3:
                 
                 line=self.lineNumber(key)
                 output.append("At Line "+str(line)+' : '+text[key:key+len(value)]+" is not in proper format ")
-        output.append('')
         #"At line "+self.line_number(text,key)+":"+
         for element in scientist_names:
                 # Check if the element is a list
@@ -91,8 +90,10 @@ class team_3:
         for word in scientist_names_used:
             if word[0].islower() is True: # can directly check True/False is True not required
                 output.append(word+" should start with a capital letter as it is a proper name ")
-        
-        output.append('\nScientist Names Used = '+str1+'\n')        
+        if str1=='':
+            output.append('No Scientist Names Used\n')        
+        else:
+            output.append('\nScientist Names Used = '+str1+'\n')        
     
     
     """
