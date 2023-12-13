@@ -17,11 +17,11 @@ class team_3:
         text = self.latex_code
         # use self
         str = '='*50
-        output.append(str+'\n\t\t\t\t\t\tScientist Names Related Comments\n'+str)
+        output.append(str+'\n\tScientist Names Related Comments\n'+str)
         self.scientistName(text,output)
-        output.append(str+'\n\t\t\t\t\t\tIndex Related Comments\n'+str+'\n')
+        output.append(str+'\n\tIndex Related Comments\n'+str+'\n')
         output.extend(self.indexCheck())
-        output.append('\n'+str+'\n\t\t\t\t\t\tAcronym Related Comments\n'+str)
+        output.append('\n'+str+'\n\tAcronym Related Comments\n'+str)
         self.acron(text,output)
         
         return output
