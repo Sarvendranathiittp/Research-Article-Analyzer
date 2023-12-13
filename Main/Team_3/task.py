@@ -1,10 +1,11 @@
-#To Check if Index Terms are written in a senctence and follow the following rules :
-#   1.All articles must contain Index Terms
-#   2.Index Terms should appear in Alphabetical order
-#   3.The first term of the Index Terms list must be capitalized and the list should end with full stop.
-#   4.Acronyms must be capitalized
-#To list the names of all Scientists used in the research paper 
-#and to check if they are started with a capital letter since they are proper names
+"""To Check if Index Terms are written in a senctence and follow the following rules :
+   1.All articles must contain Index Terms
+   2.Index Terms should appear in Alphabetical order
+   3.The first term of the Index Terms list must be capitalized and the list should end with full stop.
+   4.Acronyms must be capitalized
+To list the names of all Scientists used in the research paper 
+and to check if they are started with a capital letter since they are proper names
+* More Scientist names can be added to the list at line 38"""
 
 class team_3:
     #Constructor
@@ -33,12 +34,13 @@ class team_3:
         scientist_names_used1=set()
         scientist_names_used2=set()
         scientist_names2=[]
+
         #List is used for ordering       
         scientist_names=[['Isaac Newton','Newton'],['Albert Einstein','Einstein'],'Galileo Galilei',['Niels Bohr','Bohr'],'Marie Curie',
                           ['Max Planck','Planck'],['James Clerk Maxwell','Maxwell'],['Werner Heisenberg','Heisenberg'],['Richard Feynman','Feynman'],
                           ['Erwin Schrödinger','Schrödinger'],'Enrico Fermi','Stephen Hawking','Hawking',['Michael Faraday',
                          'Faraday'],'Dmitri Mendeleev','Carl Sagan','Andrei Sakharov','Lise Meitner',
-                         'Edwin Hubble','Jocelyn Bell Burnell','Chandrasekhar Subrahmanyan',
+                         'Edwin Hubble','Jocelyn Bell Burnell','Gauss','Chandrasekhar Subrahmanyan',
                          'Gaussian','Doppler']
         
         for element in scientist_names:
