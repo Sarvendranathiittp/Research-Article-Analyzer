@@ -93,11 +93,34 @@ class team_3:
             if word[0].islower() is True: # can directly check True/False is True not required
                 output.append(word+" should start with a capital letter as it is a proper name ")
         if str1=='':
-            output.append('No Scientist Names Used\n')        
+            output.append('No Scientist Names Used\n')
         else:
             output.append('\nScientist Names Used = '+str1+'\n')        
-    
-    
+            
+        # Misspelled names
+        misspelled_names = set()
+        strings=text.split()
+        for name in strings:
+            for correct_names in scientist_names2:
+                if self.is_approximate_match(name,correct_names)=='same':
+                    a=1
+                elif self.is_approximate_match(name,correct_names) is True:
+                    #if self.is_string_in_lists(name, scientist_names2,scientist_names1,scientist_names_used,scientist_names_used2):    
+                    #if name not in scientist_names2 or scientist_names1 or scientist_names_used or scientist_names_used1 or scientist_names_used2:
+                    if name not in scientist_names2 :
+                        if name not in scientist_names1:
+                            if name[-1]!='.':
+                                misspelled_names.add(name)
+        if misspelled_names:
+            output.append("Spelling mistakes found for the following names:")
+            for name in misspelled_names:
+                output.append("At Line "+str(self.lineNumber(text.find(name)))+" : "+name)
+
+
+    def is_string_in_lists(self,search_string, *lists):
+        return any(search_string in my_list for my_list in lists)
+   
+   
     """
     Make seperate functions for whatever you do and call it in run
     """
@@ -207,3 +230,37 @@ class team_3:
                 line_count+=1
             current_index+=1
         return line_count+1
+    
+    # For Finding Mispelled Names
+    def levenshtein_distance(self,str1, str2):
+        m, n = len(str1), len(str2)
+        
+        # Initialize a matrix to store distances
+        dp = [[0] * (n + 1) for _ in range(m + 1)]
+
+        # Initialize the first row and column
+        for i in range(m + 1):
+            dp[i][0] = i
+        for j in range(n + 1):
+            dp[0][j] = j
+
+        # Fill the matrix
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                cost = 0 if str1[i - 1] == str2[j - 1] else 1
+                dp[i][j] = min(
+                    dp[i - 1][j] + 1,        # Deletion
+                    dp[i][j - 1] + 1,        # Insertion
+                    dp[i - 1][j - 1] + cost  # Substitution
+                )
+
+        return dp[m][n]
+
+    def is_approximate_match(self,str1, str2, max_difference=1):
+
+        distance = self.levenshtein_distance(str1, str2)
+        if distance==0 :
+            return 'equal'
+        else:
+            return (distance <= max_difference) 
+
