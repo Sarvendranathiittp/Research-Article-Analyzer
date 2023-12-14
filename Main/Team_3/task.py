@@ -138,24 +138,17 @@ class team_3:
         index_text = text[start_index+21:end_index].rstrip() # 21 is to offset \begin{IEEEkeywords}
         index_text = index_text.strip()
         """
-        Checking if any enumeration/ list is used
+        Checking if any enumeration/ list / formatting is used
         """
 
-        pattern = re.compile(r'\\.*?{.*?}')
+        pattern = re.compile(r'\\.*?{.*?}') # check for \${$} where $ is placeholder for anything of any length
         pattern_matches = re.findall(pattern,index_text)
         
         if len(pattern_matches)>0:
             line = self.lineNumber(start_index+21)
             output.append(f"At Line {line} : Index must be a sentence and should not use any formatting.")
             return output
-        """
-        Checking alphabetical order 
-        """
         
-        comma_list = [i.strip()[0].lower() for i in index_text.split(",") if len(i)>=1 and i.strip()[0].isalpha()]
-        if comma_list != sorted(comma_list):
-            line = self.lineNumber(start_index+21)
-            output.append(f"At Line {line} : Index terms are not in alphabetical order")
         
         index_text_list = index_text.replace(","," ").split(" ")
         full_stop_check_list = [i.strip() for i in index_text_list if len(i)>=1]
@@ -165,9 +158,30 @@ class team_3:
         reference_text_list = [i.strip(" .") for i in reference_text_list if len(i)>=1]
         
         """
+        Checking if the index terms have newlines in them
+        """
+        pattern = re.compile(r'.*?\n\n.*?')
+        pattern_matches = re.findall(pattern,index_text)
+
+        if len(pattern_matches)>0:
+            line = self.lineNumber(start_index+21)
+            output.append(f"At Line {line} : Index must be a sentence")
+            return output
+
+        """
+        Checking alphabetical order 
+        """
+
+        comma_list = [i.strip()[0].lower() for i in index_text.split(",") if len(i)>=1 and i.strip()[0].isalpha()]
+        if comma_list != sorted(comma_list):
+            line = self.lineNumber(start_index+21)
+            output.append(f"At Line {line} : Index terms are not in alphabetical order")
+        
+        """
         Checking if index terms are in Sentence case
         Considering any word with >=2 upper case characters as Acronyms
         """
+        
         for i,j in zip(index_text_list,reference_text_list):
             if not sum([1 for _ in i if _.isupper()])>=2:
                 if i != j:
@@ -184,7 +198,7 @@ class team_3:
             line = self.lineNumber(start_index+21 + index_text.find(full_stop_check_list[-1][-1]))
             output.append(f"At Line {line} : Full stop not present at the end of index")
         return output if len(output)>=1 else ["No errors in Index"]
-
+    
     def lineNumber(self,target_index):
         line_count=0
         current_index=0
