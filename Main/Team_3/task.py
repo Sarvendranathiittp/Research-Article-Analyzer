@@ -6,7 +6,7 @@
 To list the names of all Scientists used in the research paper 
 and to check if they are started with a capital letter since they are proper names
 * More Scientist names can be added to the list at line 38"""
-
+import re
 class team_3:
     #Constructor
     def __init__(self, latex_code, text_begin):
@@ -137,7 +137,17 @@ class team_3:
         
         index_text = text[start_index+21:end_index].rstrip() # 21 is to offset \begin{IEEEkeywords}
         index_text = index_text.strip()
+        """
+        Checking if any enumeration/ list is used
+        """
+
+        pattern = re.compile(r'\\.*?{.*?}')
+        pattern_matches = re.findall(pattern,index_text)
         
+        if len(pattern_matches)>0:
+            line = self.lineNumber(start_index+21)
+            output.append(f"At Line {line} : Index must be a sentence and should not use any formatting.")
+            return output
         """
         Checking alphabetical order 
         """
