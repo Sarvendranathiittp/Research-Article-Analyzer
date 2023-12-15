@@ -8,7 +8,8 @@ class zero:
         equations = self.get_inline_equations()
         for i in range(self.begin_index,len(self.code)):
             if (self.code(i) == '.') and (self.code(i + 1).isdigit()) and self.is_in_equation(i, equations):
-                dotindex.append(i)
+                if not self.code[i-1].isdigit():
+                    dotindex.append(i)
 
 
     def get_inline_equations(self):
