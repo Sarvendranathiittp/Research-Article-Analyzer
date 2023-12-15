@@ -1,23 +1,43 @@
 # Assuming you have the latex_content
 latex_content = r"""
-{\title{
-\vspace*{1cm}
-\Large{ Article title in ENGLISH (12pt, capitalized the first letter of each word [except connectors])\\
-\large{\textcolor{carnelian}{\emph{Título del Artículo en ESPAÑOL (12pt, con mayúsculas la primera letra de cada palabra (excepto conectores)}}}
-\\[0.2cm]}}}
+{\title{\vspace{0cm} \fontsize{10}{12}\selectfont \textbf{COLOMBIAN JOURNAL OF ADVANCED TECHNOLOGIES INDICATIONS FOR PAPER SUBMITTION} 
+
+\vspace{6mm} \textbf{REVISTA COLOMBIANA DE TECNOLOGÍAS DE AVANZADA INDICACIONES PARA LA PRESENTACIÓN DE ARTÍCULOS}\vspace{4mm}}
+\author{\fontsize{10}{12}\selectfont \textbf{\fontsize{10}{12}\selectfont PhD. Autor Principal, Msc. Co-Autor I,} \\ \textbf{\fontsize{10}{12}\selectfont Msc. Co-Autor II}\\ \\
+\small{\textbf{\fontsize{10}{12}\selectfont Universidad de Pamplona}}\\
+\small{\fontsize{10}{12}\selectfont Comité Editorial Revista Colombiana de Tecnologías de Avanzada}\\
+\small{\fontsize{10}{12}\selectfont Ciudadela Universitaria. Pamplona, Norte de Santander, Colombia.} \\ \small{\fontsize{10}{12}\selectfont Tel.: 57-7-5685303, Fax: 57-7-5685303, Ext. 144}\\
+\small{\fontsize{10}{12}\selectfont E-mail: \{correo1,correo2,correo3\}@unipamplona.edu.co}
+}
 """
 
-import re
-
 # Function to remove LaTeX commands
-def remove_latex_commands(text):
-    return re.sub(r'\\[a-zA-Z]+', '', text)
+import re
 
 class team2:
     def __init__(self, latex_content, begin_document_index):
         self.latex_content = latex_content
         self.begin_document_index = begin_document_index
 
+    def process_title(latex_title):
+        # Remove LaTeX formatting commands
+        processed_title = re.sub(r'\\[a-zA-Z]+\{.*?\}', '', latex_title)
+    
+        # Remove additional spaces and curly braces
+        processed_title = re.sub(r'\s+', ' ', processed_title)
+        processed_title = processed_title.strip('{}')
+    
+        # Remove unwanted numbers
+        processed_title = re.sub(r'\b\d+\b', '', processed_title)
+    
+        # Remove additional spaces and curly braces again
+        processed_title = re.sub(r'\s+', ' ', processed_title)
+        processed_title = processed_title.strip('{}')
+
+        # Count the number of words
+        word_count = len(processed_title.split())
+
+        return processed_title, word_count
 
     def extract_title(self, title_command=r'\title', opening_brace='{', closing_brace='}'):
         # Find the index of the title command using the given begin_document_index
@@ -47,21 +67,20 @@ class team2:
             current_index += 1
 
         return None
-# Example usage:
+    
+
+
+#Example usage:
 obj_team2 = team2(latex_content, 0)  # begin_document_index
 title = obj_team2.extract_title()
 
 if title:
-    print("Title (Original):")
-    print(title)
+        print("Title (Original):")
+        print(title)
 
-    # Process the title by removing LaTeX commands
-    processed_title = remove_latex_commands(title)
-    print("Title (Processed):")
-    print(processed_title)
+        processed_title, word_count = process_title(title)
 
-    # Count words in the processed title
-    word_count = len(processed_title.split())
-    print(f"Number of words in the processed title: {word_count}")
+        print(f"Title (Processed): {processed_title}")
+        print(f"Number of words in the processed title: {word_count}")
 else:
-    print("No title found.")
+        print("No title found.")
