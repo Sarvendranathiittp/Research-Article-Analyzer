@@ -33,3 +33,4 @@ doc.generate_tex('output_document')
 
 # Compile the generated LaTeX document (you may need to install a LaTeX distribution)
 #doc.generate_pdf('output_document', clean_tex=True)
+#rdhfghyghiu
