@@ -67,6 +67,6 @@ if(a==keys):
     print("no error")
 else:
     diff=set(a)-set(keys)
-    print(diff)
+    print(diff,"is not defined in starting")
 
 
