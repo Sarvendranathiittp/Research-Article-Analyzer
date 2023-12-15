@@ -5,6 +5,7 @@ class team_5:
     def __init__(self, latex_code, text_begin):
         self.latex_code = latex_code
         self.text_begin = text_begin
+        # self.filepath = filepath
     
     def check_punctuation(self,latex_content):
         self.latex_content = latex_content
@@ -16,9 +17,9 @@ class team_5:
     
         for equation in equations:
             # Extract the equation label if present
+            # line_number = self.find_equation_line_number(equation)
             label_match = re.search(r'\\label{([^}]*)}', equation)
             last_char = equation.strip()[-1] if equation.strip() else None
-            # print(last_char)
             if last_char =="." or last_char ==",":
                 index1 = latex_content.find(equation)
             else: 
@@ -27,30 +28,20 @@ class team_5:
     
                     # Check for punctuation before the label
                     index = equation.find('\\label{' + label + '}')
-                    # print(index)
                     if index > 0:
                         preceding_text = equation[:index]
                     index1 = latex_content.find(equation)
                     # Check if there is a comma or period at the end of the preceding text
                     last_char = preceding_text.strip()[-1] if preceding_text.strip() else None
-            # else :
-            #     last_char = equation.strip()[-1] if equation.strip() else None
-            # print(last_char)
-                
+
             if last_char in [',', '.']:
                 print(f"Punctuation ({last_char}) found before label '{label}' in equation (if any):\n{equation}")
     
                 # Find the index of \end{equation} after the current equation
                 end_equation_index = latex_content.find('\\end{equation}', index1)
-                # print(end_equation_index)
-                # print("////////////////////////////////////")
                 if end_equation_index != -1:
                     # Extract the text immediately after \end{equation}
                     text_after_end = latex_content[end_equation_index + len('\\end{equation}'):].lstrip()
-                    # print(text_after_end)
-                    # print(text_after_end.isalnum())
-                    # while not text_after_end.isalnum():
-                    #     text_after_end = latex_content[len(text_after_end)].lstrip()
     
                     # Find the first word after \end{equation}
                     match = re.search(r'\w+', text_after_end)
@@ -61,18 +52,30 @@ class team_5:
                         if word_after_end and word_after_end[0].isupper():
                             if last_char != '.':
                                 
-                                print("The word after \\end{equation} starts with a capital letter, but the punctuation is not a full stop.")
+                                print("The word after \\end{equation} starts with a capital letter, but the punctuation is not a full stop. In line number")
                         else:
                             if last_char != ',':
-                                print("The word after \\end{equation} does not start with a capital letter, but the punctuation is not a comma.")
+                                print("The word after \\end{equation} does not start with a capital letter, but the punctuation is not a comma.In line number")
                     else:
                         print("Error: Word after \\end{equation} not found.")
                 else:
                     print("Error: \\end{equation} not found after the equation.")
             elif last_char not in [',', '.']:
-                print("Warning: Punctuation not found at the end of the equation (if any).")
+                print("Warning: Punctuation not found at the end of the equation (if any).In line number")
 
-        
+    # def find_equation_line_number(self,target_equation):
+    #     with open(self.filepath, 'r', encoding='utf-8') as file:
+    #        line_number = 0
+
+    #        for line in file:
+    #           line_number += 1
+
+    #           # Check if the line contains the target equation
+    #           if target_equation in line:
+    #              return line_number
+
+        # Equation not found in the file
+        # return None
 
         
         
