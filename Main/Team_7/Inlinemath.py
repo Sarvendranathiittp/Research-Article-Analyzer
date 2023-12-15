@@ -35,6 +35,15 @@ class Inline:
                         paren_index.append(ind)
 
         return paren_index
+    def get_exp(self):
+    # Geneartes a list of indices which are at exponential functions
+        exp_index =[]
+        for i in range(self.begin_index,len(self.code)) :
+            if self.code[i] == 'e' & self.code[i+1] == '^' :
+                exp_index.add(i)
+
+        return exp_index
+    
 
 
 
