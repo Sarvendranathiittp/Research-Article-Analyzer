@@ -12,12 +12,25 @@
 	#def run(self):
 	 #   count_words()
 
-       
+
+      
 
 
 class team_2:
     def __init__(self, latex_content, begin_document_index):
         self.latex_content = latex_content
+        
+        title_index = latex_content.find(r'\title')
+        begin_document_index = latex_content.find(r'\begin{document}')
+
+        # Check if both indices were found
+        if title_index != -1 and begin_document_index != -1:
+            # Choose the minimum index (earlier occurrence)
+            begin_index = min(title_index, begin_document_index)
+        else:
+            # If one index is -1, choose the other (whichever is not -1)
+            begin_index = max(title_index, begin_document_index)
+
         self.begin_document_index = begin_document_index
     
     
