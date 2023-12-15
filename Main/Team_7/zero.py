@@ -5,7 +5,7 @@ class zero:
 
     def run(self):
         dotindex =[]
-        equations = self.get_inline_equations()
+        equations = self.get_inline_equations() +self.display_equations()
         for i in range(self.begin_index,len(self.code)):
             if (self.code(i) == '.') and (self.code(i + 1).isdigit()) and self.is_in_equation(i, equations):
                 if not self.code[i-1].isdigit():
@@ -13,7 +13,7 @@ class zero:
 
 
     def get_inline_equations(self):
-    # A function that generates a list containing starting and ending indices of all the equations
+    # A function that generates a list containing starting and ending indices of only inline equations
         equations = []
         found = False
         current_equation = []
@@ -42,7 +42,20 @@ class zero:
                 equations.append(current_equation)
                 found = False
                 current_equation = []
-            elif not found and self.code[i:i + len("\\begin{equation}")] == "\\begin{equation}" :
+
+    def is_in_equation(self, x, equations):
+        for i in equations:
+            if i[0] < x < i[1]:
+                return True
+        else:
+            return False
+    def display_equations(self):
+    # Function that generates list containing indices of equations
+        equations = []
+        found = False
+        current_equation = []
+        for i in range(self.begin_index, len(self.code)):
+            if not found and self.code[i:i + len("\\begin{equation}")] == "\\begin{equation}" :
                 current_equation.append(i)
                 found = True
             elif found and self.code[i:i + len("\\end{equation")] == "\\begin{equation}" :
@@ -123,13 +136,6 @@ class zero:
                 found = False
                 current_equation = []
         return equations
-
-    def is_in_equation(self, x, equations):
-        for i in equations:
-            if i[0] < x < i[1]:
-                return True
-        else:
-            return False
 
 
 

@@ -22,3 +22,13 @@ class team_7:
             elif self.latex_code[i] == '\n':
                 line += 1
         return None
+
+    def create_error_msg(self,error_index_list, error_type):
+        string_list = []
+        for i in error_index_list:
+            error_string = f"{error_type} at line {self.get_line(i)}"
+            string_list.append(error_string)
+        return string_list
+
+
+
