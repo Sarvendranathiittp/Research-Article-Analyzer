@@ -1,6 +1,6 @@
 # Assuming you have the latex_content
 latex_content = r"""
-\title{
+{\title{
 \vspace*{1cm}
 \Large{ Article title in ENGLISH (12pt, capitalized the first letter of each word [except connectors])\\
 \large{\textcolor{carnelian}{\emph{Título del Artículo en ESPAÑOL (12pt, con mayúsculas la primera letra de cada palabra (excepto conectores)}}}
@@ -34,17 +34,17 @@ class team2:
         while current_index < len(self.latex_content):
             current_char = self.latex_content[current_index]
 
-        if current_char == opening_brace:
-            depth += 1
-        elif current_char == closing_brace:
-            depth -= 1
+            if current_char == opening_brace:
+                depth += 1
+            elif current_char == closing_brace:
+                depth -= 1
 
-        # Check if the closing brace is found and the depth becomes zero
-        if depth == 0 and current_char == closing_brace:
-            title_content = self.latex_content[opening_brace_index + 1:current_index].strip()
-            return title_content
+            # Check if the closing brace is found and the depth becomes zero
+            if depth == 0 and current_char == closing_brace:
+                title_content = self.latex_content[opening_brace_index + 1:current_index].strip()
+                return title_content
 
-        current_index += 1
+            current_index += 1
 
         return None
 # Example usage:
