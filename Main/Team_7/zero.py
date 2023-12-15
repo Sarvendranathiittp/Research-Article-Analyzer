@@ -5,9 +5,9 @@ class zero:
 
     def run(self):
         dotindex =[]
-        equations_=self.get_inline_equations()
+        equations = self.get_inline_equations()
         for i in range(self.begin_index,len(self.code)):
-            if (self.code(i) == '.') & ((self.code(i + 1) <= '9') & (self.code(i + 1) >= '0')):
+            if (self.code(i) == '.') and (self.code(i + 1).isdigit()) and self.is_in_equation(i, equations):
                 dotindex.append(i)
 
 
@@ -121,12 +121,14 @@ class zero:
                 equations.append(current_equation)
                 found = False
                 current_equation = []
-
-
-
-
         return equations
 
+    def is_in_equation(self, x, equations):
+        for i in equations:
+            if i[0] < x < i[1]:
+                return True
+        else:
+            return False
 
 
 
