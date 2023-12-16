@@ -39,6 +39,5 @@ class team_0:
                     pass
                 else:
                     output.append("The first occurrence of acronym " + word[1:-1] + " is not found on the document.\n")
-
         print(self.text_begin)
         return output
