@@ -33,14 +33,23 @@ class team_6:
             postag = pos_tag(tokens) #tagging parts of speech.
             pos_list1={'NN', 'NNS', 'NNP', 'PRP', 'PRP$', 'IN', 'RBR', 'RBS', 'JJ', 'JJR', 'JJS', 'VB', 'RB'}
             pos_list2={'CC','DT'}
+            list3={'before','from','through','with','versus','among','under','between','without'}
             for word, pos in postag:
                 if pos in pos_list1 and word[0].islower():
                     output[i]={'ERROR in line:', [index]}
                     i=i+1
-            # for word,pos in postag:
-            #     if pos in pos_list2:
-            #         if word[0].isupper() or word
-                   
+            for word,pos in postag:
+                if pos in pos_list2 and word[0].islower() and word!=tokens[0] and word!=tokens[-1]:
+                    pass
+                else:
+                    output[i]={'ERROR in line:', [index]}
+                    i=i+1
+            for word in tokens:
+                if word in list3:
+                    output[i]={'ERROR in line:', [index]}
+                    i=i+1
+
+        return output
 
 
 
