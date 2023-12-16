@@ -1,0 +1,218 @@
+\documentclass[10pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{geometry}
+\usepackage[english,spanish]{babel}
+\usepackage{blindtext}
+\usepackage{lipsum}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{changepage}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{ragged2e}
+\usepackage[style=apa,backend=biber]{biblatex}
+\addbibresource{referencias.bib}
+
+\usepackage{parskip}
+
+\usepackage{tikz}
+
+\usetikzlibrary{shapes, arrows}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usetikzlibrary{positioning, arrows.meta}
+\usetikzlibrary{shapes, arrows.meta}
+
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, text width=6em, text centered, rounded corners, minimum height=3em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse, fill=red!20, node distance=3cm, minimum height=2em]
+
+\usepackage{schemata}
+\usetikzlibrary{mindmap}
+
+\usetikzlibrary{fit,positioning}
+
+\geometry{
+    top=2.5cm,
+    left=2.8cm,
+    right=2.8cm,
+    bottom=2.44cm
+}
+
+\tikzset{
+every picture/.append style={
+  execute at begin picture={\deactivatequoting},
+  execute at end picture={\activatequoting}
+  }
+}
+
+\usepackage{titlesec}
+
+\titleformat{\section}{\fontsize{10}{12}\selectfont\bfseries\centering}{\thesection. }{1em}{}
+\titlespacing*{\section}{0pt}{\baselineskip}{\baselineskip}
+
+\titleformat{\subsection}{\fontsize{10}{12}\selectfont \itshape}{\thesubsection. }{1em}{}
+\titlespacing*{\subsection}{0pt}{\baselineskip}{\baselineskip}
+
+\titleformat{\subsubsection}{\fontsize{10}{12}\selectfont \itshape}{\thesubsubsection. }{1em}{}
+\titlespacing*{\subsubsection}{0pt}{\baselineskip}{\baselineskip}
+
+\usepackage[pages=all]{background}
+
+\backgroundsetup{
+ scale=1, %escala de la imagen, es recomendable que sea del mismo tamaño que el pdf
+ color=black, %fondo a usar para transparencia
+ opacity=0.2, %nivel de transparencia
+ angle=0, %en caso de querer una rotación
+ contents={%
+  \includegraphics[width=\paperwidth,height=\paperheight]{Plantilla Latex CIETA.pdf} %nombre de la imagen a utilizar como fondo
+ }%
+}
+
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+\title{\vspace{0cm} \fontsize{10}{12}\selectfont \textbf{COLOMBIAN JOURNAL OF ADVANCED TECHNOLOGIES INDICATIONS FOR PAPER SUBMITTION} 
+
+\vspace{6mm} \textbf{REVISTA COLOMBIANA DE TECNOLOGÍAS DE AVANZADA INDICACIONES PARA LA PRESENTACIÓN DE ARTÍCULOS}\vspace{4mm}}
+\author{\fontsize{10}{12}\selectfont \textbf{\fontsize{10}{12}\selectfont PhD. Autor Principal, Msc. Co-Autor I,} \\ \textbf{\fontsize{10}{12}\selectfont Msc. Co-Autor II}\\ \\
+\small{\textbf{\fontsize{10}{12}\selectfont Universidad de Pamplona}}\\
+\small{\fontsize{10}{12}\selectfont Comité Editorial Revista Colombiana de Tecnologías de Avanzada}\\
+\small{\fontsize{10}{12}\selectfont Ciudadela Universitaria. Pamplona, Norte de Santander, Colombia.} \\ \small{\fontsize{10}{12}\selectfont Tel.: 57-7-5685303, Fax: 57-7-5685303, Ext. 144}\\
+\small{\fontsize{10}{12}\selectfont E-mail: \{correo1,correo2,correo3\}@unipamplona.edu.co}
+}
+\date{\vspace{-6mm}}
+
+\begin{document}
+
+\fontsize{10}{12}\selectfont
+
+\selectlanguage{spanish}
+
+\def\tablename{Tabla}%
+
+\setlength{\parskip}{0mm}
+
+\maketitle
+
+\setlength{\parskip}{3mm}
+
+\selectlanguage{english}
+
+\renewcommand\abstractname{}
+
+\begin{abstract}
+    \fontsize{10}{12}\selectfont
+    \textbf{Abstract:} Our journal has a biannual basis and is dedicated to the engineering area, mainly to the disciplines of electrical, electronics, telecommunications and systems engineering, so the target audience for the magazine that is interested in such areas. We publish scientific research papers or problem reflections in a specific topic, review articles, papers, reviews, discussions and translations, within this thematic framework. We use the IFAC standards for publications.
+
+    \vspace{3mm}
+    
+    \textbf{Keywords:} Publishing rules, procedures, publication, IFAC format.
+    \vspace{-7mm}
+\end{abstract}
+
+\selectlanguage{spanish}
+
+\renewcommand\abstractname{}
+
+\begin{abstract}
+    \fontsize{10}{12}\selectfont
+    \textbf{Resumen:} Nuestra revista tiene una periodicidad semestral y está dedicada al área de las Ingenierías, principalmente a las disciplinas de Ingenierías Eléctrica, Electrónica, Telecomunicaciones y Sistemas; por tanto, el público objetivo de la revista es aquel interesado en tales áreas. Se publicarán artículos de investigación científica o de reflexión sobre un problema o tópico de un área, artículos de revisión, ponencias, reseñas, discusiones y traducciones, dentro de este marco temático. Utilizamos las normas IFAC para publicaciones.
+
+    \vspace{3mm}
+    
+    \textbf{Palabras Clave:} Normativa de publicación, procedimientos, publicación, formato IFAC.
+\end{abstract}
+
+\vspace{3mm}
+
+\setlength{\columnsep}{1cm}
+
+\renewcommand{\tablename}{Tabla}
+
+\begin{multicols}{2}
+\fontsize{10}{12}\selectfont
+
+\section{INTRODUCCIÓN}
+
+El proceso para evaluar los materiales remitidos el editor realizará una primera revisión del material entregado y determinará si cumple con los requisitos exigidos; después de ello, será entregado al Comité Editorial donde se llevará a cabo la selección de los artículos y la elección de los pares para el proceso de evaluación.
+
+En conjunto el artículo debe de enviarse el formato de datos de los autores y de la investigación que se consigue en la página web: \href{http://www.unipamplona.edu.co/unipamplona/hermesoft/portalIG/home_18/recursos/01_general/contenidos/13052008/rev_tec_avanzada.jsp}{Revista Técnica de Avanzada.}
+
+\section{RECOMENDACIONES}
+
+El artículo debe entregarse en formato electrónico (disquete 3½ o CD) o ser enviado por correo electrónico a la dirección de la revista: rcta@unipamplona.edu.co con formato para Word y que contenga todo el material necesario para su evaluación y publicación.
+
+En otro documento aparte se debe de enviar el resumen de la hoja de vida de los autores.
+
+El escrito debe venir acompañado de un resumen en español e inglés que no supere las 150 palabras.
+
+Se recomienda que en éste se indiquen los fines del estudio o la investigación, los procedimientos básicos utilizados, los resultados más destacados y las conclusiones principales del artículo. Se deben presentar e identificar como tales entre 3 a 5 palabras claves en español y en inglés.
+
+\section{NORMAS PARA LA PRESENTACIÓN DE TEXTOS}
+
+El texto -incluye citas, notas a pie de página, tablas, leyendas de figuras y referencias bibliográficas -debe estar digitado, con claridad y limpieza-, en letra \textit{Times New Roman}, 10 puntos, simple espacio, a simple columna y centrado el título en ingles y español, los autores con su respectivo grado científico, afiliación de los autores (primero en negrita la institución de origen). Luego el \textit{Abstract}, el resumen y finalmente las palabras claves en ingles (\textit{Keywords}) y español, todas estas justificadas.
+
+El resto de cuerpo del trabajo debe de estar u a doble columna, a simple espacio, en hojas tamaño carta - 21,5 x 28 cm - con márgenes izquierda y derecha de 2.8 cm y superior 2.5 cm e inferior de 2.4 cm. Los artículos deben tener mínimo 4 páginas y como máximo 8 páginas; con excepción tratándose de artículos de revisión del estado del arte que podrán tener hasta 12 páginas. Todas las páginas deben estar numeradas en orden consecutivo.
+
+\subsection{Tablas, figuras y ecuaciones}
+
+Todo el material gráfico debe llamarse en el texto, de modo directo o entre paréntesis. Debe presentarse a parte del texto y estar numerado consecutivamente (Fig. 1, Mapa 1, Cuadro 1, Tabla 1, Ecuación (1), etc.). Debe incluir la fuente y el título. El material debe presentarse en un programa graficador (Photo Editor, Photo Impact, Photo Shop, Corel, etc.) y no en Word. En caso de ser necesaria alguna autorización para la publicación del material, esta corre por cuenta de quien escribe el artículo.
+
+\begin{table}[H]
+    \centering
+    \caption{\textit{Base de Reglas}}
+    \begin{tabular}{cccccc}
+        \hline
+         & \textbf{NG} & \textbf{NP} & \textbf{C} & \textbf{PP} & \textbf{PG} \\
+        \hline
+        \textbf{NG} & MB & MB & MB & B & B \\
+        \textbf{NP} & MB & MB & B & B & N \\
+        \textbf{C} & B & N & N & N & A \\
+        \textbf{PP} & N & A & A & MA & MA \\
+        \textbf{PG} & A & A & MA & MA & MA \\
+        \hline
+    \end{tabular}
+    \label{tab:Base de Reglas}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{figuras/PID.png}
+    \caption{\justifying \textit{. Respuesta de velocidad del controlador PID y del controlador lógico difuso}}
+    \label{fig:PID Fuzzy}
+\end{figure}
+
+\subsection{Títulos y subtítulos}
+
+El título del documento debe sintetizar la idea principal y debe evitar las palabras que no sirvan para propósitos útiles, que aumenten su extensión o que confundan al lector. Debe ser breve. Los subtítulos indican las principales subdivisiones del texto y deben orientar al lector en los temas que trata el escrito. No debe haber más de tres jerarquías de subtítulos. Deben reflejar, de manera precisa, la organización del documento.
+
+\subsection{Notas de pie a página y citas}
+
+Las notas siempre deben ir a pie de página, estas servirán para comentar, complementar o profundizar información importante dentro del texto. No deben ser notas bibliográficas, a no ser que se trate de citas textuales de revistas o libros. Las citas textuales de más de tres líneas o que deban destacarse se escribirán en párrafo a parte, sangrado a la izquierda. Las que se incluyan dentro del texto irán entre comillas.
+
+\section{RECONOCIMIENTO}
+
+Es de carácter opcional y donde se puede dar crédito a instituciones y personas por su aporte.
+
+\section{CONCLUSIONES}
+
+Comentarios finales donde se resumen y se puntualiza sobre los aportes más significativos del trabajo. Se recomienda 4 páginas de extensión.
+
+\begin{center}
+    \printbibliography[title={\fontsize{10}{12}\selectfont REFERENCIAS}, heading=bibintoc]
+\end{center}
+
+Las citas bibliográficas se harán dentro del texto e incluirán el apellido del autor o la autora, el año, así: \parencite{ogata2004}. Otros ejemplos: dos autores(as): \parencite{pardo2004}; más de dos autoras(es): \parencite{clymer1992}; más de dos obras del(a) mismo(a) autor(a), del mismo año: (Díaz, 2000a, 2000b): obras de varias(os) autoras(es) en una misma cita: (Acero, 1993; Aguilar y Rivas, 2001; Clymer et al., 1999). La bibliografía o referencias bibliográficas deben incluirse al final de todos los trabajos, y puede presentarse en orden de aparición o alfabético, primero con los apellidos (el segundo, si aplica, sólo con la inicial) y separado con coma las iniciales de los nombres. La utilización de mayúsculas sostenidas está reservada únicamente para siglas. En esta revista se siguen las normas IFAC para publicaciones.
+
+\section{ANEXOS}
+
+Es de carácter opcional y es donde se pueden agregar datos, listados de programas, nomenclaturas, simbologías y de forma general información para complementar la adecuada comprensión de trabajo.
+
+\end{multicols}
+
+\end{document}
