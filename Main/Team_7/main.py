@@ -10,7 +10,7 @@ class team_7:
 
     def run(self):
         z = zero(self.latex_code, self.text_begin)
-        s = z.run()
+        s1, s2 = z.run()
         n = NumStart(self.latex_code, self.text_begin)
 
     # Calculates the line at which the index is present
