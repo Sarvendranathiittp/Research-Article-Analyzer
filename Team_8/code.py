@@ -23,7 +23,7 @@ class team_8:
         # Flatten and split the citations
         all_citations = [cite.strip() for group in cite_matches for cite in group.split(',')]
 
-        # Maintain the order of citations
+        # Maintain the order of citations.
         unique_citations = []
         citation_counts = {}
         for citation in all_citations:
