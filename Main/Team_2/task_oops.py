@@ -7,7 +7,7 @@ def remove_latex_commands(text):
     cleaned_text = re.sub(pattern, '', text_withoutcommands)
     return cleaned_text
 
-class Team2Processor:
+class Wrapper:
     def __init__(self, latex_content, begin_document_index):
         self.latex_content = latex_content
         self.begin_document_index = begin_document_index
@@ -69,9 +69,9 @@ class Team2Processor:
             self.output.append(f"\n No title found.")
 
         self.output.append(f"\n ================================================\n Related Comments \n ================================================ ")
-
+        processed_abstract = remove_latex_commands(self.abstract)
         if self.abstract:
-            processed_abstract = remove_latex_commands(self.abstract)
+            
             self.output.append(f"\n Abstract (Processed): \n{processed_abstract}")
             self.abstract_word_count = self.count_words(processed_abstract)
             self.output.append(f"\n Number of words in the abstract: {self.abstract_word_count}")
@@ -88,18 +88,50 @@ class Team2Processor:
         return self.output
 
 # Example usage:
+# Corrected LaTeX content without unnecessary characters and with proper line breaks
 latex_content_example = """
-\title{Sample Title}
-\begin{document}
-\begin{abstract}
-This is a sample abstract.
-\end{abstract}
-\end{document}
+\\title{Sample Title}
+\\begin{document}
+\\begin{abstract}
+example
+\\end{abstract}
+
+\\selectlanguage{english}
+
+\\renewcommand{\\abstractname}{}
+
+\\begin{abstract}
+    \\fontsize{10}{12}\\selectfont
+    \\textbf{Abstract:} Our journal has a biannual basis and is dedicated to the engineering area, mainly to the disciplines of electrical, electronics, telecommunications, and systems engineering, so the target audience for the magazine is interested in such areas. We publish scientific research papers or problem reflections in a specific topic, review articles, papers, reviews, discussions, and translations, within this thematic framework. We use the IFAC standards for publications.
+
+    \\vspace{3mm}
+
+    \\textbf{Keywords:} Publishing rules, procedures, publication, IFAC format.
+    \\vspace{-7mm}
+\\end{abstract}
+
+\\selectlanguage{spanish}
+
+\\renewcommand{\\abstractname}{}
+
+\\begin{abstract}
+    \\fontsize{10}{12}\\selectfont
+    \\textbf{Resumen:} Nuestra revista tiene una periodicidad semestral y está dedicada al área de las Ingenierías, principalmente a las disciplinas de Ingenierías Eléctrica, Electrónica, Telecomunicaciones y Sistemas; por tanto, el público objetivo de la revista es aquel interesado en tales áreas. Se publicarán artículos de investigación científica o de reflexión sobre un problema o tópico de un área, artículos de revisión, ponencias, reseñas, discusiones y traducciones, dentro de este marco temático. Utilizamos las normas IFAC para publicaciones.
+
+    \\vspace{3mm}
+
+    \\textbf{Palabras Clave:} Normativa de publicación, procedimientos, publicación, formato IFAC.
+\\end{abstract}
+\\end{document}
 """
 
 begin_document_index_example = 0
 
-team_2_processor = Team2Processor(latex_content_example, begin_document_index_example)
+# Create an instance of the Wrapper class
+team_2_processor = Wrapper(latex_content_example, begin_document_index_example)
+
+# Process the document and print the output
 result_output = team_2_processor.process_document()
 for output_line in result_output:
     print(output_line)
+
