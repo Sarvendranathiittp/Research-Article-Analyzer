@@ -15,6 +15,7 @@ class team_1:
         output = []     # The output list with the errors to be returned
         text=self.latex_code
         self.title_analysis(text,output)
+        output.append('='*50+"\n")
         return output
         
     def title_analysis(self,latex_content,output):
