@@ -3,6 +3,7 @@ import re
 class AcronymProcessor:
     def __init__(self, abstract_content):
         self.abstract_content = abstract_content
+        self.output = ""
 
     def extract_acronyms(self):
         acronyms_with_parentheses = re.findall(r'\(([^)]+)\)', self.abstract_content)
@@ -30,19 +31,18 @@ class AcronymProcessor:
 
         return word_count, word_first_occurrence
 
-    def find_and_print_remaining_acronyms(self, acronyms):
+    def find_and_accumulate_remaining_acronyms(self, acronyms):
         pattern = r'\b[A-Z]+\b'
         remaining_acronyms = re.findall(pattern, self.abstract_content)
 
         if remaining_acronyms:
-            print("\nAll acronyms:")
-            print(remaining_acronyms)
+            self.output += "\nAll acronyms:\n" + str(remaining_acronyms)
         else:
             return None
 
         return remaining_acronyms
 
-    def check_and_print_occurrences(self, acronyms_with_parentheses, plural_acronyms):
+    def accumulate_occurrences(self, acronyms_with_parentheses, plural_acronyms):
         total_occurrences = 0
         matching_word_count, word_first_occurrence = self.count_matching_words(acronyms_with_parentheses)
 
@@ -50,18 +50,20 @@ class AcronymProcessor:
             occurrences = plural_acronyms.count(word) + matching_word_count.get(word, 0)
             total_occurrences += occurrences
             if occurrences > 0:
-                print(f"\n{word}: {occurrences} times \n(First occurrence in line {word_first_occurrence.get(word, 'N/A')})")
+                self.output += f"\n{word}: {occurrences} times \n(First occurrence in line {word_first_occurrence.get(word, 'N/A')})"
 
-        print("\nTotal acronyms:", total_occurrences)
+        self.output += "\nTotal acronyms: " + str(total_occurrences)
 
     def run_analysis(self):
         acronyms_with_parentheses, plural_acronyms = self.extract_acronyms()
 
         if self.abstract_content:
-            self.find_and_print_remaining_acronyms(acronyms_with_parentheses)
-            self.check_and_print_occurrences(acronyms_with_parentheses, plural_acronyms)
+            self.find_and_accumulate_remaining_acronyms(acronyms_with_parentheses)
+            self.accumulate_occurrences(acronyms_with_parentheses, plural_acronyms)
         else:
-            print("No abstract found.")
+            self.output += "No abstract found."
+
+        return self.output
 
 # Example usage:
 abstract_content_example = """
@@ -76,5 +78,6 @@ Transmit antenna selection (TAS) is a technique that achieves better performance
 # Create an instance of AcronymProcessor
 acronym_processor = AcronymProcessor(abstract_content_example)
 
-# Run the analysis
-acronym_processor.run_analysis()
+# Run the analysis and print the result
+result = acronym_processor.run_analysis()
+print(result)
