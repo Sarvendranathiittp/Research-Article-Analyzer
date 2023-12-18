@@ -2,7 +2,7 @@
 #2. Create a list of acronyms used.
 #3. Count the number of times each acronym occurred.
 #4. Identify the acronyms that are not expanded at the first occurrence
-    
+import re    
 class team_2:
     def __init__(self, latex_content, begin_document_index):
         self.latex_content = latex_content
