@@ -26,7 +26,7 @@ class wrapper:
         output.append(obj_team_0.run())
         obj_team_1 = team_1(text,begin_index)
         output.append(obj_team_1.run())
-        obj_team2= team_2(text,begin_index)
+        obj_team2= team_2(text,0)
         output.append(obj_team2.run())
         obj_team_5 = team_5(text,begin_index)
         output.append(obj_team_5.run())
