@@ -1,57 +1,80 @@
 import re
-from collections import Counter
 
-class Wrapper:
-    def __init__(self, input_string):
-        self.input_string = input_string
-        self.acronym_list = []
+class AcronymProcessor:
+    def __init__(self, abstract_content):
+        self.abstract_content = abstract_content
 
-    def extract_capital_words(self):
-        pattern = r'\(([^)]+)\)'
-        matches = re.finditer(pattern, self.input_string)
+    def extract_acronyms(self):
+        acronyms_with_parentheses = re.findall(r'\(([^)]+)\)', self.abstract_content)
+        plural_acronyms = [word[:-1] for word in self.abstract_content.split() if (
+            word[:-1].isupper() and word[-1] == 's' and word[:-1].isalpha() and word[-1].islower()
+        )]
+        return acronyms_with_parentheses, plural_acronyms
 
-        for match in matches:
-            content_between_parentheses = match.group(1)
-            
-            if content_between_parentheses.isupper():
-                words = content_between_parentheses.split()
-                self.acronym_list.extend(words)
+    def count_matching_words(self, acronyms):
+        word_count = {}
+        word_first_occurrence = {}
 
-    def count_matching_words(self):
-        word_count = Counter(re.findall(r'\b\w+\b', self.input_string))
+        lines = self.abstract_content.split('\n')
+        for line_number, line in enumerate(lines, start=1):
+            words_in_line = re.findall(r'\b\w+\b', line)
+            for word in words_in_line:
+                if word in acronyms:
+                    if word not in word_first_occurrence:
+                        word_first_occurrence[word] = line_number
 
-        matching_words = {word: count for word, count in word_count.items() if word in self.acronym_list}
+                    if word in word_count:
+                        word_count[word] += 1
+                    else:
+                        word_count[word] = 1
 
-        return matching_words
+        return word_count, word_first_occurrence
 
-    def find_and_print_remaining_uppercase_words(self):
+    def find_and_print_remaining_acronyms(self, acronyms):
         pattern = r'\b[A-Z]+\b'
-        uppercase_words = re.findall(pattern, self.input_string)
+        remaining_acronyms = re.findall(pattern, self.abstract_content)
 
-        if uppercase_words:
-            
-            for word in uppercase_words:
-                return(word)
+        if remaining_acronyms:
+            print("\nAll acronyms:")
+            print(remaining_acronyms)
         else:
-            return("\nNo remaining uppercase words.")
+            return None
+
+        return remaining_acronyms
+
+    def check_and_print_occurrences(self, acronyms_with_parentheses, plural_acronyms):
+        total_occurrences = 0
+        matching_word_count, word_first_occurrence = self.count_matching_words(acronyms_with_parentheses)
+
+        for word in acronyms_with_parentheses:
+            occurrences = plural_acronyms.count(word) + matching_word_count.get(word, 0)
+            total_occurrences += occurrences
+            if occurrences > 0:
+                print(f"\n{word}: {occurrences} times \n(First occurrence in line {word_first_occurrence.get(word, 'N/A')})")
+
+        print("\nTotal acronyms:", total_occurrences)
+
+    def run_analysis(self):
+        acronyms_with_parentheses, plural_acronyms = self.extract_acronyms()
+
+        if self.abstract_content:
+            self.find_and_print_remaining_acronyms(acronyms_with_parentheses)
+            self.check_and_print_occurrences(acronyms_with_parentheses, plural_acronyms)
+        else:
+            print("No abstract found.")
 
 # Example usage:
-input_string = """Transmit antenna selection (TAS) is a technique that achieves better performance than a single\n"
-    "antenna system while using the same number of radio frequency chains. We propose a novel TAS\n"
-    "rule called the $\\lambda$-weighted interference indicator rule (LWIIR). We prove that for the general\n"
-    "class of fading models with TED continuous cumulative distribution functions, LWIIR achieves the lowest\n"
-    "average symbol error probability (SEP) among all TAS rules for an underlay cognitive radio system\n"
-    "that employs binary power control and is subject to the interference-outage constraint."""
+abstract_content_example = """
+Transmit antenna selection (TAS) is a technique that achieves better performance than a single\n"
+"antenna system while using the same number of radio frequency chains. We propose a novel TAS\n"
+"rule called the $\\lambda$-weighted interference indicator rule (LWIIR). We prove that for the general\n"
+"class of fading models with TED continuous cumulative distribution functions, LWIIR achieves the lowest\n"
+"average symbol error probability (SEP) among all TAS rules for an underlay cognitive radio system\n"
+"that employs binary power control and is subject to the interference-outage constraint.
+"""
 
-# Create an instance of AcronymAnalyzer
-analyzer = Wrapper(input_string)
+# Create an instance of AcronymProcessor
+acronym_processor = AcronymProcessor(abstract_content_example)
 
-# Extract acronyms, count matching words, and print remaining uppercase words
-analyzer.extract_capital_words()
-matching_word_count = analyzer.count_matching_words()
-analyzer.find_and_print_remaining_uppercase_words()
-
-# Print the results
-print("\nMatching Acronyms and Their Counts:")
-for word, count in matching_word_count.items():
-    print(f"{word}: {count} times")
+# Run the analysis
+acronym_processor.run_analysis()
