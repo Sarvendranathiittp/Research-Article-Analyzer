@@ -4,7 +4,7 @@ from tkinter import *
 from tkinter import filedialog
 
 # Teams' main file import
-from Team_0.task import team_0
+#from Team_0.task import team_0
 from Team_2.task import team_2
 
 
@@ -20,10 +20,13 @@ class wrapper:
         begin_index = text.find(r'\begin{document}')
 
         # Calling all team run() files
-        obj_team_0 = team_0(text,begin_index)
-        output.append(obj_team_0.run())
+        #obj_team_0 = team_0(text,begin_index)
+        #output.append(obj_team_0.run())
         obj_team2= team_2(text,0)
         output.append(obj_team2.run())
+
+        # Access processed_abstract from team_2 instance
+        processed_abstract = obj_team2.processed_abstract
         
 
 

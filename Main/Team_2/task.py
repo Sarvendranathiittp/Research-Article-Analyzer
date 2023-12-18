@@ -6,15 +6,24 @@
 
       
 import re
-# Function to remove LaTeX commands
+
 def remove_latex_commands(text):
-    return re.sub(r'\\[a-zA-Z]+', '', text)
+
+    # Function to remove LaTeX commands
+    text_withoutcommands = re.sub(r'\\[a-zA-Z]+', '', text)
+    # Define a regular expression pattern to match the unwanted patterns
+    pattern = r'\{[\d.]+(cm|mm)?\}'
+
+    # Use re.sub to replace the matched patterns with an empty string
+    cleaned_text = re.sub(pattern, '', text_withoutcommands)
+    
+    return cleaned_text
 
 class team_2:
     def __init__(self, latex_content, begin_document_index):
         self.latex_content = latex_content
         
-        title_index = latex_content.find(r'\title')
+        title_index = latex_content.find(r'\title{')
         begin_document_index = latex_content.find(r'\begin{document}')
 
         # Check if both indices were found
@@ -25,7 +34,8 @@ class team_2:
             # If one index is -1, choose the other (whichever is not -1)
             begin_index = max(title_index, begin_document_index)
 
-        self.begin_document_index = begin_document_index
+        self.begin_document_index = begin_index
+    
     
     
 
@@ -82,27 +92,14 @@ class team_2:
         title = self.extract_title()
         output = [] # The output would be updated with the extracted title and abstract along with the word counts respectively.
 
-        if abstract:
-
-            output.append(f"Abstract: \n{abstract}")
-        
-            # Call the count_words method using the obj_team_2 instance
-            word_count = self.count_words(abstract)
-            print(f"Abstract is found,data is updated in LOGII file")
-
-            output.append(f"\n Number of words in the abstract: {word_count}")
-       
-        else:
-            output.append("No abstract found.")
-
-            print("No abstract found.")
-        
+        output.append(f"\n ================================================\n Title Related Comments \n ================================================ ")
+    
         if title:          
-            output.append(f"Title (Original): \n{title}")
+            #output.append(f"Title (Original): \n{title}")
 
             # Process the title by removing LaTeX commands
             processed_title = remove_latex_commands(title)            
-            output.append(f"Title (Processed): \n{processed_title}")
+            output.append(f"\n Title (Processed): \n{processed_title}")
 
             print(f"Title is found,data is updated in LOGII file")
 
@@ -111,7 +108,29 @@ class team_2:
             output.append(f"\n Number of words in the processed title: {word_count}")
 
         else:
-            output.append("No title found.")
+            output.append(f"\n No title found.")
             print("No title found.")
+        
+        output.append(f"\n ================================================\n  Related Comments \n ================================================ ")
 
+        if abstract:
+
+            #output.append(f"Abstract: \n{abstract}")
+
+            # Process the abstract by removing LaTeX commands
+            processed_abstract = remove_latex_commands(abstract)            
+            output.append(f"\n Abstract (Processed): \n{processed_abstract}")
+
+            # Call the count_words method using the obj_team_2 instance
+            word_count = self.count_words(abstract)
+            print(f"Abstract is found,data is updated in LOGII file")
+
+            output.append(f"\n Number of words in the abstract: {word_count}")
+        
+        else:
+            output.append("\n No abstract found.")
+
+            print("No abstract found.")
+        
+        
         return output
