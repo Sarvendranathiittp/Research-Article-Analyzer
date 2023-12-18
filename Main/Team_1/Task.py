@@ -37,22 +37,43 @@ class team_1:
                  output.append(word +"\n")
                  if word == words[0] or word ==words[-1]:
                      if not word.istitle():
-                         output.append("Word '"+word +"' need to be capitalized since it is at starting/ending of title")
+                         output.append("Word '"+word +"' need to be capitalized since it is at starting/ending of title\n")
                  
-                 elif pos.startswith('N') or pos.startswith('J') or pos.startswith('V') or pos.startswith('R')  :
+                 elif pos.startswith('N') or pos.startswith('J') or pos.startswith('V') or pos.startswith('R') or pos.startswith('P') :
                     if  not word.istitle() and not word.isupper():
-                        output.append(" This word'"+word+"' need to be Capitalized since it is a "+ pos  + "\n")
+                        output.append(" word'"+word+"' need to be Capitalized since it is a '"+ pos_tag_fullforms(pos)  + "'\n")
                          
                  elif pos=='CC'or pos=='DT' or (pos=='IN' and len(word)<4):
                         if not word.islower():
-                            output.append(" This word '"+word+"' need to be in lower case since it is a "+ pos +"\n")
+                            output.append(" word '"+word+"' need to be in lower case since it is a '"+ pos_tag_fullforms(pos) +"'\n")
                  
-                 elif pos=='IN' and len(word>3) :
+                 elif pos=='IN' and len(word)>3 :
                         if not word.istitle():
-                            output.append("This Word '"+word+"'need to be capitalised sice it is a "+pos+"\n")
+                            output.append(" Word '"+word+"'need to be capitalised since it is a '"+ pos_tag_fullforms(pos)+"'\n")
             
         else:
             output.append("No Title Found in the Latex Code\n")
+            
+            
+def pos_tag_fullforms(pos):
+    if(pos.startswith('N')):
+        return "Noun" 
+    elif(pos.startswith('J')):
+        return "Adjective"
+    elif(pos.startswith('V')):
+        return "Verb"
+    elif(pos.startswith('R')):
+        return "AdVerb"
+    elif(pos=='CC'):
+        return "Coordinating Conjuction"
+    elif(pos=='IN'):
+        return "preposition/subordinating conjunction"
+    elif(pos.startswith('P')):
+        return "Pronoun"
+    elif(pos.startswith('DT')):
+        return "Articles"
+    else:
+        return "Null"
             
                 
         
