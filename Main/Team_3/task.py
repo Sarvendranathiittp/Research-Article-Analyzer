@@ -116,7 +116,7 @@ class team_3:
             output.append("Spelling mistakes found for the following names:")
             for name in misspelled_names:
                 output.append("At Line "+str(self.lineNumber(text.find(name)))+" : "+name)
-"""
+
         for word in text.split():
             for scientist_name in scientist_names2:
                 if isinstance(scientist_name, list):
@@ -129,7 +129,7 @@ class team_3:
                             if word not in scientist_names1:
                                if word[-1]!='.':
                                     print(f"Found match: {word} -> {correct_name}")
-
+"""
     def is_string_in_lists(self,search_string, *lists):
         return any(search_string in my_list for my_list in lists)
    
