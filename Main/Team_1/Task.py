@@ -32,15 +32,29 @@ class team_1:
              
              pos_tags = pos_tag(words)
              
-             word_checking = [word for word, pos in pos_tags if pos.startswith('N') or pos.startswith('J') or pos.startswith('V') or pos.startswith('R')]
              
-             for word in word_checking:
-                 output.append(word+"\n")
-                 if  not word.istitle():
-                     output.append(" This word'"+word+"' need to be Capital since it is a"  +"\n")
-             
+             for word,pos in pos_tags:
+                 output.append(word +"\n")
+                 if word == words[0] or word ==words[-1]:
+                     if not word.istitle():
+                         output.append("Word '"+word +"' need to be capitalized since it is at starting/ending of title")
+                 
+                 elif pos.startswith('N') or pos.startswith('J') or pos.startswith('V') or pos.startswith('R')  :
+                    if  not word.istitle() and not word.isupper():
+                        output.append(" This word'"+word+"' need to be Capitalized since it is a "+ pos  + "\n")
+                         
+                 elif pos=='CC'or pos=='DT' or (pos=='IN' and len(word)<4):
+                        if not word.islower():
+                            output.append(" This word '"+word+"' need to be in lower case since it is a "+ pos +"\n")
+                 
+                 elif pos=='IN' and len(word>3) :
+                        if not word.istitle():
+                            output.append("This Word '"+word+"'need to be capitalised sice it is a "+pos+"\n")
+            
         else:
             output.append("No Title Found in the Latex Code\n")
+            
+                
         
         
         
