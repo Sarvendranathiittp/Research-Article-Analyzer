@@ -7,18 +7,6 @@
       
 import re
 
-def remove_latex_commands(text):
-
-    # Function to remove LaTeX commands
-    text_withoutcommands = re.sub(r'\\[a-zA-Z]+', '', text)
-    # Define a regular expression pattern to match the unwanted patterns
-    pattern = r'\{[\d.]+(cm|mm)?\}'
-
-    # Use re.sub to replace the matched patterns with an empty string
-    cleaned_text = re.sub(pattern, '', text_withoutcommands)
-    
-    return cleaned_text
-
 class team_2:
     def __init__(self, latex_content, begin_document_index):
         self.latex_content = latex_content
@@ -81,6 +69,18 @@ class team_2:
             current_index += 1
 
         return None
+    
+    def remove_latex_commands(self,text):
+
+        # Function to remove LaTeX commands
+        text_withoutcommands = re.sub(r'\\[a-zA-Z]+', '', text)
+        # Define a regular expression pattern to match the unwanted patterns
+        pattern = r'\{[\d.]+(cm|mm)?\}'
+
+        # Use re.sub to replace the matched patterns with an empty string
+        cleaned_text = re.sub(pattern, '', text_withoutcommands)
+    
+        return cleaned_text
    
     def count_words(self, text):
         # Split the text into words and return the count
@@ -98,7 +98,7 @@ class team_2:
             #output.append(f"Title (Original): \n{title}")
 
             # Process the title by removing LaTeX commands
-            processed_title = remove_latex_commands(title)            
+            processed_title = self.remove_latex_commands(title)            
             output.append(f"\n Title (Processed): \n{processed_title}")
 
             print(f"Title is found,data is updated in LOGII file")
@@ -118,7 +118,7 @@ class team_2:
             #output.append(f"Abstract: \n{abstract}")
 
             # Process the abstract by removing LaTeX commands
-            processed_abstract = remove_latex_commands(abstract)            
+            processed_abstract = self.remove_latex_commands(abstract)            
             output.append(f"\n Abstract (Processed): \n{processed_abstract}")
 
             # Call the count_words method using the obj_team_2 instance

@@ -6,6 +6,8 @@ from tkinter import filedialog
 # Teams' main file import
 #from Team_0.task import team_0
 from Team_2.task import team_2
+from Team_2.acronyms1 import team_2a
+
 
 
 class wrapper:
@@ -14,6 +16,7 @@ class wrapper:
         filepath = filedialog.askopenfilename()
         raw_data = []
         output = []
+        storage=[]
 
         with open(filepath,'r',errors='ignore') as file:
             text=str(file.read())
@@ -26,15 +29,17 @@ class wrapper:
         output.append(obj_team2.run())
 
         # Access processed_abstract from team_2 instance
-        processed_abstract = obj_team2.processed_abstract
+        processed_abstract = obj_team2.remove_latex_commands(obj_team2.extract_abstract()) 
+        obj_team2a=team_2a(processed_abstract)
+        storage.append(obj_team2a.run())
         
 
 
 
 
         # Writing all the output logs to the log file
-        with open ("LOGII", "a") as logw:
-            for logs in output:
+        with open ("LOGII_a", "a") as logw:
+            for logs in storage:
                 for log in logs:
                     logw.write(log)
                     print(log)
