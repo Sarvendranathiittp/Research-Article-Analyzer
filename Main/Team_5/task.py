@@ -50,11 +50,11 @@ class team_5:
                             if last_char != '.':
                                 
                                 # print("The word after \\end{equation} starts with a capital letter, but the punctuation is not a full stop.")
-                                result.append("The word after \\end{equation} starts with a capital letter, but the punctuation is not a full stop.\n")
+                                result.append("The word after \\end{equation} starts with a capital letter, but the punctuation is not a full stop."+equation+"\n")
                         else:
                             if last_char != ',':
                                 # print("The word after \\end{equation} does not start with a capital letter, but the punctuation is not a comma.")
-                                result.append("The word after \\end{equation} does not start with a capital letter, but the punctuation is not a comma.\n")
+                                result.append("The word after \\end{equation} does not start with a capital letter, but the punctuation is not a comma."+equation+"\n")
                     else:
                         print("Error: Word after \\end{equation} not found.")
                 else:
@@ -108,11 +108,11 @@ class team_5:
                             if last_char != '.':
                                 
                                 # print("The word after \\end{align} starts with a capital letter, but the punctuation is not a full stop.")
-                                result.append("The word after \\end{align} starts with a capital letter, but the punctuation is not a full stop.\n")
+                                result.append("The word after \\end{align} starts with a capital letter, but the punctuation is not a full stop."+equation+"\n")
                         else:
                             if last_char != ',':
                                 # print("The word after \\end{align} does not start with a capital letter, but the punctuation is not a comma.")
-                                result.append("The word after \\end{align} does not start with a capital letter, but the punctuation is not a comma.\n")
+                                result.append("The word after \\end{align} does not start with a capital letter, but the punctuation is not a comma."+equation+"\n")
                     else:
                         print("Error: Word after \\end{align} not found.")
                 else:
