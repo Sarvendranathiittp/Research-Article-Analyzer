@@ -1,3 +1,10 @@
+# merge methods for line 36 and 10
+#Make list of full form of acronyms , acronym and occurance
+#make warnings for acro. that are  1) not defined entirely  2) defined but not at first occurrence
+#cronym must be followed by parentheses for the first time
+#NOTE : If the acronym is not repeated the whole body then no need to add parentheses.
+
+
 import re
 
 class AcronymProcessor:
