@@ -129,7 +129,7 @@ class team_3:
                             if word not in scientist_names1:
                                if word[-1]!='.':
                                     print(f"Found match: {word} -> {correct_name}")
-"""
+    """
     def is_string_in_lists(self,search_string, *lists):
         return any(search_string in my_list for my_list in lists)
    
