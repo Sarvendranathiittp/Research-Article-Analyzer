@@ -1,3 +1,5 @@
+# Online Python compiler (interpreter) to run Python online.
+# Write Python 3 code in this online editor and run it.
 import re
 
 class AcronymProcessor:
@@ -60,7 +62,7 @@ class AcronymProcessor:
 # Example usage:
 input_string = """Transmit antenna selection (TASs) aalo Teacher Assistant(TA) is a technique that achieves better performance than a single\n"
     "antenna system while using the same number of radio frequency chains. We propose a novel TAS\n"
-    "rule called the $\\lambda$-weighted interference (EDSs) TAS indicator rule (LWIIRs). We prove that for the general\n"
+    "rule called the $\\lambda$-weighted interference (EDS) TAS indicator rule (LWIIRs). We prove that for the general\n"
     "class of fading models with TED continuous cumulative  EDD distribution functions, LWIIR achieves TASs the lowest\n"
     "average symbol error probability (SEPs) among all TAS rules for an underlay cognitive radio system\n" "TSA"
     "that employs binary power control and is subject to the interference-outage constraint."""
@@ -87,6 +89,18 @@ else:
     print("\nNot defined:")
     print(diff)
 
-processor.check_and_print_occurrences()
-#fddfvhjg
-#jdivjivj
+
+# Split the input string into lines
+lines = input_string.split('\n')
+
+# Define a regular expression pattern to find words within parentheses
+pattern = re.compile(r'\((\w+)\)')
+
+# Iterate through each line and find matches
+for i, line in enumerate(lines, start=1):
+    matches = pattern.findall(line)
+    for match in matches:
+        print(f"\nWord  {match} occured in Line Number: {i}")
+
+
+
