@@ -79,24 +79,15 @@ b = processor.matching_word_count.items()
 #print(list(b))
 keys = [item[0] for item in b]
 #print(keys)
-
 a = processor.find_and_print_remaining_uppercase_words()
-
 if a == keys:
     print("All defined")
 else:
     diff = set(a) - set(keys)
     print("\nNot defined:")
     print(diff)
-
-
-# Split the input string into lines
 lines = input_string.split('\n')
-
-# Define a regular expression pattern to find words within parentheses
 pattern = re.compile(r'\((\w+)\)')
-
-# Iterate through each line and find matches
 for i, line in enumerate(lines, start=1):
     matches = pattern.findall(line)
     for match in matches:
