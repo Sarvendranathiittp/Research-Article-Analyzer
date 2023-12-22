@@ -1,90 +1,114 @@
-# Online Python compiler (interpreter) to run Python online.
-# Write Python 3 code in this online editor and run it.
 import re
 
-def process_input(abstract):
-    acro_list = re.findall(r'\(([^)]+)\)', abstract)
-    new_acro_list = [word[:-1] for word in abstract.split() if (
-        word[:-1].isupper() and word[-1] == 's' and word[:-1].isalpha() and word[-1].islower()
-    )]
-    return acro_list, new_acro_list
+class AcronymProcessor:
+    def _init_(self, abstract_content):
+        self.abstract_content = abstract_content
+        self.output = ""
+        self.word_first_occurrence = {}  # Define word_first_occurrence as a class attribute
 
-def count_matching_words(abstract, acronym_list):
-    word_count = {}
-    word_first_occurrence = {}
+    def extract_acronyms(self):
+        acronyms_with_parentheses = re.findall(r'\(([^)]+)\)', self.abstract_content)
+        plural_acronyms = [word[:-1] for word in self.abstract_content.split() if (
+            word[:-1].isupper() and word[-1] == 's' and word[:-1].isalpha() and word[-1].islower()
+        )]
+        return acronyms_with_parentheses, plural_acronyms
 
-    lines = abstract.split('\n')
-    for line_number, line in enumerate(lines, start=1):
-        words_in_line = re.findall(r'\b\w+\b', line)
-        for word in words_in_line:
-            if word in acronym_list:
-                if word not in word_first_occurrence:
-                    word_first_occurrence[word] = line_number
+    def count_matching_words(self, acronyms):
+        word_count = {}
 
-                if word in word_count:
-                    word_count[word] += 1
-                else:
-                    word_count[word] = 1
+        lines = self.abstract_content.split('\n')
+        for line_number, line in enumerate(lines, start=1):
+            words_in_line = re.findall(r'\b\w+\b', line)
+            for word in words_in_line:
+                if word in acronyms:
+                    if word not in self.word_first_occurrence:
+                        self.word_first_occurrence[word] = line_number
 
-    return word_count, word_first_occurrence
+                    if word in word_count:
+                        word_count[word] += 1
+                    else:
+                        word_count[word] = 1
 
-def find_and_print_remaining_uppercase_words(abstract):
-    pattern = r'\b[A-Z]+\b'
-    uppercase_words = re.findall(pattern, abstract)
+        return word_count
 
-    if uppercase_words:
-        print("\nAll acronyms:")
-        print(uppercase_words)
-    else:
-        return None
+    def find_and_accumulate_remaining_acronyms(self, acronyms):
+        pattern = r'\b[A-Z]+\b'
+        remaining_acronyms = re.findall(pattern, self.abstract_content)
 
-    return uppercase_words
-
-def check_and_print_occurrences(acro_list, new_acro_list, abstract):
-    total_occurrences = 0
-    matching_word_count, word_first_occurrence = count_matching_words(abstract, acro_list)
-
-    for word in acro_list:
-        occurrences = new_acro_list.count(word) + matching_word_count.get(word, 0)
-        total_occurrences += occurrences
-        if occurrences > 0:
-            print(f"\n{word}: {occurrences} times \n(First occurrence in line {word_first_occurrence.get(word, 'N/A')})")
-
-    print("\nTotal acronyms:", total_occurrences)
-
-
-
-class team_2a:
-    def __init__(self, abstract_content):
-        self.abstract_content =abstract_content
-
-    def run(self):
-        abstract = self.abstract_content
-       
-        output = [] # The output would be updated with the extracted title and abstract along with the word counts respectively.
-        
-        acro_list, new_acro_list = process_input(abstract)
-        
-        if abstract:            
-
-            #find_and_print_remaining_uppercase_words(abstract)
-
-            #check_and_print_occurrences(acro_list, new_acro_list, abstract)
-        
-
-            
-            output.append(f"\n Acronyms list: \n{acro_list}")
-            output.append(f"\nPlural acronyms: \n{new_acro_list}")
-
-
-            print(f"Acronyms are found,data is updated in LOGII file")
-
-            
-        
+        if remaining_acronyms:
+            self.output += "\nAll acronyms:\n" + str(remaining_acronyms)
         else:
-            output.append("\n No abstract found.")
+            return None
 
-            print("No abstract found.")
+        return remaining_acronyms
+
+    def accumulate_occurrences(self, acronyms_with_parentheses, plural_acronyms):
+        total_occurrences = 0
+        matching_word_count = self.count_matching_words(acronyms_with_parentheses)
+
+        for word in acronyms_with_parentheses:
+            occurrences = plural_acronyms.count(word) + matching_word_count.get(word, 0)
+            total_occurrences += occurrences
+            if occurrences > 0:
+                self.output += f"\n{word}: {occurrences} times \n(First occurrence in line {self.word_first_occurrence.get(word, 'N/A')})"
+
+        self.output += "\nTotal acronyms: " + str(total_occurrences)
+
+    def check_acronym_definitions(self, acronyms_with_parentheses, plural_acronyms):
+        defined_acronyms = set()
+    
+        for acronym in acronyms_with_parentheses:
+            first_occurrence_line = self.word_first_occurrence.get(acronym, None)
         
-        
-        return output
+        # Check if the acronym is defined at all
+            if first_occurrence_line is None:
+                print(f"Warning: Acronym '{acronym}' is not defined at all")
+                continue
+
+        # Check if the acronym is defined at the first occurrence
+            if first_occurrence_line != 0:
+                print(f"Warning: Acronym '{acronym}' is defined at the first occurrence (Line {first_occurrence_line})")
+
+        # Check if the acronym is enclosed in parentheses at its first occurrence
+            first_occurrence_text = re.search(fr'\b{re.escape(acronym)}\b', self.abstract_content)
+            if first_occurrence_text and not first_occurrence_text.group().startswith('('):
+                print(f"Warning: Acronym '{acronym}' is not enclosed in parentheses at its first occurrence (Line {first_occurrence_line})")
+
+        # Add the acronym to the set of defined acronyms
+            defined_acronyms.add(acronym)
+
+    # Check if the acronym is used later without a warning
+        for acronym in plural_acronyms:
+            if acronym in defined_acronyms:
+                print(f"Warning: Acronym '{acronym}' is used without a warning in the later part of the content.")
+
+
+    def run_analysis(self):
+        acronyms_with_parentheses, plural_acronyms = self.extract_acronyms()
+
+        if self.abstract_content:
+            self.find_and_accumulate_remaining_acronyms(acronyms_with_parentheses)
+            self.accumulate_occurrences(acronyms_with_parentheses, plural_acronyms)
+            acronym_processor.check_acronym_definitions(acronyms_with_parentheses, plural_acronyms)
+
+        else:
+            self.output += "No abstract found."
+
+        return self.output
+
+# Example usage:
+abstract_content_example = """
+Transmit antenna selection (TAS) is a technique that achieves better performance than a single\n"
+"antenna system while using the same number of radio frequency chains. We propose a novel TAS\n"
+"rule called the $\\lambda$-weighted interference indicator rule (LWIIR). We prove that for the general\n"
+"class of fading models with TED continuous cumulative distribution functions, LWIIR achieves the lowest\n"
+"average symbol error probability (SEP) among all TAS rules for an underlay cognitive radio system\n"
+"that employs binary power control and is subject to the interference-outage constraint.
+"""
+
+# Create an instance of AcronymProcessor
+acronym_processor = AcronymProcessor(abstract_content_example)
+
+# Run the analysis and print the result
+result = acronym_processor.run_analysis()
+print(result)
