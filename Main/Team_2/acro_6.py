@@ -1,7 +1,7 @@
 import re
 
 class AcronymProcessor:
-    def _init_(self, abstract_content):
+    def __init__(self, abstract_content):
         self.abstract_content = abstract_content
         self.output = ""
         self.word_first_occurrence = {}  # Define word_first_occurrence as a class attribute
@@ -81,20 +81,72 @@ class AcronymProcessor:
         for acronym in plural_acronyms:
             if acronym in defined_acronyms:
                 print(f"Warning: Acronym '{acronym}' is used without a warning in the later part of the content.")
+    # ...
 
+# ...
 
     def run_analysis(self):
         acronyms_with_parentheses, plural_acronyms = self.extract_acronyms()
+        encountered_acronyms = set()
 
         if self.abstract_content:
             self.find_and_accumulate_remaining_acronyms(acronyms_with_parentheses)
-            self.accumulate_occurrences(acronyms_with_parentheses, plural_acronyms)
-            acronym_processor.check_acronym_definitions(acronyms_with_parentheses, plural_acronyms)
-
+            self.accumulate_occurrences(acronyms_with_parentheses, plural_acronyms, encountered_acronyms)
+            self.check_acronym_definitions(acronyms_with_parentheses, plural_acronyms, encountered_acronyms)
         else:
             self.output += "No abstract found."
 
         return self.output
+
+    # ...
+
+    def accumulate_occurrences(self, acronyms_with_parentheses, plural_acronyms, encountered_acronyms):
+        total_occurrences = 0
+        matching_word_count = self.count_matching_words(acronyms_with_parentheses)
+
+        for word in acronyms_with_parentheses:
+            occurrences = plural_acronyms.count(word[:-1]) + matching_word_count.get(word, 0)
+            total_occurrences += occurrences
+            if occurrences > 0:
+                self.output += f"\n{word}: {occurrences} times \n(First occurrence in line {self.word_first_occurrence.get(word, 'N/A')})"
+
+            # Add the acronym to the set of encountered acronyms
+            encountered_acronyms.add(word)
+
+        self.output += "\nTotal acronyms: " + str(total_occurrences)
+
+    # ...
+
+    def check_acronym_definitions(self, acronyms_with_parentheses, plural_acronyms, encountered_acronyms):
+        defined_acronyms = set()
+
+        for acronym in acronyms_with_parentheses:
+            first_occurrence_line = self.word_first_occurrence.get(acronym, None)
+
+            # Check if the acronym is defined at all
+            if first_occurrence_line is None:
+                print(f"Warning: Acronym '{acronym}' is not defined at all")
+                continue
+
+            # Check if the acronym is defined at the first occurrence
+            if first_occurrence_line != 1:
+                print(f"Warning: Acronym '{acronym}' is defined, but not at the first occurrence (Line {first_occurrence_line})")
+
+            # Check if the acronym is enclosed in parentheses at its first occurrence
+            first_occurrence_text = re.search(fr'\b{re.escape(acronym)}\b', self.abstract_content)
+            if first_occurrence_text and not first_occurrence_text.group().startswith('('):
+                print(f"Warning: Acronym '{acronym}' is not enclosed in parentheses at its first occurrence (Line {first_occurrence_line})")
+
+            # Add the acronym to the set of defined acronyms
+            defined_acronyms.add(acronym)
+
+        # Check if the acronym is used later without a warning
+        for acronym in plural_acronyms:
+            if acronym in defined_acronyms and acronym not in encountered_acronyms:
+                print(f"Warning: Acronym '{acronym}' is used without a warning in the later part of the content.")
+
+
+
 
 # Example usage:
 abstract_content_example = """
