@@ -50,9 +50,6 @@ matching_word_count = count_matching_words(input_string, acronym_list)
 # Print the results
 for word, count in matching_word_count.items():
     print(f"{word}: {count} times")
-    e=input_string.split()
-for m in e :
- if (m.upper() and m.isalpha() and  m!=acronym_list):
-  print (m ," is not defined at starting")
+
  
 
