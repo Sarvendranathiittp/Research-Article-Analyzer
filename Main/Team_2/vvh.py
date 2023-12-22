@@ -74,9 +74,9 @@ print("\nPlural acronyms:")
 print(processor.new_acro_list)
 
 b = processor.matching_word_count.items()
-print(list(b))
+#print(list(b))
 keys = [item[0] for item in b]
-print(keys)
+#print(keys)
 
 a = processor.find_and_print_remaining_uppercase_words()
 
