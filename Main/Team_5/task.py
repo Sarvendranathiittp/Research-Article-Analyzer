@@ -109,7 +109,6 @@ class team_5:
             else: 
                 if label_match:
                     label = label_match.group(1)
-    
                     # Check for punctuation before the label
                     index = equation.find('\\label{' + label + '}')
                     if index > 0:
