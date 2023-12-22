@@ -15,6 +15,7 @@ class team_1:
         output = []     # The output list with the errors to be returned
         text=self.latex_code
         self.title_analysis(text,output)
+        self.author_analysis(text,output)
         output.append('='*50+"\n")
         return output
         
@@ -45,7 +46,7 @@ class team_1:
                  #Finding Nouns, Adjectives, Verbs, Adverbs & Prnouns and checking the condition
                  elif pos.startswith('N') or pos.startswith('J') or pos.startswith('V') or pos.startswith('R') or pos.startswith('P') :
                     if  not word.istitle() and not word.isupper():
-                        output.append(" word'"+word+"' need to be Capitalized since it is a '"+ pos_tag_fullforms(pos)  + "'\n")
+                        output.append(" word '"+word+"' need to be Capitalized since it is a '"+ pos_tag_fullforms(pos)  + "'\n")
                  
                  #Finding Coordinate Conjuctions , Articles, pripostions         
                  elif pos=='CC'or pos=='DT' or (pos=='IN' and len(word)<4):
@@ -60,7 +61,22 @@ class team_1:
         else:
             output.append("No Title Found in the Latex Code\n")
             
+    def author_analysis(self,latex_content,output):
+        
+        output.append('='*50+"\n\t\t Author Related Comments \n"+'='*50+'\n')
+        
+        pattern = r"\\author\{(.*)\}"
+        matches = re.findall(pattern, latex_content)
+        matches[0]=matches[0]+"}"
+        print(matches[0])
+
+        words = word_tokenize(matches[0])
+
+        for word in words:
+            print(word)
+        
     
+        
     # full forms of each of the parts of speech tag (POS_tag)
 def pos_tag_fullforms(pos):
     
