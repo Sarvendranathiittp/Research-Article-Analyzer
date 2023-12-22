@@ -47,7 +47,50 @@ class team_5:
                     result.append("here , is missing at the end of one of the equation. The equation is  "+equation+"\n")
                 char_next=False
                 punc=False   
-        return result;                  
+        return result;  
+    def check_punctuations_for_array(self,latex_content):
+        self.latex_content=latex_content
+        result = []
+        equation_pattern = re.compile(r'\\begin{array}{ll}(.*?)\\end{array}',re.DOTALL)
+        equations = re.findall(equation_pattern, latex_content)
+
+        
+        for equation in equations:
+            for i in range(0,len(equation) - 1):
+                if equation[i]=='\\' and equation[i+1]=='\\':
+                    
+                    for j in range(i - 1, -1, -1):
+                        if equation[j] != ' ':  # If the character is not a space
+                            if equation[j]==',':
+                                punc = True
+                                # print("1")
+                                # print(equation)
+                            break
+                    
+                    for k in range(i+2,i+10):
+                        # print(equation[j])
+                        if equation[k] not in [' ', '\n']:
+                            if equation[k]=="\\":  
+                                char_next = True
+                                # print(equation[k])
+                            if punc==True and equation[k]=="&":
+                                char_next = True
+                            break
+                # if char_next and punc:
+                #     print("yes")
+                #     print(equation)
+                if punc and (not char_next):
+                    # print("hi")
+                    # print(equation)
+                    result.append("here , is placed at the end of one of the equation, but it is not expexted there. The equation is  "+equation+"\n")
+                if char_next and (not punc):
+                    # print("bye")
+                    # print(equation)
+                    result.append("here , is missing at the end of one of the equation. The equation is  "+equation+"\n")
+                char_next=False
+                punc=False   
+        return result; 
+        
                                 
     def check_punctuation(self,latex_content):
         self.latex_content = latex_content
@@ -174,9 +217,11 @@ class team_5:
         result1=self.check_punctuation(text) 
         result2=self.check_punctuation_align(text) 
         result3=self.check_punctuation_between_multiequations(text) 
+        result4=self.check_punctuations_for_array(text)
         start="\n\n ///////////////////####punctuation at the end of equations related comments####\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n"
         output.extend(start)
         output.extend(result1)
         output.extend(result2)    
         output.extend(result3)
+        output.extend(result4)
         return output
