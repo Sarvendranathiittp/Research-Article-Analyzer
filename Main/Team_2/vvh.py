@@ -98,3 +98,23 @@ for i, line in enumerate(lines, start=1):
     matches = pattern.findall(line)
     for match in matches:
         print(f"\nWord  {match} occured in Line Number: {i}")
+tches = re.findall(r'\([^)]*\)', input_string)
+
+# Process each match
+for match in tches:
+    # Count the number of uppercase letters in the word
+    num_uppercase = sum(1 for char in match if char.isupper())
+    
+    # Find the position of the word in the input string
+    match_position = input_string.find(match)
+    
+    # Find the substring before the word
+    substring_before_word = input_string[:match_position]
+    
+    # Find the n words before the word (excluding '(')
+    words_before = re.findall(r'\b\w+\b', substring_before_word)[-num_uppercase:]
+    
+    # Print the result
+    print(f"Word {match}")
+    print(f"Full form is: {' '.join(words_before)}\n")
+
