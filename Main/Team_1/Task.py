@@ -19,12 +19,15 @@ class team_1:
         output.append('='*50+"\n")
         return output
         
+    #function to analyse title text. 
     def title_analysis(self,latex_content,output):
         
         output.append('='*50+"\n\t\t Title Related Comments \n"+'='*50+'\n')
+        
          # Define a regular expression to match LaTeX Title
         title_pattern = re.compile(r'\\title{([^}]+)}')
         
+         # Finding title pattern in latex content
         title_match = re.search(title_pattern, latex_content)
         
         if title_match:
@@ -57,45 +60,70 @@ class team_1:
                  elif pos=='IN' and len(word)>3 :
                         if not word.istitle():
                             output.append(" Word '"+word+"'need to be capitalised since it is a '"+ pos_tag_fullforms(pos)+"'\n")
-            
+             
+             #Checking Whether extra spaces are added in title text.
              spaces_count(title_text,output)    
             
         else:
-            output.append("No Title Found in the Latex Code\n")
+            output.append("Error : No Title Found in the Latex Code\n")
+         
             
+    # Function to analyse author text       
     def author_analysis(self,latex_content,output):
         
         output.append('='*50+"\n\t\t Author Related Comments \n"+'='*50+'\n')
         
-        pattern = r"\\author\{(.*)\}"
-        matches = re.findall(pattern, latex_content)
-        matches[0]=matches[0]+"}"
-        print(matches[0])
-
-        words = word_tokenize(matches[0])
-        word_count=0
+        # Define a regular expression to match latex author 
+        author_pattern = r"\\author\{(.*)\}"
+        
+        # finding author pattern in latex content
+        matches = re.findall(author_pattern, latex_content)
+        
+        #extracted author text in latext content
+        author_text=matches[0]
+        author_text=author_text+"}"
+        
+        # making author text into token of words 
+        words = word_tokenize(author_text)
+        
+        # variable to count the no of names or authors 
+        name_count=0
+        
+        #Verifying the author text with IEEE rules
         for i in range(len(words)):
             if re.match(r'^[a-zA-Z]+$', words[i]):
-                word_count=word_count+1
+                name_count=name_count+1
+                
+                #verifying all authors, other names is capitalized or not 
                 if not words[i].istitle()and not words[i].isupper():
                     output.append("word '"+words[i]+"' need to be capitalized\n")
-                if word_count>3:
+                
+                #verifying a comma is missing or not
+                if name_count>3:
                     output.append("Warning : Comma is not present in first three words of the author list. Check for any missing comma\n")
-                    word_count=0
+                    name_count=0
+                    
             if words[i]=='{':
                 if not words[i-1]==',':
                     output.append("Comma is missing after the Author Name & Before Author Affiliation\n")
-                    word_count=0
+                    name_count=0
+                    
+                #making sure that author affiliation is writen in italic style.
                 if not words[i+1]=='\it':
                     output.append("Warning : it's better to use Italyic Style in writing Author Affiliation \n")
+            
             if words[i]==',':
-                word_count=0   
+                name_count=0   
+            
+            #verifiying whether comma is missing after the author affiliation and before author name
             if words[i]=='}'and not i==len(words)-1:
                 if not words[i+1]==',' :
                        output.append("Comma is missing before author '"+words[i+1]+"'.\n")
-            
-        spaces_count(matches[0],output)
+                       
+        # Finding whether unncessary spaces are assigned in author content    
+        spaces_count(author_text,output)
         
+# Function to verify whether unnecessary spaces are given or not    
 def spaces_count(text,output):
         spaces_count=0
         for i in range(len(text)):
@@ -104,11 +132,12 @@ def spaces_count(text,output):
             else:   
                 spaces_count=0
             
+            #if there are more than 2 spaces we will through a warning
             if(spaces_count>2):
                 output.append("Warning : Found Unnecessary Spaces, Try to remove them\n")
                 break
                     
-    # full forms of each of the parts of speech tag (POS_tag)
+ # full forms of each of the parts of speech tag (POS_tag)
 def pos_tag_fullforms(pos):
     
     if(pos.startswith('N')):
