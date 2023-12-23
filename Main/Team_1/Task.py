@@ -1,4 +1,10 @@
-#team 1#
+# Team 1 #
+"""
+To run this file 
+        First we need to install the nltk module using the command "pip install nltk"
+        Then import it ...because we can easily detect the parts of speech of each word easily.
+"""
+
 import nltk     #importing module nltk containing parts of speech
 from nltk import pos_tag, word_tokenize
 
@@ -89,9 +95,9 @@ class team_1:
         # variable to count the no of names or authors 
         name_count=0
         
-        #Verifying the author text with IEEE rules
+        #Verifying the author text with IEEE rules 
         for i in range(len(words)):
-            if re.match(r'^[a-zA-Z]+$', words[i]):
+            if re.match(r'^[a-zA-Z]+$', words[i]) and not words[i]=='and':
                 name_count=name_count+1
                 
                 #verifying all authors, other names is capitalized or not 
