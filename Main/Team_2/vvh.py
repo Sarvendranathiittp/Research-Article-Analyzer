@@ -65,10 +65,10 @@ class AcronymProcessor:
 # Example usage:
 input_string = """Transmit antenna selection (TASs) aalo Teacher Assistant(TA) is a technique that achieves better performance than a single\n"
     "antenna system while using the same number of radio frequency chains. We propose a novel TAS\n"
-    "rule called the $\\lambda$-weighted interference (EDS) TAS indicator rule (LWIIRs). We prove that for the general\n"
+    "rule called the $\\lambda$-weighted interference indicator rule (LWIIRs). We prove that for the general\n"
     "class of fading models with TED continuous cumulative  EDD distribution functions, LWIIR achieves TASs the lowest\n"
     "average symbol error probability (SEPs) among all TAS rules for an underlay cognitive radio system\n" "TSA"
-    "that employs binary power control and is subject to the interference-outage constraint."""
+    "that employs binary power control and is subject to the interference-outage constraint(IOC)."""
 
 processor = AcronymProcessor(input_string)
 
