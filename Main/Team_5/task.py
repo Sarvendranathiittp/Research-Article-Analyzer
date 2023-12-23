@@ -51,10 +51,10 @@ class team_5:
     def check_punctuations_for_array(self,latex_content):
         self.latex_content=latex_content
         result = []
+        punc = False
+        char_next = False
         equation_pattern = re.compile(r'\\begin{array}{ll}(.*?)\\end{array}',re.DOTALL)
         equations = re.findall(equation_pattern, latex_content)
-
-        
         for equation in equations:
             for i in range(0,len(equation) - 1):
                 if equation[i]=='\\' and equation[i+1]=='\\':
