@@ -2,8 +2,6 @@
 #2. Create a list of acronyms used.
 #3. Count the number of times each acronym occurred.
 #4. Identify the acronyms that are not expanded at the first occurrence
-
-
 import re    
 class team_2:
     def __init__(self, latex_content, begin_document_index):
@@ -22,9 +20,6 @@ class team_2:
 
         self.begin_document_index = begin_index
     
-    
-    
-
     def extract_abstract(self):
         # Find the index of \begin{abstract} using the given begin_document_index
         begin_abstract_index = self.latex_content.find(r'\begin{abstract}', self.begin_document_index)
@@ -90,7 +85,7 @@ class team_2:
         title = self.extract_title()
         output = [] # The output would be updated with the extracted title and abstract along with the word counts respectively.
 
-        output.append(f"\n ================================================\n Title Related Comments \n ================================================ ")
+        output.append('\n'+'='*50+"\n\t\t Title Related Comments \n"+'='*50)
     
         if title:          
             #output.append(f"Title (Original): \n{title}")
@@ -109,8 +104,8 @@ class team_2:
             output.append(f"\n No title found.")
             print("No title found.")
         
-        output.append(f"\n ================================================\n  Related Comments \n ================================================ ")
-
+        output.append('\n'+'='*50+"\n\t\t Abstract Related Comments \n"+'='*50)
+        
         if abstract:
 
             #output.append(f"Abstract: \n{abstract}")

@@ -1,3 +1,5 @@
+# Online Python compiler (interpreter) to run Python online.
+# Write Python 3 code in this online editor and run it.
 import re
 
 class AcronymProcessor:
@@ -58,9 +60,9 @@ class AcronymProcessor:
         print("\nTotal acronyms:", total_occurrences)
 
 # Example usage:
-input_string = """Transmit antenna selection (TASs) is a technique that achieves better performance than a single\n"
+input_string = """Transmit antenna selection (TASs) aalo Teacher Assistant(TA) is a technique that achieves better performance than a single\n"
     "antenna system while using the same number of radio frequency chains. We propose a novel TAS\n"
-    "rule called the $\\lambda$-weighted interference (EDSs) TAS indicator rule (LWIIRs). We prove that for the general\n"
+    "rule called the $\\lambda$-weighted interference (EDS) TAS indicator rule (LWIIRs). We prove that for the general\n"
     "class of fading models with TED continuous cumulative  EDD distribution functions, LWIIR achieves TASs the lowest\n"
     "average symbol error probability (SEPs) among all TAS rules for an underlay cognitive radio system\n" "TSA"
     "that employs binary power control and is subject to the interference-outage constraint."""
@@ -74,18 +76,22 @@ print("\nPlural acronyms:")
 print(processor.new_acro_list)
 
 b = processor.matching_word_count.items()
-print(list(b))
+#print(list(b))
 keys = [item[0] for item in b]
-print(keys)
-
+#print(keys)
 a = processor.find_and_print_remaining_uppercase_words()
-
 if a == keys:
     print("All defined")
 else:
     diff = set(a) - set(keys)
     print("\nNot defined:")
     print(diff)
+lines = input_string.split('\n')
+pattern = re.compile(r'\((\w+)\)')
+for i, line in enumerate(lines, start=1):
+    matches = pattern.findall(line)
+    for match in matches:
+        print(f"\nWord  {match} occured in Line Number: {i}")
 
-processor.check_and_print_occurrences()
-#fddfvhjg
+
+
