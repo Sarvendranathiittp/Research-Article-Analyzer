@@ -1,5 +1,8 @@
 # Online Python compiler (interpreter) to run Python online.
 # Write Python 3 code in this online editor and run it.
+print("Hello world")
+# Online Python compiler (interpreter) to run Python online.
+# Write Python 3 code in this online editor and run it.
 import re
 
 class AcronymProcessor:
@@ -57,7 +60,7 @@ class AcronymProcessor:
             if occurrences > 0:
                 print(f"\n{word}: {occurrences} times")
 
-        print("\nTotal acronyms:", total_occurrences)
+        print("Total acronyms:", total_occurrences)
 
 # Example usage:
 input_string = """Transmit antenna selection (TASs) aalo Teacher Assistant(TA) is a technique that achieves better performance than a single\n"
@@ -86,12 +89,12 @@ else:
     diff = set(a) - set(keys)
     print("\nNot defined:")
     print(diff)
+processor.count_matching_words()
+processor.check_and_print_occurrences()
+
 lines = input_string.split('\n')
 pattern = re.compile(r'\((\w+)\)')
 for i, line in enumerate(lines, start=1):
     matches = pattern.findall(line)
     for match in matches:
         print(f"\nWord  {match} occured in Line Number: {i}")
-
-
-
