@@ -58,6 +58,8 @@ class team_1:
                         if not word.istitle():
                             output.append(" Word '"+word+"'need to be capitalised since it is a '"+ pos_tag_fullforms(pos)+"'\n")
             
+             spaces_count(title_text,output)    
+            
         else:
             output.append("No Title Found in the Latex Code\n")
             
@@ -71,12 +73,41 @@ class team_1:
         print(matches[0])
 
         words = word_tokenize(matches[0])
-
-        for word in words:
-            print(word)
+        word_count=0
+        for i in range(len(words)):
+            if re.match(r'^[a-zA-Z]+$', words[i]):
+                word_count=word_count+1
+                if not words[i].istitle()and not words[i].isupper():
+                    output.append("word '"+words[i]+"' need to be capitalized\n")
+                if word_count>3:
+                    output.append("Warning : Comma is not present in first three words of the author list. Check for any missing comma\n")
+                    word_count=0
+            if words[i]=='{':
+                if not words[i-1]==',':
+                    output.append("Comma is missing after the Author Name & Before Author Affiliation\n")
+                    word_count=0
+                if not words[i+1]=='\it':
+                    output.append("Warning : it's better to use Italyic Style in writing Author Affiliation \n")
+            if words[i]==',':
+                word_count=0   
+            if words[i]=='}'and not i==len(words)-1:
+                if not words[i+1]==',' :
+                       output.append("Comma is missing before author '"+words[i+1]+"'.\n")
+            
+        spaces_count(matches[0],output)
         
-    
-        
+def spaces_count(text,output):
+        spaces_count=0
+        for i in range(len(text)):
+            if(text[i]==" "):
+                spaces_count=spaces_count+1
+            else:   
+                spaces_count=0
+            
+            if(spaces_count>2):
+                output.append("Warning : Found Unnecessary Spaces, Try to remove them\n")
+                break
+                    
     # full forms of each of the parts of speech tag (POS_tag)
 def pos_tag_fullforms(pos):
     
