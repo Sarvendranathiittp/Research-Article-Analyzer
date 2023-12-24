@@ -1,3 +1,8 @@
+# Online Python compiler (interpreter) to run Python online.
+# Write Python 3 code in this online editor and run it.
+print("Hello world")
+# Online Python compiler (interpreter) to run Python online.
+# Write Python 3 code in this online editor and run it.
 import re
 
 class AcronymProcessor:
@@ -55,15 +60,15 @@ class AcronymProcessor:
             if occurrences > 0:
                 print(f"\n{word}: {occurrences} times")
 
-        print("\nTotal acronyms:", total_occurrences)
+        print("Total acronyms:", total_occurrences)
 
 # Example usage:
 input_string = """Transmit antenna selection (TASs) aalo Teacher Assistant(TA) is a technique that achieves better performance than a single\n"
     "antenna system while using the same number of radio frequency chains. We propose a novel TAS\n"
-    "rule called the $\\lambda$-weighted interference (EDSs) TAS indicator rule (LWIIRs). We prove that for the general\n"
+    "rule called the $\\lambda$-weighted interference indicator rule (LWIIRs). We prove that for the general\n"
     "class of fading models with TED continuous cumulative  EDD distribution functions, LWIIR achieves TASs the lowest\n"
     "average symbol error probability (SEPs) among all TAS rules for an underlay cognitive radio system\n" "TSA"
-    "that employs binary power control and is subject to the interference-outage constraint."""
+    "that employs binary power control and is subject to the interference-outage constraint(IOC)."""
 
 processor = AcronymProcessor(input_string)
 
@@ -74,19 +79,42 @@ print("\nPlural acronyms:")
 print(processor.new_acro_list)
 
 b = processor.matching_word_count.items()
-print(list(b))
+#print(list(b))
 keys = [item[0] for item in b]
-print(keys)
-
+#print(keys)
 a = processor.find_and_print_remaining_uppercase_words()
-
 if a == keys:
     print("All defined")
 else:
     diff = set(a) - set(keys)
     print("\nNot defined:")
     print(diff)
-
+processor.count_matching_words()
 processor.check_and_print_occurrences()
-#fddfvhjg
-#jdivjivj
+
+lines = input_string.split('\n')
+pattern = re.compile(r'\((\w+)\)')
+for i, line in enumerate(lines, start=1):
+    matches = pattern.findall(line)
+    for match in matches:
+        print(f"\nWord  {match} occured in Line Number: {i}")
+tches = re.findall(r'\([^)]*\)', input_string)
+
+# Process each match
+for match in tches:
+    # Count the number of uppercase letters in the word
+    num_uppercase = sum(1 for char in match if char.isupper())
+    
+    # Find the position of the word in the input string
+    match_position = input_string.find(match)
+    
+    # Find the substring before the word
+    substring_before_word = input_string[:match_position]
+    
+    # Find the n words before the word (excluding '(')
+    words_before = re.findall(r'\b\w+\b', substring_before_word)[-num_uppercase:]
+    
+    # Print the result
+    print(f"Word {match}")
+    print(f"Full form is: {' '.join(words_before)}\n")
+
