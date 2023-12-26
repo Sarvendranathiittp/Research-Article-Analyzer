@@ -137,7 +137,7 @@ class team_5:
     
                     if match:
                         word_after_end = match.group()
-                        print(word_after_end)
+                        # print(word_after_end)
                         if word_after_end and word_after_end[0].isupper():
                             if last_char != '.':
                                 
