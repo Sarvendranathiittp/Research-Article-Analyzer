@@ -1,5 +1,5 @@
 class Inline:
-    def __intit__(self,code,begin_index):
+    def __init__(self,code,begin_index):
         self.code=code
         self.begin_index=begin_index
     def getfrac(self):
