@@ -90,8 +90,7 @@ class team_5:
                 char_next=False
                 punc=False   
         return result; 
-        
-                                
+                                 
     def check_punctuation(self,latex_content):
         self.latex_content = latex_content
             # Define a regular expression to match LaTeX equations and labels
@@ -103,7 +102,14 @@ class team_5:
         for equation in equations:
             # Extract the equation label if present
             label_match = re.search(r'\\label{([^}]*)}', equation)
-            last_char = equation.strip()[-1] if equation.strip() else None
+            equation_pattern1 = re.compile(r'\\begin{array}(.*?)\\end{array}', re.DOTALL)
+            equations1 = re.findall(equation_pattern1, equation)
+            
+            if equations1 != []:
+                equation1 = equations1[0]
+                last_char = equation1.strip()[-1] if equation1.strip() else None
+            else: 
+                last_char = equation.strip()[-1] if equation.strip() else None
             if last_char =="." or last_char ==",":
                 index1 = latex_content.find(equation)
             else: 
@@ -131,7 +137,7 @@ class team_5:
     
                     if match:
                         word_after_end = match.group()
-                        # print(word_after_end)
+                        print(word_after_end)
                         if word_after_end and word_after_end[0].isupper():
                             if last_char != '.':
                                 
@@ -148,8 +154,7 @@ class team_5:
             elif last_char not in [',', '.']:
                 # print("Warning: Punctuation not found at the end of the equation (if any).")
                 result.append("Warning: Punctuation not found at the end of the equation."+equation+"\n")
-        return result  
-    
+        return result     
     def check_punctuation_align(self,latex_content):
         self.latex_content = latex_content
             # Define a regular expression to match LaTeX equations and labels
@@ -217,7 +222,7 @@ class team_5:
         result2=self.check_punctuation_align(text) 
         result3=self.check_punctuation_between_multiequations(text) 
         result4=self.check_punctuations_for_array(text)
-        start="\n\n ///////////////////####punctuation at the end of equations related comments####\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n"
+        start="\n\n ///////////////////####punctuation at the end of equations related comments####\\\\\\\\\\\\\\\\\\\\\\\n"
         output.extend(start)
         output.extend(result1)
         output.extend(result2)    
