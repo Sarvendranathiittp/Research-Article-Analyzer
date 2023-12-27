@@ -5,6 +5,18 @@ class team_5:
         self.latex_code = latex_code
         self.text_begin = text_begin
     
+    def skip_line_by_first_word(self,text, first_word_to_skip):
+        # Split the text into lines
+        lines = text.split('\n')
+        
+        # Find and filter out the line with the specified first word
+        filtered_lines = [line for line in lines if line.split() and line.split()[0] != first_word_to_skip]
+        
+        # Join the remaining lines back into a single string
+        result = '\n'.join(filtered_lines)
+        
+        return result
+
     def check_punctuation_between_multiequations(self,latex_content):
         self.latex_content=latex_content
         result = []
@@ -133,20 +145,64 @@ class team_5:
                     text_after_end = latex_content[end_equation_index + len('\\end{equation}'):].lstrip()
     
                     # Find the first word after \end{equation}
-                    match = re.search(r'\w+', text_after_end)
-    
-                    if match:
-                        word_after_end = match.group()
+                    # match = re.search(r'\w+', text_after_end)
+                    match = re.search(r'\S+', text_after_end)
+                    word_after_end = match.group()
+                    # print(word_after_end)
+                    
+                    if word_after_end == '%':
+                        end_index = match.end()  # Get the end index of the matched substring
+                        word_after_end = text_after_end[end_index:].split()[0]  # Get the next word after the matched substring
+                        a = 1
+                        while word_after_end == '%':
+                             word_after_end = text_after_end[end_index:].split()[a]
+                             a=a+1 
                         # print(word_after_end)
-                        if word_after_end and word_after_end[0].isupper():
+                        if word_after_end==r"{\em":
+                            index2 =  text_after_end.index(word_after_end)
+                            start_index_next_word = index2 + len(word_after_end) + 1
+                            word_after_end = text_after_end[start_index_next_word]
+                            # print(word_after_end)
+                            
+                        if last_char=='.' and word_after_end[0]== '(':
+                            pass
+                        elif word_after_end[0].isalnum() and word_after_end[0].isupper():
                             if last_char != '.':
                                 
                                 # print("The word after \\end{equation} starts with a capital letter, but the punctuation is not a full stop.")
-                                result.append("The word after \\end{equation} starts with a capital letter, but the punctuation is not a full stop."+equation+"\n")
+                                result.append("The word after \\end{equation} starts with a capital letter, but the punctuation is not a full stop."+equation+"next word is:"+word_after_end+"\n"+"\n")
                         else:
                             if last_char != ',':
                                 # print("The word after \\end{equation} does not start with a capital letter, but the punctuation is not a comma.")
-                                result.append("The word after \\end{equation} does not start with a capital letter, but the punctuation is not a comma."+equation+"\n")
+                                result.append("The word after \\end{equation} does not start with a capital letter, but the punctuation is not a comma."+equation+"next word is:"+word_after_end+"\n"+"\n")
+                    
+                    elif word_after_end:
+                        # word_after_end = match.group()
+                        # print(word_after_end)
+                        if r"\sub" in word_after_end:
+                            # print("hi")
+                            nextt=self.skip_line_by_first_word(text_after_end,word_after_end)
+                            # print("\\\\\\\\\\\\\\\\\\\its done//////////////////"+nextt[0])
+                            word_after_end = nextt
+                            
+                        if word_after_end==r"{\em":
+                            index2 =  text_after_end.index(word_after_end)
+                            start_index_next_word = index2 + len(word_after_end) + 1
+                            word_after_end = text_after_end[start_index_next_word]
+                            
+                        if last_char=='.' and word_after_end[0]== '(':
+                            pass
+                        elif last_char=='.' and word_after_end== r"\item":
+                            pass
+                        elif word_after_end and word_after_end[0].isupper():
+                            if last_char != '.':
+                                
+                                # print("The word after \\end{equation} starts with a capital letter, but the punctuation is not a full stop.")
+                                result.append("The word after \\end{equation} starts with a capital letter, but the punctuation is not a full stop."+equation+"next word is:"+word_after_end+"\n"+"\n")
+                        else:
+                            if last_char != ',':
+                                # print("The word after \\end{equation} does not start with a capital letter, but the punctuation is not a comma.")
+                                result.append("The word after \\end{equation} does not start with a capital letter, but the punctuation is not a comma."+equation+"next word is:"+word_after_end+"\n"+"\n")
                     else:
                         print("Error: Word after \\end{equation} not found.")
                 else:
@@ -218,21 +274,25 @@ class team_5:
         equation_pattern=re.compile(r'\\begin{multline}(.*?)\\end{multline}', re.DOTALL)
         result=[]
         math_operator=["+","-",">","<","=","/","x"]
-        other_operator=["\leq","\geq"]
+        # other_operator=["\leq","\geq"]
+        other_operator = [r"\leq", r"\geq"]
+
         equations = re.findall(equation_pattern,latex_content)
         for equation in equations:
            equation=equation.replace(" ",'')
-           print(equation)
+        #    print(equation)
            for i in range(len(equation)):
                if equation[i]=="\\" and equation[i+1]=="\\":
                    if equation[i-1] not in math_operator and equation[i+2] in math_operator:
-                       print("yes")
+                    #    print("yes")
+                    pass
                    if equation[i-1] not in math_operator and equation[i+2:i+6] in other_operator:
-                       print("yes")
+                    #    print("yes")
+                    pass
                    else:
                        if equation[i-1] in math_operator:
-                           print("The math operator should not be there before \\")
-                           result.append("The math operator should not be there before \\")
+                        #    print("The math operator should not be there before \\")
+                           result.append("The math operator should not be there before \\ in this equation:"+equation)
         return result
 
     def run(self):  # The function which is going to be invoked in the wrapper class should contain no arguments
