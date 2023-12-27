@@ -212,8 +212,23 @@ class team_5:
             elif last_char not in [',', '.']:
                 # print("Warning: Punctuation not found at the end of the equation (if any).")
                 result.append("Warning: Punctuation not found at the end of the equation."+equation+"\n")
-        return result          
-    
+        return result    
+    def check_math_operator(self,latex_content):
+        self.latex_content=latex_content
+        equation_pattern=re.compile(r'\\begin{multline}(.*?)\\end{multline}', re.DOTALL)
+        result=[]
+        math_operator=["+","-","x","/"]
+        equations = re.findall(equation_pattern,latex_content)
+        for equation in equations:
+           for i in range(len(equation)):
+               if equation[i]=="\\":
+                   if equation[i-1] not in math_operator and equation[i+1] in math_operator:
+                       print("yes")
+                   else:
+                       if equation[i-1] in math_operator:
+                           print("The math operator should not be there before \\")
+                           result.append("The math operator should not be there before \\")
+
     def run(self):  # The function which is going to be invoked in the wrapper class should contain no arguments
 
         output = [] # The output list with the errors to be returned
@@ -222,10 +237,12 @@ class team_5:
         result2=self.check_punctuation_align(text) 
         result3=self.check_punctuation_between_multiequations(text) 
         result4=self.check_punctuations_for_array(text)
+        result5=self.check_math_operator(text)
         start="\n\n ///////////////////####punctuation at the end of equations related comments####\\\\\\\\\\\\\\\\\\\\\\\n"
         output.extend(start)
         output.extend(result1)
         output.extend(result2)    
         output.extend(result3)
         output.extend(result4)
+        output.extend(result5)
         return output
