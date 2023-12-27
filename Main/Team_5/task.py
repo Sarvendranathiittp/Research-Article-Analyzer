@@ -209,7 +209,7 @@ class team_5:
                     print("Error: \\end{equation} not found after the equation.")
             elif last_char not in [',', '.']:
                 # print("Warning: Punctuation not found at the end of the equation (if any).")
-                result.append("Warning: Punctuation not found at the end of the equation."+equation+"\n")
+                result.append("Warning: Punctuation not found at the end of the equation."+equation+"\n"+"\n")
         return result     
     def check_punctuation_align(self,latex_content):
         self.latex_content = latex_content
@@ -247,27 +247,74 @@ class team_5:
                     text_after_end = latex_content[end_equation_index + len('\\end{align}'):].lstrip()
     
                     # Find the first word after \end{align}
-                    match = re.search(r'\w+', text_after_end)
-    
-                    if match:
-                        word_after_end = match.group()
+                    match = re.search(r'\S+', text_after_end)
+                    word_after_end = match.group()
+                    # print(word_after_end)
+                    
+                    if word_after_end == '%':
+                        end_index = match.end()  # Get the end index of the matched substring
+                        word_after_end = text_after_end[end_index:].split()[0]  # Get the next word after the matched substring
+                        a = 1
+                        while word_after_end == '%':
+                             word_after_end = text_after_end[end_index:].split()[a]
+                             a=a+1 
                         # print(word_after_end)
-                        if word_after_end and word_after_end[0].isupper():
+                        if word_after_end==r"{\em":
+                            index2 =  text_after_end.index(word_after_end)
+                            start_index_next_word = index2 + len(word_after_end) + 1
+                            word_after_end = text_after_end[start_index_next_word]
+                            # print(word_after_end)
+                            
+                        if last_char=='.' and word_after_end[0]== '(':
+                            pass
+                        elif last_char=='.' and word_after_end[0].isalnum()==False:
+                            pass
+                        elif word_after_end[0].isalnum() and word_after_end[0].isupper():
                             if last_char != '.':
                                 
-                                # print("The word after \\end{align} starts with a capital letter, but the punctuation is not a full stop.")
-                                result.append("The word after \\end{align} starts with a capital letter, but the punctuation is not a full stop."+equation+"\n")
+                                # print("The word after \\end{equation} starts with a capital letter, but the punctuation is not a full stop.")
+                                result.append("The word after \\end{align} starts with a capital letter, but the punctuation is not a full stop."+equation+"next word is:"+word_after_end+"\n"+"\n")
                         else:
                             if last_char != ',':
-                                # print("The word after \\end{align} does not start with a capital letter, but the punctuation is not a comma.")
-                                result.append("The word after \\end{align} does not start with a capital letter, but the punctuation is not a comma."+equation+"\n")
+                                # print("The word after \\end{equation} does not start with a capital letter, but the punctuation is not a comma.")
+                                result.append("The word after \\end{align} does not start with a capital letter, but the punctuation is not a comma."+equation+"next word is:"+word_after_end+"\n"+"\n")
+                    
+                    elif word_after_end:
+                        # word_after_end = match.group()
+                        # print(word_after_end)
+                        if r"\sub" in word_after_end:
+                            # print("hi")
+                            nextt=self.skip_line_by_first_word(text_after_end,word_after_end)
+                            # print("\\\\\\\\\\\\\\\\\\\its done//////////////////"+nextt[0])
+                            word_after_end = nextt
+                            
+                        if word_after_end==r"{\em":
+                            index2 =  text_after_end.index(word_after_end)
+                            start_index_next_word = index2 + len(word_after_end) + 1
+                            word_after_end = text_after_end[start_index_next_word]
+                            
+                        if last_char=='.' and word_after_end[0]== '(':
+                            pass
+                        elif last_char=='.' and word_after_end== r"\item":
+                            pass
+                        elif last_char=='.' and word_after_end[0].isalnum()==False:
+                            pass
+                        elif word_after_end and word_after_end[0].isupper():
+                            if last_char != '.':
+                                
+                                # print("The word after \\end{equation} starts with a capital letter, but the punctuation is not a full stop.")
+                                result.append("The word after \\end{align} starts with a capital letter, but the punctuation is not a full stop."+equation+"next word is:"+word_after_end+"\n"+"\n")
+                        else:
+                            if last_char != ',':
+                                # print("The word after \\end{equation} does not start with a capital letter, but the punctuation is not a comma.")
+                                result.append("The word after \\end{align} does not start with a capital letter, but the punctuation is not a comma."+equation+"next word is:"+word_after_end+"\n"+"\n")
                     else:
                         print("Error: Word after \\end{align} not found.")
                 else:
                     print("Error: \\end{align} not found after the equation.")
             elif last_char not in [',', '.']:
                 # print("Warning: Punctuation not found at the end of the equation (if any).")
-                result.append("Warning: Punctuation not found at the end of the equation."+equation+"\n")
+                result.append("Warning: Punctuation not found at the end of the equation."+equation+"\n"+"\n")
         return result    
     def check_math_operator(self,latex_content):
         self.latex_content=latex_content
