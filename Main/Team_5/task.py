@@ -217,17 +217,23 @@ class team_5:
         self.latex_content=latex_content
         equation_pattern=re.compile(r'\\begin{multline}(.*?)\\end{multline}', re.DOTALL)
         result=[]
-        math_operator=["+","-","x","/"]
+        math_operator=["+","-",">","<","=","/","x"]
+        other_operator=["\leq","\geq"]
         equations = re.findall(equation_pattern,latex_content)
         for equation in equations:
+           equation=equation.replace(" ",'')
+           print(equation)
            for i in range(len(equation)):
-               if equation[i]=="\\":
-                   if equation[i-1] not in math_operator and equation[i+1] in math_operator:
+               if equation[i]=="\\" and equation[i+1]=="\\":
+                   if equation[i-1] not in math_operator and equation[i+2] in math_operator:
+                       print("yes")
+                   if equation[i-1] not in math_operator and equation[i+2:i+6] in other_operator:
                        print("yes")
                    else:
                        if equation[i-1] in math_operator:
                            print("The math operator should not be there before \\")
                            result.append("The math operator should not be there before \\")
+        return result
 
     def run(self):  # The function which is going to be invoked in the wrapper class should contain no arguments
 
