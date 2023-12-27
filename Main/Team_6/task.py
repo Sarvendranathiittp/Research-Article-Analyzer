@@ -22,30 +22,26 @@ class team_6:
         word_1="\subsection" 
         word_2="\subsubsection"
 
-        lines=self.latex_code.splitlines() #splitting the code into lines.
-        indices=[]
-        #finding the index of each line containing either word_1 or word_2
-        #output.append(lines)
-        output.append(lines[1769])
-        for index in range(0,len(lines)): 
-            if word_1 in lines[index] or word_2 in lines[index]:
-                indices.append(index) #storing the indices of word_1 and word_2 in the list.
+        lines = self.latex_code.splitlines()  # splitting the code into lines.
+        indices = []
+
+        # Finding the index of each line containing either word_1 or word_2
+        for index, line in enumerate(lines):
+            if word_1 in line or word_2 in line:
+                indices.append(index)  # storing the indices of word_1 and word_2 in the list.
+
         for index in indices:
             line1 = lines[index]
-            #   output.append(str(index)+" "+line1)
-            a=12
-            # if word_1 in line1:
-            #     a=12
-            if word_2 in line1:
-                a=15
-            char1='}'
-            char2='~'
-            b = 0
-            for c in range(a,len(line1)):
-                if line1[c] == char1 or line1[c] == char2:
-                    b = c
-                    break
-            line=line1[a:b]
+            
+            char1 = '}'
+            char2 = '~'
+
+            # Finding the substring between '}' or '~' and the end of the line
+            a = 12 if word_1 in line1 else 15 if word_2 in line1 else 0
+            b = line1.find(char1, a) if char1 in line1[a:] else line1.find(char2, a)
+            
+            if b != -1:
+                  line = line1[a:b]
             #output.append(line)
            # output.append(line+'\n')
             tokens= word_tokenize(line) #tokenising parts of speech.
