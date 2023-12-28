@@ -50,23 +50,25 @@ class team_1:
              for word,pos in pos_tags:
                  if word == words[0] or word ==words[-1]:   # intial & final word shld be capital ina title
                      if not word.istitle() and not word.isupper():
-                         output.append("Word '"+word +"' need to be capitalized since it is at starting/ending of title\n")
+                         output.append(" Word '"+word +"' need to be capitalized since it is at starting/ending of title\n")
                  
                  #Finding Nouns, Adjectives, Verbs, Adverbs & Prnouns and checking the condition
                  elif pos.startswith('N') or pos.startswith('J') or pos.startswith('V') or pos.startswith('R') or pos.startswith('P') :
                     if  not word.istitle() and not word.isupper():
-                        output.append(" word '"+word+"' need to be Capitalized since it is a '"+ pos_tag_fullforms(pos)  + "'\n")
+                        output.append(" Word '"+word+"' need to be Capitalized since it is a '"+ pos_tag_fullforms(pos)  + "'\n")
                  
                  #Finding Coordinate Conjuctions , Articles, pripostions         
                  elif pos=='CC'or pos=='DT' or (pos=='IN' and len(word)<4):
                         if not word.islower():
-                            output.append(" word '"+word+"' need to be in lower case since it is a '"+ pos_tag_fullforms(pos) +"'\n")
+                            output.append(" Word '"+word+"' need to be in lower case since it is a '"+ pos_tag_fullforms(pos) +"'\n")
                  
                  #finding prepostions of length greater than 3
                  elif pos=='IN' and len(word)>3 :
                         if not word.istitle():
                             output.append(" Word '"+word+"'need to be capitalised since it is a '"+ pos_tag_fullforms(pos)+"'\n")
-             
+                 else:
+                     if not word.isupper():
+                        output.append("Warning : This word '"+word+"' is not recognised !!!!  ")
              #Checking Whether extra spaces are added in title text.
              spaces_count(title_text,output)    
             
