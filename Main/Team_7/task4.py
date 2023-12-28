@@ -61,11 +61,12 @@ class Task_4:
                         j = j + 1
                     if not forall:
                         error_index.append(i)
+        error_index2 = []
         for ind in comma_index:
             count = 0
             i = ind
             while self.code[i] == ' ':
                 count+=1
             if not(count == 1):
-                error_index.append(ind)
-        return error_index
+                error_index2.append(ind)
+        return error_index,error_index2
