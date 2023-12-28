@@ -1,8 +1,8 @@
 from Main.Team_7.zero import zero
 
 
-class task_2:
-    def __intit__(self, code, begin_index):
+class Task_2:
+    def __init__(self, code, begin_index):
         self.begin_index = begin_index
         self.code = code
 
@@ -16,7 +16,7 @@ class task_2:
         error_index = []
         for ind in dot_index:
             i = ind
-            while (i < len(self.code)):
+            while i < len(self.code):
                 if not (self.code[i] == ' '):
                     break
                 i += 1

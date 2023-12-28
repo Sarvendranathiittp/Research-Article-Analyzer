@@ -1,5 +1,5 @@
 class Inline:
-    def __intit__(self,code,begin_index):
+    def __init__(self,code,begin_index):
         self.code=code
         self.begin_index=begin_index
     def getfrac(self):
@@ -43,6 +43,14 @@ class Inline:
                 exp_index.add(i)
 
         return exp_index
+    def get_line(self, index):
+        line = 1
+        for i in range(0, self.n):
+            if i == index:
+                return line
+            elif self.latex_code[i] == '\n':
+                line += 1
+        return None
     
 
 
