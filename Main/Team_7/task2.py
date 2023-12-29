@@ -1,7 +1,7 @@
 from Main.Team_7.zero import zero
 
 
-class task_2:
+class Task_2:
     def __init__(self, code, begin_index):
         self.begin_index = begin_index
         self.code = code

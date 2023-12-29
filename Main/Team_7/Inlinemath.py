@@ -43,6 +43,14 @@ class Inline:
                 exp_index.add(i)
 
         return exp_index
+    def get_line(self, index):
+        line = 1
+        for i in range(0, self.n):
+            if i == index:
+                return line
+            elif self.latex_code[i] == '\n':
+                line += 1
+        return None
     
 
 
