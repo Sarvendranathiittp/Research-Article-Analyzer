@@ -13,6 +13,7 @@ class team_6:
     def __init__(self, latex_code, text_begin):
         self.latex_code = latex_code 
         self.text_begin = text_begin
+    
 
     def run(self):
 
@@ -52,21 +53,45 @@ class team_6:
             #Articles and Co-ordinating conjuctions
             pos_list2={'CC','DT'}
             #Prepositions of more than three words
-            list3={'before','from','through','with','versus','among','under','between','without'}
+         #   list3={'before','from','through','with','versus','among','under','between','without'}
             index+=1
+            
             for word, pos in postag:
                 if pos in pos_list1 and word[0].islower():
-                    output.append(('ERROR in line:'+str(index)+" "+word+' '+pos))
+                    output.append(('ERROR in line:'+str(index)+" "+word+' '+" :   need to be Capitalized since it is a   :"+ get_pos_full_form(pos) ))
             # for word,pos in postag:
                 elif pos in pos_list2 :
                     if word[0].islower() and word!=tokens[0] and word!=tokens[-1]:
                         pass
                     else:
-                        output.append(('ERROR in line:'+str(index)+" "+word+' '+pos))
+                        output.append(('ERROR in line:'+str(index)+" "+word+' '+":   need to be in lower case since it is a   :"+ get_pos_full_form(pos)))
             # for word in tokens:
-                elif word in list3:
-                    output.append(('ERROR in line:'+str(index)+" "+word+' '+pos))
+                 #finding prepostions of length greater than 3
+                elif pos=='IN' and len(word)>3 :
+                        if not word[0].isUpper():
+                            output.append(('ERROR in line:'+str(index)+" "+word+' '+":  need to be capitalised since it is a  :"+ get_pos_full_form(pos)))
         return output
+
+
+def get_pos_full_form(pos_tag):
+     pos_full_forms = {
+        'NN': 'Noun, Singular or Mass',
+        'NNS': 'Noun, Plural',
+        'NNP': 'Proper Noun, Singular',
+        'PRP': 'Personal Pronoun',
+        'PRP$': 'Possessive Pronoun',
+        'IN': 'Preposition or Subordinating Conjunction',
+        'RBR': 'Adverb, Comparative',
+        'RBS': 'Adverb, Superlative',
+        'JJ': 'Adjective',
+        'JJR': 'Adjective, Comparative',
+        'JJS': 'Adjective, Superlative',
+        'VB': 'Verb, Base Form',
+        'RB': 'Adverb'
+        # Add more POS tags as needed
+    }
+
+     return pos_full_forms.get(pos_tag, 'Unknown POS Tag')
 
 
     # def lineNumber(self,target_index):
