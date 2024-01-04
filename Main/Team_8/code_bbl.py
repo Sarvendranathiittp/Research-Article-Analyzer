@@ -6,7 +6,7 @@
    4.To find and print number of times a each reference has been cited in the latex document
    5.To print the total number of references"""
 
-
+import re
 class team_8:
     # Constructor
     def __init__(self, latex_code, bbl_code,text_begin):
