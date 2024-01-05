@@ -187,7 +187,7 @@ class team_8:
                 output.append(f"In reference number [{reference_number}], acronym {acronym} has a missing opening brace\n")
             elif '}' not in acronym:
                 output.append(f"In reference number [{reference_number}], acronym {acronym} has a missing closing brace\n")
-            else
+            else:
                 pass
 
     def print_unique_acronyms(self,bibliography, output,electrical_engineering_acronyms):
