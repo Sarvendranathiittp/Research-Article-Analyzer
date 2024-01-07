@@ -16,7 +16,8 @@ Comments Type
 '''
 import re    
 class team_2:
-    def __init__(self, latex_content, begin_document_index):
+    def __init__(self, latex_content, begin_document_index):        
+
         self.latex_content = latex_content
         
         title_index = latex_content.find(r'\title{')
@@ -32,6 +33,7 @@ class team_2:
 
         self.begin_document_index = begin_index
 
+        self.text=""
         self.acronyms = []
         self.first_occurrence_line = {}
         self.warnings = []
@@ -99,47 +101,41 @@ class team_2:
                     break
 
             if first_occurrence_line is None and not is_common_acronym:
-                self.warnings.append(f"Warning: Acronym '{acronym}' is not defined at all.")
+                self.warnings.append(f"\n Warning: Acronym '{acronym}' is not defined at all.")
             elif not defined_at_first_occurrence:
                 if not is_common_acronym:
-                    self.warnings.append(f"Warning: Acronym '{acronym}' is defined, but not at the first occurrence (Line {first_occurrence_line}).")
+                    self.warnings.append(f"\n Warning: Acronym '{acronym}' is defined, but not at the first occurrence (Line {first_occurrence_line}).")
                 else:
-                    print(f"Acronym '{acronym}' is a common acronym and is not defined at the first occurrence.")
+                    self.warnings.append(f"\n Acronym '{acronym}' is a common acronym and is not defined at the first occurrence.")
             elif defined_without_parentheses:
                 if not is_common_acronym:
-                    print(f"Acronym '{acronym}' is defined without parentheses at Line {first_occurrence_line}.")
+                    self.warnings.append(f"\n Acronym '{acronym}' is defined without parentheses at Line {first_occurrence_line}.")
                 else:
-                    print(f"Acronym '{acronym}' is a common acronym and is defined without parentheses at Line {first_occurrence_line}.")
+                    self.warnings.append(f"\n Acronym '{acronym}' is a common acronym and is defined without parentheses at Line {first_occurrence_line}.")
             elif is_common_acronym:
-                print(f"Acronym '{acronym}' is a common acronym and is defined at Line {first_occurrence_line}, but within parentheses.")
+                self.warnings.append(f"\n Acronym '{acronym}' is a common acronym and is defined at Line {first_occurrence_line}, but within parentheses.")
 
+            
             self.first_occurrence_line[acronym] = first_occurrence_line
-        
+          
     def run(self):
-        abstract = self.remove_latex_commands(self.extract_abstract()) 
+        abstract = self.remove_latex_commands(self.extract_abstract())
         output = []  # The output would be updated with the extracted title and abstract along with the word counts respectively.
+
 
         output.append('\n' + '=' * 50 + "\n\t\t Abstract Related Comments \n" + '=' * 50)
 
-        # Assuming team_2 is your class
-        self.text = abstract  # Set the text attribute before creating an instance
-        acronym_processor = team_2(self.text,0)
-        acronym_processor.extract_acronyms()
-        
-        if acronym_processor.acronyms:
-            acronym_processor.verify_acronyms()
-            output.append("List of Acronyms: " + str(acronym_processor.acronyms))
-            
-            if acronym_processor.warnings:
+        self.text = abstract
+        self.extract_acronyms()
+
+        if self.acronyms:
+            self.verify_acronyms()
+            output.append("\n List of Acronyms: " + str(self.acronyms))
+
+            if self.warnings:
                 output.append("\nWarnings:")
-                for warning in acronym_processor.warnings:
+                for warning in self.warnings:
                     output.append(warning)
         else:
-            output.append("No acronyms found in the given text.")
-
+            output.append("\n No acronyms found in the given text.")
         return output
-
-
-
-
-
