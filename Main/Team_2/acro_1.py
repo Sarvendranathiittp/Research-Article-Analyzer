@@ -5,6 +5,7 @@ class Team2:
         self.latex_content = latex_content
         self.begin_document_index = begin_document_index
         self.acronyms = []
+        self.apostrophe_acronyms = []  # New attribute for apostrophe acronyms
         self.first_occurrence_line = {}
         self.warnings = []
         self.common_acronyms = ['DIY', 'NASA', 'HTML']
@@ -25,15 +26,20 @@ class Team2:
         cleaned_text = re.sub(pattern, '', text_without_commands)
         return cleaned_text
 
+    def extract_apostrophe_acronyms(self):
+        self.text = self.extract_abstract()
+        apostrophe_acronyms = re.findall(r'\b[A-Z]+\'s\b', self.text)
+        return apostrophe_acronyms
+
     def extract_acronyms(self):
         self.text = self.extract_abstract()
         capital_acronyms = re.findall(r'\b[A-Z]{2,}+\b', self.text)
-        if(len(self.text)>2):
-           s_suffix_acronyms = re.findall(r'\b[A-Z]{2,}+s\b', self.text)
-           x_suffix_acronyms = re.findall(r'\b[A-Z]+x\b', self.text)
-           apostrophe_acronyms = re.findall(r'\b[A-Z]+\'s\b', self.text)   
-                
-        self.acronyms = capital_acronyms + s_suffix_acronyms + apostrophe_acronyms + x_suffix_acronyms
+        if len(self.text) > 2:
+            s_suffix_acronyms = re.findall(r'\b[A-Z]{2,}+s\b', self.text)
+            x_suffix_acronyms = re.findall(r'\b[A-Z]+x\b', self.text)
+            
+
+        self.acronyms = capital_acronyms + s_suffix_acronyms  + x_suffix_acronyms
 
     def verify_acronyms(self):
         lines = self.text.split('\n')
@@ -87,6 +93,13 @@ class Team2:
         else:
             output.append("No acronyms found in the given text.")
 
+        # Extract and print apostrophe acronyms separately
+        self.apostrophe_acronyms = self.extract_apostrophe_acronyms()
+        if self.apostrophe_acronyms:
+            output.append("\nApostrophe Acronyms: " + str(self.apostrophe_acronyms))
+        else:
+            output.append("\nNo apostrophe acronyms found in the given text.")
+
         return output
 
 # Example usage:
@@ -97,7 +110,7 @@ latex_content = r"""
 This is a sample document with some acronyms such as DIY, NASA, and HTML.
 We first propose a novel TAS rule called the $\lam$-weighted interference indicator
 rule (LWIIR) for an interference-outage constrained underlay CR system. It selects
-the antenna that minimizes a sum of two terms. The first term is the instantaneous SEP
+the antenna that minimizes a sum of AR's two terms. The first term is the instantaneous SEP
 of a maximal ratio combining (MRC) receiver  and the second term is the indicator function
 of the STx PRx channel power gain weighted by an interference-outage penalty factor $\lam$.
 It differs from the rules proposed in the literature~\cite{Hanif_2015_globecom,Sarvendranath_2013_TCOM,

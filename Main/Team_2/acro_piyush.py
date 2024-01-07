@@ -16,7 +16,8 @@ Comments Type
 '''
 import re    
 class team_2:
-    def __init__(self, latex_content, begin_document_index):
+    def __init__(self, latex_content, begin_document_index):        
+
         self.latex_content = latex_content
         
         title_index = latex_content.find(r'\title{')
@@ -31,7 +32,13 @@ class team_2:
             begin_index = max(title_index, begin_document_index)
 
         self.begin_document_index = begin_index
-    
+
+        self.text=""
+        self.acronyms = []
+        self.first_occurrence_line = {}
+        self.warnings = []
+        self.common_acronyms = ['DIY', 'NASA', 'HTML']
+           
     def extract_abstract(self):
         # Find the index of \begin{abstract} using the given begin_document_index
         begin_abstract_index = self.latex_content.find(r'\begin{abstract}', self.begin_document_index)
@@ -57,15 +64,78 @@ class team_2:
         cleaned_text = re.sub(pattern, '', text_withoutcommands)
     
         return cleaned_text
-
-    def run(self):
-        
-        abstract = self.remove_latex_commands(self.extract_abstract()) 
-        output = [] # The output would be updated with the extracted title and abstract along with the word counts respectively.
-        
-        output.append('\n'+'='*50+"\n\t\t Abstract Related Comments \n"+'='*50)
     
-   
+
+    def extract_acronyms(self):
+        # Extract acronyms with all capital letters (e.g., TASD)
+        capital_acronyms = re.findall(r'\b[A-Z]+\b', self.text)
         
+        # Extract acronyms ending with 's' (e.g., LEDs)
+        s_suffix_acronyms = re.findall(r'\b[A-Z]+s\b', self.text)
+
+        # Extract acronyms with an apostrophe and 's' (e.g., TA's)
+        apostrophe_acronyms = re.findall(r'\b[A-Z]+\'s\b', self.text)
+
+        # Combine the results into a single list
+        self.acronyms = capital_acronyms + s_suffix_acronyms + apostrophe_acronyms
+
+    def verify_acronyms(self):
+        lines = self.text.split('\n')
+
+        for acronym in self.acronyms:
+            first_occurrence_line = None
+            defined_at_first_occurrence = False
+            defined_without_parentheses = False
+            is_common_acronym = acronym in self.common_acronyms
+
+            for line_number, line in enumerate(lines, start=1):
+                if re.search(fr'\b{re.escape(acronym)}\b', line):
+                    first_occurrence_line = line_number
+
+                    if '(' in line and ')' in line:
+                        defined_at_first_occurrence = True
+
+                    if not defined_at_first_occurrence and '(' not in line and ')' not in line:
+                        defined_without_parentheses = True
+
+                    break
+
+            if first_occurrence_line is None and not is_common_acronym:
+                self.warnings.append(f"\n Warning: Acronym '{acronym}' is not defined at all.")
+            elif not defined_at_first_occurrence:
+                if not is_common_acronym:
+                    self.warnings.append(f"\n Warning: Acronym '{acronym}' is defined, but not at the first occurrence (Line {first_occurrence_line}).")
+                else:
+                    self.warnings.append(f"\n Acronym '{acronym}' is a common acronym and is not defined at the first occurrence.")
+            elif defined_without_parentheses:
+                if not is_common_acronym:
+                    self.warnings.append(f"\n Acronym '{acronym}' is defined without parentheses at Line {first_occurrence_line}.")
+                else:
+                    self.warnings.append(f"\n Acronym '{acronym}' is a common acronym and is defined without parentheses at Line {first_occurrence_line}.")
+            elif is_common_acronym:
+                self.warnings.append(f"\n Acronym '{acronym}' is a common acronym and is defined at Line {first_occurrence_line}, but within parentheses.")
+
+            
+            self.first_occurrence_line[acronym] = first_occurrence_line
+          
+    def run(self):
+        abstract = self.remove_latex_commands(self.extract_abstract())
+        output = []  # The output would be updated with the extracted title and abstract along with the word counts respectively.
+
+
+        output.append('\n' + '=' * 50 + "\n\t\t Abstract Related Comments \n" + '=' * 50)
+
+        self.text = abstract
+        self.extract_acronyms()
+
+        if self.acronyms:
+            self.verify_acronyms()
+            output.append("\n List of Acronyms: " + str(self.acronyms))
+
+            if self.warnings:
+                output.append("\nWarnings:")
+                for warning in self.warnings:
+                    output.append(warning)
+        else:
+            output.append("\n No acronyms found in the given text.")
         return output
-   
