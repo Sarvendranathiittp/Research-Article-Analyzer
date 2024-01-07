@@ -70,6 +70,7 @@ input_string = """Transmit antenna selection (TASs) aalo Teacher Assistant(TA) i
     "average symbol error probability (SEPs) among all TAS rules for an underlay cognitive radio system\n" "TSA"
     "that employs binary power control and is subject to the interference-outage constraint(IOC)."""
 
+
 processor = AcronymProcessor(input_string)
 
 print("Acronyms list:")
