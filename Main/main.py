@@ -23,14 +23,26 @@ class wrapper:
         raw_data = []
         output = []
         storage=[]
+        bbl_text =  ""
 
         with open(filepath,'r',errors='ignore') as file:
             text=str(file.read())
         begin_index = text.find(r'\begin{document}')
 
         if filepath:
+            # Creating a LOGII file in the same directory as the input file
             ip_dir = os.path.dirname(filepath)
             out_filepath = os.path.join(ip_dir, "LOGII")
+            
+            # Checking if .bbl file exists in the same directory as the input file
+            ip_dir_ext = os.path.splitext(os.path.basename(filepath))[0]
+            bbl_path = os.path.join(ip_dir, ip_dir_ext+".bbl")
+
+            if os.path.exists(bbl_path):
+                with open(bbl_path, 'r') as bbl_file:
+                    bbl_text = str(bbl_file.read())
+                    begin_index = bbl_text.find(r'\begin{document}')
+
         # Calling all team run() files
 
         obj_team_0 = team_0(text,begin_index)
