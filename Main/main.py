@@ -2,6 +2,7 @@
 
 from tkinter import *
 from tkinter import filedialog
+import os
 
 # Teams' main file import
 
@@ -27,6 +28,9 @@ class wrapper:
             text=str(file.read())
         begin_index = text.find(r'\begin{document}')
 
+        if filepath:
+            ip_dir = os.path.dirname(filepath)
+            out_filepath = os.path.join(ip_dir, "LOGII")
         # Calling all team run() files
 
         obj_team_0 = team_0(text,begin_index)
