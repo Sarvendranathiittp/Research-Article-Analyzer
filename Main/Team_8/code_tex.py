@@ -1,10 +1,11 @@
-  """Tasks given:
+"""Tasks given:
    1.To find syntax related errors in different references like journal,conference,textbook,etc
    2.To find acronym related errors
    3.To print a list of Electrical Engineering related acronyms used in bibliography
 (more names can be added to the list electrical_engineering_acronyms[] to make it more exhaustive)
    4.To find and print number of times a each reference has been cited in the latex document
-   5.To print the total number of references"""
+   5.To print the total number of references
+   """
 
 import re
 class team_8:
