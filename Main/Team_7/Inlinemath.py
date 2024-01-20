@@ -1,7 +1,7 @@
 class Inline:
     def __init__(self,code,begin_index):
         self.code=code
-        self.begin_index=begin_index
+        self.begin_index = begin_index
     def getfrac(self):
         # Generates a list containing beginning and ending index of fraction block
         fractions =[]
@@ -15,7 +15,7 @@ class Inline:
                 else:
                     fractions.append(current_fraction)
                     current_fraction=[]
-                    found=False
+                    found = False
         return fractions
 
     def get_paren(self, fractions):
@@ -39,16 +39,16 @@ class Inline:
     # Geneartes a list of indices which are at exponential functions
         exp_index =[]
         for i in range(self.begin_index,len(self.code)) :
-            if self.code[i] == 'e' & self.code[i+1] == '^' :
-                exp_index.add(i)
+            if (self.code[i] == 'e') and (self.code[i+1] == '^'):
+                exp_index.append(i)
 
         return exp_index
     def get_line(self, index):
         line = 1
-        for i in range(0, self.n):
+        for i in range(0, len(self.code)):
             if i == index:
                 return line
-            elif self.latex_code[i] == '\n':
+            elif self.code[i] == '\n':
                 line += 1
         return None
     
