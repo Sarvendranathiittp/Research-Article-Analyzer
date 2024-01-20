@@ -47,4 +47,62 @@ The first occurrence of acronym WARRANTIES is not found on the document.
 The first occurrence of acronym WARRANTY is not found on the document.
 The first occurrence of acronym WHETHER is not found on the document.
 The first occurrence of acronym WITH is not found on the document.
-The first occurrence of acronym WITHOUT is not found on the document.
+The first occurrence of acronym WITHOUT is not found on the document.The first occurrence of acronym HYA is not found on the document.
+The first occurrence of acronym IEEE is not found on the document.
+The first occurrence of acronym LTE is not found on the document.
+The first occurrence of acronym MI is not found on the document.
+The first occurrence of acronym MIT is not found on the document.
+The first occurrence of acronym MSLIR is not found on the document.
+The first occurrence of acronym PU is not found on the document.
+The first occurrence of acronym SU is not found on the document.
+The first occurrence of acronym USA is not found on the document.
+==================================================
+		 Title Related Comments 
+==================================================
+==================================================
+		 Author Related Comments 
+==================================================
+If only two authors are present then the format should be \author{author1 and author2}
+		Here Remove comma between authors & add 'and'
+==================================================
+
+==================================================
+		 Title Related Comments 
+==================================================
+ Title (Processed): 
+Transmit Antenna Selection for Interference-Outage Constrained Underlay CR
+ Number of words in the processed title: 8
+==================================================
+		 Abstract Related Comments 
+==================================================
+ Abstract (Processed): 
+Transmit antenna selection (TAS) is a technique that achieves better performance than a single
+antenna system while using the same number of radio frequency chains. We propose a novel TAS
+rule called the $$-weighted interference indicator rule (LWIIR). We prove that for the general class of fading models with continuous cumulative distribution functions, LWIIR achieves the lowest average symbol error probability (SEP) among all TAS rules for  an underlay cognitive radio system that employs binary power control and is subject to the interference-outage constraint. This constraint imposes a limit on the probability that the interference power at the primary exceeds a threshold. It is a generalization of the widely studied peak interference constraint. We derive the average SEP of LWIIR. The insightful performance analysis applies to any number of transmit and receive antennas and to many constellations.  We also analyze the practical scenario in which the secondary transmitter has imperfect information of the channel gains from itself to the secondary and primary receivers. We show that the imperfections in these two sets of channel gains have different impacts on the system. Our benchmarking shows that LWIIR outperforms many selection rules considered in the literature.
+ Number of words in the abstract: 194==================================================
+	Scientist Names Related Comments
+==================================================
+
+Scientist Names Used = Gauss, Gaussian
+==================================================
+	Index Related Comments
+==================================================
+At Line 719 : Index terms are not in alphabetical order
+
+ ///////////////////####punctuation at the end of equations related comments####\\\\\\\\\\\
+Warning: Punctuation not found at the end of the equation.
+%\label{eq:out_5}
+%\text{Pr}\!\left(\!s\! = \! 1 \! \Given \! \setGk \right)\!\!=&\text{Pr}\!\left(\!\xplambymcomp \! < \! 1, \xplambymcomp \!<\! \yk{2},\! \ldots,\xplambymcomp\!<\!\yk{k+1},
+%\right. \nonumber\\
+%&\!\left.\xplambymcomp\!<\!\ykplambymcomp{k+2}\!,\! \ldots\!,\xplambymcomp \!<\! \ykplambymcomp{\Nt}\!\Given\!\setGk\!\right)\!.
+%
+
+here , is missing at the end of one of the equation. The equation is  
+\label{eq:objective}
+\optproblem: \quad \min_{\asrule\,\in\,\asspan} \quad
+&\explow{\Hmx,\g}{\SEP(\hs)} \\
+\label{eq:cons}
+\text{s.t.} \quad &\prob{\Pt\gk{s}>\itau} \leq \outmax, \\
+ &s = \phi(\Hmx,\g). 
+
+ERROR in line:932 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:991 A :   need to be in lower case since it is a   :Unknown POS TagERROR in line:1338 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:1338 lem  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1338 outage_Nt  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1402 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:1402 res  :   need to be Capitalized since it is a   :Noun, PluralERROR in line:1402 selection_rule_on_off  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1438 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:1438 thm  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1520 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:1520 thm  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1520 avg_SEP_imperfect  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1565 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:1565 thm  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1565 outage_imperfect_CSI  :   need to be Capitalized since it is a   :Noun, Singular or Mass

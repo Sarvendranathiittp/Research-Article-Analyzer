@@ -16,7 +16,7 @@ class team_8:
     def run(self):  # will be invoked by wrapper, shouldn't take arguments
         output = []
         text = self.latex_code
-         text2 = self.bbl_code
+        text2 = self.bbl_code
         # use self
         str_line = '=' * 50
         output.append(str_line + '\n\tSyntax related comments\n' + str_line + '\n')
