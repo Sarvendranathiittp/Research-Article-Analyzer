@@ -1,8 +1,8 @@
-from Team_7.Inlinemath import Inline
-from Team_7.task2 import Task_2
-from Team_7.task4 import Task_4
-from Team_7.zero import zero
-from Team_7.numstart import NumStart
+from Inlinemath import Inline
+from task2 import Task_2
+from task4 import Task_4
+from zero import zero
+from numstart import NumStart
 
 
 class team_7:
@@ -13,7 +13,6 @@ class team_7:
 
     def run(self):
         z = zero(self.latex_code, self.text_begin)
-
         s1, s1_ = z.run()
         n = NumStart(self.latex_code, self.text_begin)
         t2 = Task_2(self.latex_code, self.text_begin)

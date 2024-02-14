@@ -8,7 +8,7 @@ class zero:
         trailing_dot_index = []
         equations = self.get_inline_equations() + self.display_equations()
         for i in range(self.begin_index, len(self.code)):
-            if (self.code(i) == '.') and (self.code(i + 1).isdigit()) and self.is_in_equation(i, equations):
+            if (self.code[i] == '.') and (self.code[i + 1].isdigit()) and self.is_in_equation(i, equations):
                 if not self.code[i-1].isdigit():
                     leading_dot_index.append(i)
                 j = i+1
