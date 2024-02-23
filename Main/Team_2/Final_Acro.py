@@ -101,7 +101,7 @@ processor.check_and_print_occurrences()
 lines = input_string.split('\n')
 pattern = re.compile(r'\((\w+)\)')
 print("===============================================")
-print("\noccurences :")
+print("\noccurences of acronyms:")
 for i, line in enumerate(lines, start=1):
     matches = pattern.findall(line)
 
