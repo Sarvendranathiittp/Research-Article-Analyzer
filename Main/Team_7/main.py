@@ -1,8 +1,8 @@
-from Inlinemath import Inline
-from task2 import Task_2
-from task4 import Task_4
-from zero import zero
-from numstart import NumStart
+from Main.Team_7.Inlinemath import Inline
+from Main.Team_7.task2 import Task_2
+from Main.Team_7.task4 import Task_4
+from Main.Team_7.zero import zero
+from Main.Team_7.numstart import NumStart
 
 
 class team_7:
@@ -18,10 +18,10 @@ class team_7:
         t2 = Task_2(self.latex_code, self.text_begin)
         s2 = t2.run()
         inmath = Inline(self.latex_code, self.text_begin)
-        s3 = inmath.get_paren()
-        s3_ =inmath.get_exp()
+        s3 = inmath.get_paren(inmath.getfrac())
+        s3_ = inmath.get_exp()
         t4 = Task_4(self.latex_code,self.text_begin)
-        s4,s4_ =  t4.run()
+        s4,s4_ = t4.run()
         t2 = Task_2(self.latex_code,self.text_begin)
         s2 = t2.run()
         error_string=[]
