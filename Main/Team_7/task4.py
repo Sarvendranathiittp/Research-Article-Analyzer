@@ -14,9 +14,7 @@ class Task_4:
         comma_index = []
         for eq in equations:
             comma_status = False
-            newline_status = False
             for i in range(eq[0], eq[1]):
-
                 if self.code[i] == '.' and (not comma_status):
                     break
                 if self.code[i] == ',':
@@ -25,10 +23,7 @@ class Task_4:
                 if (self.code[i: len("\\case")] == "\\case") and (not comma_status):
                     j = i + len("\\case")
                     forall = False
-                    while not (self.code[j: len("\\\\")] == "\\\\" and self.code[
-                                                                     j: len("\\newline")] == "\\newline" and self.code[
-                                                                                                           j: len(
-                                                                                                               "\\linebreak")] == "\\linebreak") and self.code[j] == '.':
+                    while not ((self.code[j: len("\\\\")] == "\\\\") and (self.code[j: len("\\newline")] == "\\newline") and (self.code[j: len("\\linebreak")] == "\\linebreak")) and (self.code[j] == '.'):
                         if self.code[j: len("\\forall")] == "\\forall":
                             forall = True
                             break
@@ -38,10 +33,7 @@ class Task_4:
                 elif (self.code[i: len("\\text")] == "\\text") and (not comma_status):
                     j = i + len("\\text")
                     forall = False
-                    while not (self.code[j: len("\\\\")] == "\\\\" and self.code[
-                                                                     j: len("\\newline")] == "\\newline" and self.code[
-                                                                                                           j: len(
-                                                                                                               "\\linebreak")] == "\\linebreak") and self.code[j] == '.':
+                    while not ((self.code[j: len("\\\\")] == "\\\\") and (self.code[j: len("\\newline")] == "\\newline") and (self.code[j: len("\\linebreak")] == "\\linebreak")) and (self.code[j] == '.'):
                         if self.code[j: len("\\forall")] == "\\forall":
                             forall = True
                             break
@@ -51,10 +43,7 @@ class Task_4:
                 elif (self.code[i: len("\\mbox")] == "\\mbox") and (not comma_status):
                     j = i + len("\\mbox")
                     forall = False
-                    while not (self.code[j: len("\\\\")] == "\\\\" and self.code[
-                                                                     j: len("\\newline")] == "\\newline" and self.code[
-                                                                                                           j: len(
-                                                                                                               "\\linebreak")] == "\\linebreak") and self.code[j] == '.':
+                    while not ((self.code[j: len("\\\\")] == "\\\\") and (self.code[j: len("\\newline")] == "\\newline") and (self.code[j: len("\\linebreak")] == "\\linebreak")) and (self.code[j] == '.'):
                         if self.code[j: len("\\forall")] == "\\forall":
                             forall = True
                             break
@@ -66,7 +55,8 @@ class Task_4:
             count = 0
             i = ind
             while self.code[i] == ' ':
-                count+=1
-            if not(count == 1):
+                count += 1
+                i += 1
+            if count != 1:
                 error_index2.append(ind)
-        return error_index, error_index2
+        return [error_index, error_index2]
