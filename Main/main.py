@@ -23,6 +23,7 @@ class wrapper:
         raw_data = []
         output = []
         storage=[]
+        teamno = 1
         bbl_text =  ""
 
         with open(filepath,'r',errors='ignore') as file:
@@ -59,17 +60,22 @@ class wrapper:
         output.append(obj_team_5.run())
         obj_team_6 = team_6(text,begin_index)
         output.append(obj_team_6.run())
-        #obj_team_7 = team_7(text,begin_index)
-        #output.append(obj_team_7.run())
+        obj_team_7 = team_7(text,begin_index)
+        output.append(obj_team_7.run())
         # obj_team_8 = team_8(text,begin_index)
         # output.append(obj_team_8.run())
 
         # Writing all the output logs to the log file
         with open ("LOGII", "w") as logw:
             for logs in output:
+                logw.write("TEAM {}".format(teamno))
+                logw.write("\n")
                 for log in logs:
                     logw.write(log)
-                print()
+                logw.write("\n")
+                logw.write("\n")
+                teamno+=1
+                if (teamno==4): teamno+=1
 
 obj = wrapper()
 obj.run()
