@@ -1,0 +1,1395 @@
+
+\documentclass[12pt,draftcls,peerreview,onecolumn]{IEEEtran}
+%\documentclass[10pt,conference,twocolumn]{IEEEtran}
+%\documentclass[10pt,conference]{IEEEtran}
+\usepackage{epsf}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{cite}
+\usepackage{multirow,tabularx}
+\usepackage{ifthen}
+% Add these after the document class declaration
+\usepackage{times}
+\usepackage{stackrel}
+%\usepackage{hyperref}
+
+\graphicspath{{./plots/}}
+%\input{epsf.sty}
+%\pagestyle{bfheadings}
+%-------------------------------
+
+%\input{commands.tex}
+
+\renewcommand{\baselinestretch}{1.65}
+\newcommand{\showfigure}{\boolean{true}}
+%\newcommand{\showfigure}{\boolean{false}}
+
+\newcommand{\hide}[1]{\ifthenelse{\boolean{false}}{#1}{}}
+
+%\include{../../commonHeader}
+%%%%%%%%%%%%%%%%%%%%%%
+% Theorems, etc.
+
+\newtheorem{theorem}{{\bf Theorem}}
+\newtheorem{lemma}{{\bf Lemma}}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}{{\bf Corollary}}
+
+%\newenvironment{proof}[1][Proof]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+%\newtheorem{defn}{Definition}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+      \ifdim\lastskip<1.5em \hskip-\lastskip
+      \hskip1.5em plus0em minus0.5em \fi \nobreak
+      \vrule height0.75em width0.5em depth0.25em\fi}
+
+
+\newtheorem{fact}{Fact}
+\newtheorem{obs}{Observation}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Environments
+
+\newcommand{\barr}{\begin{array}}
+\newcommand{\earr}{\end{array}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+% References
+
+\newcommand{\eqn}[1]{(\ref{#1})}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Brackets
+
+\newcommand{\brac}[1]{\left({#1}\right)}
+\newcommand{\sbrac}[1]{\left[{#1}\right]}
+\newcommand{\cbrac}[1]{\left\{{#1}\right\}}
+
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Misc
+
+\newcommand{\expc}[2][]{E_{#1}\left[{#2}\right]}
+
+\newcommand{\set}[1]{\{#1\}}
+
+\newcommand{\ul}{\underline}
+\newcommand{\smq}[1]{{\it #1}}
+\newcommand{\ave}[1]{\overline{#1}}
+
+\newcommand{\recip}[1]{\frac{1}{{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Indicator function
+
+\newcommand{\indic}[1]{I_{\cbrac{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Superscripts
+\newcommand{\supth}{^{{\mathrm{th}}}}
+\newcommand{\mth}{^{{\mathrm{th}}}}
+\newcommand{\supnd}{^{{\mathrm{nd}}}}
+\newcommand{\suprd}{^{{\mathrm{rd}}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Combinatorics
+
+\newcommand{\nchoosek}[2]{\left(\begin{array}{c}
+                                {#1} \\ {#2}
+                             \end{array}
+                        \right)}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Symbols
+\newcommand{\CN}{{\cal CN}}
+\newcommand{\db}{{\mathrm dB}}
+\newcommand{\Om}{\widehat{\Omega}}
+
+\newcommand{\define}{\triangleq}
+%\newcommand{\define}{\stackrel{\triangle}{=}}
+%\newcommand{\implies}{\Rightarrow}
+%\newcommand{\tendsto}{\rightarrow}
+\newcommand{\tendsto}{\to}
+
+\newcommand{\degree}{^{\circ}}
+\newcommand{\kroneck}{\otimes}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Special phrases
+
+\newcommand{\ie}{{i.e.}}
+\newcommand{\eg}{{e.g.}}
+\newcommand{\etal}{{et al.}}
+\newcommand{\wrt}{w.r.t.}
+\newcommand{\vs}{{vs.}}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Matrix related
+
+\newcommand{\tvec}{\text{vec}} % \vec is already defined
+\newcommand{\mtx}[1]{{\bf #1}} % matrix
+\newcommand{\mtxg}[1]{{\boldsymbol #1}} % matrix for greek symbol
+
+\newcommand{\trp}{\text{T}} % transpose
+\newcommand{\trc}[1]{\text{Tr}\left\{{#1}\right\}} % trace
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Special matrices
+
+
+\newcommand{\mzero}{\mtx{0}}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Principal sub-matrix
+
+\newcommand{\princ}[2]{{#2}^{({#1})}}
+\newcommand{\princsup}[3]{{{#2}^{({#1})^{#3}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Probability related
+
+\newcommand{\EX}{\bf{E}} % expectation operator
+\newcommand{\expect}[1]{{\bf{E}}\left[{#1}\right]}
+\newcommand{\expectpow}[2]{{\bf{E}}^{#2}\left[{#1}\right]}
+\newcommand{\explow}[2]{{\bf{E}}_{#1}\left[{#2}\right]}
+\newcommand{\prob}[1]{\text{Pr}\brac{#1}}
+\newcommand{\pr}{{\text{Pr}}}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Derivatives
+
+\newcommand{\deriv}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pderiv}[2]{\frac{\partial{#1}}{\partial{#2}}}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Slides
+
+\newcommand{\bsp}{\begin{slide*}}
+\newcommand{\esp}{\end{slide*}}
+\newcommand{\bsl}{\begin{slide}}
+\newcommand{\esl}{\end{slide}}
+\newcommand{\vsp}[1]{\vspace{#1}}
+
+
+
+
+
+%-------------------------------
+% This paper's specific shortcuts
+
+\newcommand{\nbm}[1]{{[\bf nbm: #1]}}
+\newcommand{\vinod}[1]{[\textsl{v: #1}]}
+\newcommand{\var}[1]{{\bf var}\left[{#1}\right]}
+\newcommand{\opt}{\text{opt}}
+\newcommand{\sth}{\text{th}}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+%\newcommand{\var}{var}
+
+\newcommand{\dv}{D}
+\newcommand{\newdv}{{\cal D}^{\prime}}
+
+\newcommand{\abs}[1]{\left\lvert{#1}\right\lvert}
+
+%\newcommand{\err}{\text{Err}}
+
+\newcommand{\given}{\arrowvert}
+\newcommand{\givens}{\big\arrowvert}
+\newcommand{\Given}{\Big\arrowvert}
+
+\newcommand{\bMQAM}{b_{\text{QAM}}}
+\newcommand{\bMPSK}{b_{\text{PSK}}}
+
+\newcommand{\cMPSK}{c_{\text{PSK}}}
+\newcommand{\cMQAM}{c_{\text{QAM}}}
+
+%\newcommand{\opt}{\text{opt}}
+%\newcommand{\asym}{\text{asm}}
+
+
+%\newcommand{\err}{\text{Err}}
+
+
+%% \newcommand{\alphaoptasm}{\alpha_{\opt}^{\asym}}
+%% \newcommand{\betaoptasm}{\beta_{\opt}^{\asym}}
+
+
+%\newcommand{\sepMPSK}{P_{\text{MPSK}}}
+
+\newcommand{\limgamma}{\lim_{\gamma \tendsto \infty}}
+
+
+\newcommand{\SEP}{\text{SEP}}
+\newcommand{\SEPdouble}{\text{SEP}_{\text{si}}}
+
+
+\newcommand{\sinpiM}{\sin^2\brac{\frac{\pi}{M}}}
+
+\IEEEoverridecommandlockouts
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+
+\newcommand{\est}[1]{\widehat{#1}}
+
+\newcommand{\y}{\mathbf{y}}
+
+
+\newcommand{\hg}{\mathbf{hg}}
+\newcommand{\nx}{{0}}
+%\newcommand{\nck}[2]{{{#1}\choose{#2}}}
+\newcommand{\nck}[2]{\binom{#1}{#2}}
+\newcommand{\setA}{A}
+\newcommand{\setAk}{\setA_{k}}
+\newcommand{\setB}{B_k}
+
+
+\newcommand{\setAkhat}{\widehat{\setA}_k}
+
+%\newcommand{\setAone}{\!\gk{1}\!>\!\taubypt,\setB\!}
+\newcommand{\setG}{G}
+\newcommand{\setL}{L}
+\newcommand{\setGk}{\setG_k}
+\newcommand{\setLk}{\setL_k}
+
+\newcommand{\setGkhat}{\widehat{\setG}_k}
+\newcommand{\setLkhat}{\widehat{\setL}_k}
+
+\newcommand{\setBgk}{B_{gk}}
+\newcommand{\setBlk}{B_{lk}}
+
+
+\newcommand{\snh}{\sin^2(\theta)} 
+\newcommand{\onebysin}{\frac{1}{\sin^2(\theta)}} 
+
+\newcommand{\bg}{\frac{\be}{\ga}}
+\newcommand{\twobg}{\frac{2\be}{\ga}}
+\newcommand{\be}{\alpha}
+
+\newcommand{\ginc}[2]{\gamma\left({#1},{#2}\right)}
+\newcommand{\gincnew}[2]{\widetilde{\gamma}\left({#1},{#2}\right)}
+\newcommand{\cmc}{\frac{\be}{\ga m^{\bg}}}
+
+\newcommand{\lam}{\lambda}
+\newcommand{\lamstar}{\lam^{*}}
+\newcommand{\lamp}{\lam_{p}}
+\newcommand{\lamasym}{\lam_{\text{a}}}
+\newcommand{\lamub}{\lam_{\text{ub}}}
+\newcommand{\lsg}{{\lam\mg}}
+\newcommand{\s}[1][]{s_{#1}}
+\newcommand{\sphi}{s}
+%\newcommand{\sphi}{s_{\phi}}
+
+\newcommand{\slam}{s_{\lam}}
+\newcommand{\szero}{s_{0}}
+\newcommand{\sstar}{s^{*}}
+\newcommand{\shp}{s_{h}}
+\newcommand{\ipi}{{\frac{1}{\pi}}}
+\newcommand{\intmpi}{{\int_{0}^{m\pi}}}
+\newcommand{\intm}{{\int_{0}^{m}}}
+\newcommand{\intinf}{{\int_{0}^{\infty}}}
+\newcommand{\intg}{{\int_{0}^{\frac{m-y_1}{\lam}}}}
+
+\newcommand{\error}{\epsilon_n} 
+
+\newcommand{\mug}{{\mu_{g}}}
+
+\newcommand{\muh}{{\mu_{h}}}
+
+\newcommand{\yg}[1]{y_{#1}+\lam g_{#1}}
+
+
+\newcommand{\Err}{{\text{Err}}}
+
+\newcommand{\z}{{\cal{Z}}}
+\newcommand{\tL}{{L}}
+\newcommand{\K}{{\left(1+\frac{\mh}{\eta\mg}\right)}}
+\newcommand{\M}{{\left(\frac{\eta\mg}{\eta\mg+\mh}\right)}}
+\newcommand{\prlseta}{{\left(\frac{\eta\mg}{\eta\mg+\mh}\right)}}
+\newcommand{\frhg}[1]{{\frac{h_{#1}}{g_{#1}}}}
+\newcommand{\pdfh}{{\frac{e^{-\frac{h_1}{\mh}}}{\mh}}}
+\newcommand{\pdfg}{{\frac{e^{-\frac{g_1}{\mg}}}{\mg}}}\newcommand{\frM}{{\frac{\mg h_1}{\mh g_1+\mg h_1}}}
+
+
+
+\newcommand{\MPSKSEP}{\exp\brac{\frac{-h_1\Et\sinpiM}{\sigma^2\sin^2\theta}}}
+
+\newcommand{\F}{\cal{F}}
+\newcommand{\goodset}{\cal{G}}
+\newcommand{\badset}{\cal{B}}
+\newcommand{\setc}{\cal{C}}
+\newcommand{\setszero}{{\cal{S}}_0}
+\newcommand{\setonegt}{{\cal{S}}_{11}}
+
+\newcommand{\setonelt}{{\cal{S}}_{12}}
+\newcommand{\MI}{\text{MI}}
+\newcommand{\MSLIR}{\text{MSLIR}}
+
+\newcommand{\termone}{T_1}
+\newcommand{\termtwo}{T_2}
+
+\newcommand{\Nt}{{N_t}}
+\newcommand{\Nr}{{N_r}}
+\newcommand{\Np}{{N_p}}
+\newcommand{\Pt}{{P_t}}
+
+
+\newcommand{\such}{h}
+\newcommand{\puch}{g}
+
+
+\newcommand{\hk}[1]{{\such_{#1}}}
+\newcommand{\gk}[1]{{\puch_{#1}}}
+
+
+\newcommand{\hi}{\hk{i}}
+\newcommand{\gi}{\gk{i}}
+
+\newcommand{\hij}{{\such_{ij}}}
+\newcommand{\gkj}{{\puch_{kj}}}
+
+\newcommand{\selp}{s_{p}}
+\newcommand{\sopt}{s^{*}}
+
+\newcommand{\h}{\mathbf{\such}}
+\newcommand{\g}{\mathbf{\puch}}
+
+
+\newcommand{\ghatvec}{\mathbf{\hat{\puch}}}
+\newcommand{\yhatvec}{\mathbf{\hat{y}}}
+
+\newcommand{\Rsrx}{R_{i}}
+\newcommand{\Iprx}{I_{p}}
+\newcommand{\Isrx}{I_{i}}
+
+\newcommand{\noise}{n_i}
+
+\newcommand{\noisevar}{\sigma^2}
+
+\newcommand{\outsym}{\out_{\text{asym}}}
+\newcommand{\outhp}{\out_{{h}}}
+\newcommand{\outwb}{\out_{\text{wub}}}
+\newcommand{\prout}{\prob{\text{out}}}
+\newcommand{\outmax}{O_{\text{max}}}
+\newcommand{\itau}{\tau}
+\newcommand{\ibeta}{\beta}
+
+\newcommand{\cone}{c_{1}}
+\newcommand{\ctwo}{c_{2}}
+\newcommand{\cthree}{c_{3}}
+\newcommand{\cfour}{c_{4}}
+
+\newcommand{\out}{O}
+\newcommand{\m}{\cone}
+
+\newcommand{\outmaxhrule}{e^{-\taubyptmug}}
+\newcommand{\taubyptmug}{\frac{\itau}{\mug\Pt}}
+\newcommand{\Nttaubyptmug}{\frac{\Nt\itau}{\mug\Pt}}
+\newcommand{\taubypt}{\frac{\itau}{\Pt}}
+\newcommand{\gkgrtaubypt}[1]{{\gk{#1}}>\taubypt}
+\newcommand{\gklttaubypt}[1]{{\gk{#1}}\leq\taubypt}
+
+\newcommand{\gkhatgrtaubypt}[1]{{\gkhat{#1}}>\taubypt}
+\newcommand{\gkhatlttaubypt}[1]{{\gkhat{#1}}\leq\taubypt}
+
+
+
+\newcommand{\gindic}[1]{\indic{\gkgrtaubypt{#1}}}
+\newcommand{\ghatindic}[1]{\indic{\gkhatgrtaubypt{#1}}}
+
+\newcommand{\lambym}{\frac{\lam}{\m}}
+
+\newcommand{\lamstarbym}{\frac{\lamstar}{\m}}
+
+
+\newcommand{\yk}[1]{y_{#1}}
+\newcommand{\ykplambym}[1]{\yk{#1}+\lambym}
+\newcommand{\ccdfyray}[1]{\left(1-\left(#1\right)^{\albysnr[]}\right)}
+\newcommand{\sepg}[1]{\SEP(\hk{#1}) + \lam \gindic{#1}}
+\newcommand{\ykplusgk}[1]{ \yk{#1} + \lambym\gindic{#1}}
+\newcommand{\ykhatplusgkhat}[1]{ \ykhat{#1} + \lambym\ghatindic{#1}}
+\newcommand{\ccdfg}[1][]{e^{-\frac{{#1}\itau}{\mug\Pt}}}
+\newcommand{\inlccdfg}[1][]{\exp\left({-{{#1}\itau}/{\left( \mug\Pt\right) }}\right)}
+
+%\newcommand{\m}{m}
+\newcommand{\ai}{a}
+\newcommand{\bj}{b}
+\newcommand{\cj}{c}
+\newcommand{\outopt}{\out_{\text{opt}}}
+\newcommand{\lamopt}{\lam_{\text{opt}}}
+
+\newcommand{\inty}{\int_{0}^{1-\lambym}}
+\newcommand{\al}{\ctwo}
+\newcommand{\snr}{\Omega}
+\newcommand{\Ptmuhbynoisevar}{\frac{\Pt\muh}{\noisevar}}
+\newcommand{\albysnr}[1][]{\frac{\al#1}{\snr}}
+\newcommand{\snrbyal}[1][]{\frac{\snr#1}{\al}}
+
+
+
+\newcommand{\un}{U}
+\newcommand{\prggrtaubyp}{e^{-\taubyptmug}}
+\newcommand{\prggrNttaubyp}{e^{-\Nttaubyptmug}}
+\newcommand{\probszero}{\un\left(1-\left(1-\lambym\right)^{\albysnr[]}\right)^{\Nt}}
+
+
+\newcommand{\allopts}{\left\{\nx,1,\ldots,\Nt\right\}}
+\newcommand{\antopts}{\left\{1,2,\ldots,\Nt\right\}}
+\newcommand{\twoopts}{\left\{2,\ldots,\Nt\right\}}
+
+
+\newcommand{\nropts}{\left\{1,2,\ldots,\Nr\right\}}
+\newcommand{\puopts}{\left\{1,2,\ldots,\Np\right\}}
+
+\newcommand{\maxh}{{\text{best antenna}}}
+\newcommand{\ub}{{\text{UB optimal}}}
+\newcommand{\IIC}{{\text{IIC}}}
+\newcommand{\iic}{{\text{iic}}}
+\newcommand{\EIIC}{{\text{Gamma}}}
+\newcommand{\eiic}{{\text{gamma}}}
+
+\newcommand{\mi}{{\text{mi}}}
+\newcommand{\mslir}{{\text{mslir}}}
+\newcommand{\emi}{\text{emi}}
+\newcommand{\emslir}{\text{emslir}}
+\newcommand{\interfUncons}{I_{\text{un}}}
+\newcommand{\sepUBL}{\SEP^{(\tL)}_{UB}}
+\newcommand{\sepUBTwo}{\SEP^{(2)}_{UB}}
+\newcommand{\interfUnconsMI}{I_{\text{unmi}}}
+\newcommand{\DS}{\text{ds}}
+\newcommand{\rBeta}{{\text{Beta}}}
+\newcommand{\rbeta}{{\text{beta}}}
+\newcommand{\igamma}{{\frac{\al\noisevar}{\Pt}\ln\left(\frac{1}{1-\left(\lam/\m\right) }\right)}}
+\newcommand{\igammainline}{{ {\al\noisevar} \ln\left({1}/\left( {1-\lam/\m }\right) \right)}/{\Pt}}
+
+\newcommand{\suchph}{\theta}
+\newcommand{\puchph}{\varphi}
+
+\newcommand{\thetahk}{\suchph_{is}}
+\newcommand{\thetagk}{\puchph_{s}}
+
+\newcommand{\asrule}{\phi}
+\newcommand{\asspan}{{\cal A}}
+\newcommand{\feasrule}{\phi}
+\newcommand{\phiprop}{\phi_{p}}
+
+\newcommand{\psifun}[2]{\psi_{{#1},{#2}}}
+%\newcommand{\psifun}[2]{\psi_{k_1k_2}\left({#1},{#2}\right)}
+
+\newcommand{\onemlc}{\left[1-\lambym\right]}
+%\newcommand{\onemlc}{\left(\!\frac{\cone\!-\!\lam}{\cone}\!\right)}
+
+\newcommand{\thresh}{\beta}
+\newcommand{\sg}{s_{\igamma}}
+\newcommand{\og}{\out_{\igamma}}
+
+%\newcommand{\zerosep}{\left(1 - \frac{1}{M}\right)}
+\newcommand{\zerosep}{m}
+
+\newcommand{\Hmx}{\mtx{H}}
+\newcommand{\Gmx}{\mtx{G}}
+
+
+\newcommand{\ith}{i^{\text{th}}}
+\newcommand{\jth}{j^{\text{th}}}
+\newcommand{\kth}{k^{\text{th}}}
+
+\newcommand{\optproblem}{{\cal P}}
+
+\newcommand{\caluncons}{{\cal S_{\text{0}}}}
+\newcommand{\callamrule}{{\cal S_{{\lam}}}}
+\newcommand{\outlam}{\out_{\lam}}
+\newcommand{\outhatlam}{\widehat{\out}_{\lam}}
+\newcommand{\outhatlamstar}{\widehat{\out}_{\lam^*}}
+\newcommand{\outUBlam}{\out_{\text{UB}\lam}}
+\newcommand{\outUBtwo}{\out_{\text{UB2}}}
+\newcommand{\callamstarrule}{\cal S_{\lam^{*}}}
+
+\newcommand{\calhprule}{{\cal S_{\text{h}}}}
+
+\newcommand{\avgSEP}{\overline{\SEP}}
+
+\newcommand{\akone}{\albysnr[k_1]}
+\newcommand{\lidx}{j}
+
+\newcommand{\nullset}{\varnothing}
+
+
+% imperfect CSI related commands
+
+\newcommand{\sug}{\alpha}
+\newcommand{\pug}{\beta}
+
+\newcommand{\sugain}[1]{\sug_{#1}}
+\newcommand{\pugain}[1]{\pug_{#1}}
+
+\newcommand{\sugainhat}[1]{\widehat{\sug}_{#1}}
+\newcommand{\pugainhat}[1]{\widehat{\pug}_{#1}}
+
+\newcommand{\unhat}{\widehat{\un}}
+\newcommand{\snrhat}{\widehat{\snr}}
+
+\newcommand{\gpilotpower}{P_g}
+\newcommand{\hpilotpower}{P_h}
+
+\newcommand{\hhat}{\hat{\such}}
+\newcommand{\ghat}{\hat{\puch}}
+\newcommand{\yhat}{\hat{y}}
+\newcommand{\shat}{\hat{s}}
+
+\newcommand{\hkhat}[1]{\hhat_{#1}}
+\newcommand{\gkhat}[1]{\ghat_{#1}}
+\newcommand{\ykhat}[1]{\hat{y}_{#1}}
+
+
+\newcommand{\muhhat}{\mu_{\hhat}}
+\newcommand{\mughat}{\mu_{\ghat}}
+
+\newcommand{\ccdfghat}[1][]{e^{-\frac{{#1}\itau}{\mughat\Pt}}}
+\newcommand{\ccdfghatinline}{\exp\left( {-{\itau}/{\left( \mughat\Pt\right) }}\right) }
+
+\newcommand{\Probglt}{L}
+
+\newcommand{\albysnrhat}[1][]{\frac{\al#1}{\snrhat}}
+\newcommand{\snrhatbyal}[1][]{\frac{\snrhat#1}{\al}}
+
+\newcommand{\rhog}{\rho_g}
+\newcommand{\rhoh}{\rho_h}
+
+\newcommand{\Tc}{\frac{1}{\snrhatbyal\left(1 + \snrbyal\left(1 - \rhoh \right)  \right) }}
+
+%\newcommand{\Dc}{\frac{1 + \snrbyal}{\snrhatbyal\left(1 + \snrbyal\left(1 - \rhoh \right)  \right) }-1}
+
+\newcommand{\T}{T}
+\newcommand{\Dc}{\T \left( 1 + \snrbyal\right) -1}
+
+\newcommand{\hpilotsym}{x_{s}}
+\newcommand{\gpilotsym}{x_{p}}
+
+\newcommand{\hpilotrcv}{y_{ik}}
+\newcommand{\gpilotrcv}{z_{k}}
+
+\newcommand{\hpilotnoise}{n_{ik}}
+\newcommand{\gpilotnoise}{n_{k}}
+
+\newcommand{\ccdfyNr}[1]{\frac{\gamma\left(\Nr,-\albysnr\ln{#1}\right)}{\Gamma\left(Nr\right)}} 
+\newcommand{\unccdfy}[2]{\frac{{#1}\,\,\gamma\left(\Nr,-\albysnr\ln{#2}\right)}{\Gamma\left(Nr\right)}}
+
+\newcommand{\pdfyNr}{\frac{\left(\albysnr\right)^{Nr}\left(-\ln\left({x}\right)\right)^{\Nr-1}x^{\albysnr[]-1}}{\Gamma(Nr)}} % only y terms constants taken care separately
+\newcommand{\ytimespdfyNr}{\left(\ln\left(\frac{1}{x}\right)\right)^{\Nr-1}x^{\albysnr[]}} % only y terms constants taken care separately
+\newcommand{\ypluslamtimespdfyNr}{\left(\ln\left(\frac{1}{x+\lambym}\right)\right)^{\Nr-1}\left(x+\lambym\right)^{\albysnr[]}} % only y terms constants taken care separately
+
+
+\newcommand{\pdfyNrgen}[1]{f_{y}\left(#1\right)} % only y terms constants taken care separately
+\newcommand{\ccdfy}[1]{F^{c}_{y}\left(#1 \right)}
+\newcommand{\unccdfygen}[2]{{#1} \ccdfy{#2}  }
+
+\newcommand{\ccdfyrv}[1]{ F^{c}_{y}\left(#1 \right) }
+\newcommand{\ccdfyhatrv}[1]{F^{c}_{\yhat}\left(#1 \right) }
+\newcommand{\pdfy}[1]{ f_{y}\left( #1 \right) }
+\newcommand{\pdfyhat}[1]{f_{\yhat}\left( #1 \right) }
+
+\newcommand{\Xhat}{\widehat{X}}
+\newcommand{\xhat}{\hat{x}}
+
+
+\newcommand{\sumnr}{\sum_{i=1}^{\Nr}}
+
+\begin{document}
+
+\title{Transmit Antenna Selection for Interference-Outage Constrained Underlay CR}
+
+\author{Rimalapudi Sarvendranath, {\it Student Member, IEEE}, Neelesh B. Mehta, {\it Senior Member, IEEE}}
+
+\setcounter{page}{1}
+
+\maketitle
+
+\begin{abstract}
+
+
+
+
+\end{abstract}
+
+
+\begin{IEEEkeywords}
+Cognitive radio, underlay, antenna selection, interference-outage constraint, symbol error probability.
+\end{IEEEkeywords}
+
+\IEEEpeerreviewmaketitle
+
+
+
+\section{Introduction}
+\label{sec:intro}
+
+Cognitive radio (CR) technology has the potential to mitigate the scarcity of radio spectrum by enabling different classes of users to access the spectrum together without an exclusive, strict, inefficient allocation of the spectrum to just one class of users~\cite{Goldsmith_2009_PIEEE}. Owing to its promise, it has been incorporated in IEEE standards such as 802.11af and 802.22~\cite{Sherman_2008_TCMAG} and continues to attract considerable attention. In CR, a user is classified into two categories: primary user (PU), who is a licensed user of the spectrum, and secondary user (SU), who is an unlicensed user. The following three modes of access have been investigated for CR~\cite{Goldsmith_2009_PIEEE}: (i)~Interweave mode, in which an SU can only transmit in unused time or frequency resources, (ii)~Overlay mode, in which SU has access to the data and channel gains of the  PU and can transmit simultaneously, and (iii)~Underlay mode, in which an SU can transmit concurrently in the same spectrum as the PU, but must ensure that the interference due to its transmissions to the primary receiver (PRx) is below a tolerable limit. 
+
+
+We focus on the underlay mode in this paper as it enables the SU to transmit even when the primary is on, and as it does not require the SU to know the PU's data and channel gains, unlike the overlay mode. Its performance is fundamentally governed by the constraint imposed on the interference caused to the PRx. Various interference constraints have been investigated in the literature. These include: (i)~Peak interference power constraint~\cite{ Hanif_2015_globecom,Wang_2010_TWC, RZhang_2009_TWC}, in which  the instantaneous interference power at the PRx cannot exceed  a threshold; (ii)~Average interference power  constraint~\cite{ Sarvendranath_2013_TCOM,Wang_2011_TCom, Kashyap_2014_TCOM }, in which  the fading-averaged interference power at the PRx  cannot exceed  a threshold;  and (iii)~Interference-outage constraint~\cite{Kashyap_2014_TCOM,Sboui_2013_TWC,Rezki_2012_ieeeVt}, in which the event that the interference exceeds a certain value is referred to as an interference-outage, and the probability of an interference-outage cannot exceed a threshold.  
+
+These interference constraints can significantly limit the performance of the secondary system. This has spurred the investigation of advanced techniques to improve the secondary system performance. Transmit antenna selection (TAS) is an important example of this. It exploits the spatial diversity afforded by multiple antennas while avoiding the hardware complexity of the latter~\cite{mehta_2012_ComMag}. Only one radio frequency (RF) chain, which is dynamically switched to one of the antennas based on the current channel conditions, is required. 
+
+%Given its benefits, TAS has attracted considerable attention in the underlay CR literature~\cite{Zhou_2009_WCNC,Dmochowski_2011_CROWNCOM,Wang_2011_TCom,Hanif_2015_globecom,Sarvendranath_2013_TCOM,Wang_2010_TWC,Kong_2011_JCN}.
+Compared to a single antenna system, TAS can significantly improve the ergodic capacity of the secondary,~\cite{Hanif_2015_globecom,Wang_2010_TWC}, and reduce the secondary outage probability and outage capacity~\cite{Kong_2011_JCN}, and the symbol error probability (SEP) at the secondary receiver (SRx)~\cite{Sarvendranath_2013_TCOM}. In TAS for underlay CR, the choice of the antenna at the secondary transmitter (STx) is driven not just by the channel gains from it to the SRx's antenna(s), but also by the interference it causes to the PRx. It also crucially depends on the interference constraint imposed on the secondary system. To understand this important aspect better, we discuss the different TAS rules, which specify the antenna to be selected as a function of the instantaneous channel gains, that have been considered in the literature for the different interference constraints. 
+%
+\begin{itemize}
+\item {\em Peak Interference Power Constraint:} For an STx transmitting with fixed power, in~\cite{Hanif_2015_globecom}, among the antennas that satisfy peak interference power constraint, the one with the highest STx to SRx (STx-SRx) channel power gain is selected. It is easy to show that this maximizes the SU capacity, or minimize the SEP. Furthermore, when the STx transmits with a power  inversely proportional to the STx to PRx (STx-PRx) channel power gain, the antenna with the highest ratio of the STx-SRx and STx-PRx channel power gains is selected in~\cite{Wang_2010_TWC}. 
+%The secondary system outage and capacity of the TAS rule with this constraint are analyzed in~\cite{Kong_2011_JCN,Fakhan_2014_TSP}.
+%
+\item {\em Average Interference Power Constraint:} A difference TAS rule is proposed in~\cite{Wang_2011_TCom}. It selects the antenna with a maximum weighted difference of the STx-SRx and STx-PRx channel power gains. For an STx that transmits with fixed power, in~\cite{Sarvendranath_2013_TCOM}, an optimal TAS rule that minimizes the average SEP is proposed. It is shown that the optimal antenna is one that minimizes a linear combination of the STx-PRx channel power gain and an exponentially decreasing function of the STx-SRx channel power gain. Furthermore, for an STx that adapts its transmit power, in~\cite{Sarvendranath_2014_TCOM}, an average SEP optimal TAS rule is proposed. It is shown that optimal antenna  is one that maximizes the ratio of STx-SRx channel power gain and an affine combination of the STx-PRx channel power gain and a constant. 
+
+%
+%\item {\em Primary SINR Constraint:} For an STx that adapts its transmit power to ensure that the primary SINR meets a threshold, the antenna that maximizes the product of the STx-SRx channel power gain and its transmit power is selected in~\cite{Dmochowski_2011_CROWNCOM}. However, the STx requires knowledge of the primary transmitter (PTx) to PRx channel power gain.  
+
+\item{\em Interference-Outage Constraint:} To the best of our knowledge, no TAS rule is studied for this constraint and the optimal selection rule is not known in the literature. However,~\cite{Peng_2016_eurasip} considered TAS for peak interference power constrained CR and modified it to interference-outage constraint due to imperfect CSI. A power back-off technique is used to control the interference-outage at the primary.
+
+\end{itemize}
+
+
+In this paper, we focus on the interference-outage constraint. It is a generalization of the peak interference power constraint which corresponds to the extreme case in which the interference-outage probability is zero. Therefore, a more general class of underlay CR systems is covered by this constraint. Furthermore, the peak interference power constraint requires perfect channel state information (CSI) of the STx-PRx channel gain at the STx. This is not possible in practice due to the channel estimation errors and outdated estimates~\cite{musavian_2009_tcom,Suraweera_2010_TVT,Peng_2016_eurasip}. In terms of the impact on the primary system, this constraint is justifiable when primary offers delay-or-disruption tolerant services, or the primary traffic is based on user datagram protocol (UDP) services like voice and video traffic. Furthermore, the primary wireless systems are already designed to tolerate deep fades or larger co-channel interference-outage. As mentioned above, the TAS rule for it has not been studied in the literature. Further, it cannot be inferred from the TAS rules proposed for other interference constraints. 
+
+\subsection{Contributions} 
+We make the following contributions in this paper:
+\begin{itemize}
+\item We first propose a novel TAS rule called the $\lam$-weighted interference indicator rule (LWIIR) for an interference-outage constrained underlay CR system, which as we saw have received less attention in the CR literature. It selects the antenna that minimizes the sum of two terms. The first term is the instantaneous SEP of that antenna and the second term is the indicator function of STx-PRx channel power gain weighted by an interference-outage penalty factor $\lam$. To the best of our knowledge, such a rule has not been proposed in the literature and differs from those in~\cite{Wang_2011_TCom,Dmochowski_2011_CROWNCOM,Wang_2010_TWC}. It is also different from the ones that are designed for the average interference power constraint~\cite{Sarvendranath_2013_TCOM,Sarvendranath_2014_TCOM}. Further, it includes the TAS rule in~\cite{Hanif_2015_globecom}, which was defined for peak interference power constraint. 
+
+\item We prove that LWIIR has the following optimality property.  For a general  class of fading models with continuous cumulative distribution function (CDF), which henceforth we shall refer to as continuous fading model, it yields the lowest fading-averaged SEP among all the TAS rules that satisfy the interference-outage constraint. We note that the average SEP is an important performance measure for a communication system as it is a measure of reliability of communication, and has attracted significant interest in the literature~\cite{Kashyap_2014_TCOM,Sarvendranath_2013_TCOM,Sarvendranath_2014_TCOM,li_2011_pimrc}. 
+
+%
+\item We then analyze the average SEP of LWIIR. First, we derive a general expression that is in a single integral form for any fading model with an arbitrary number of receive antennas at the SRx. We gain several insights about its behavior by then considering various special cases of interest. We show that it simplifies to an insightful closed-form for a range of parameter $\lam$, for Rayleigh fading and for an SRx with a single receive antenna.  
+% 
+\item We also present results that enable the $\lam$ to be computed easily. For this, we derive a novel integral-free upper bound on the interference-outage probability of the LWIIR. This further leads us to an insightful and tight upper bound for $\lam$ that has a closed-form.
+% 
+%\item We also show that in high transmit power region the optimal rule transforms into a very simple form. This results in a closed-form exact expression for interference-outage probability.       
+%
+%\item To gain further insights, we derive a simpler upper bound on the interference-outage probability for the special case with $\Nt = 2$ antennas. Using this we get a very simple closed-form expression for $\lam$. We show that the performance of the optimal TAS rule does not degrade much even when the $\lam$ is chosen from this simple upper bound. Note that the optimization parameter is generally obtained using numerical methods~\cite{Sarvendranath_2013_TCOM,Wang_2011_TCom}.
+
+\item We also study the impact of imperfect CSI of both the STx-SRx and STx-PRx channel power gains on LWIIR. For this scenario, we derive  expressions for the average SEP and the interference-outage probability.
+
+\item Our extensive benchmarking results bring out the significant gains of using the LWIIR as opposed to ad-hoc adaptations of the rules considered in the literature.
+
+\end{itemize}
+
+\subsection{Outline and Notation}
+The  paper is organized as follows. Section~\ref{sec:model} presents the system model and the problem statement. The LWIIR rule, its interference-outage probability, and its optimality are studied in Section~\ref{sec:analysis}. The average SEP analysis and its insightful simplifications are studied in Section~\ref{sec:SEPanalysis}. The impact of imperfect CSI on the LWIIR  is studied in section~\ref{sec:imperfectcsi}. Numerical results are shown in Section~\ref{sec:results} and are followed by our conclusions in Section~\ref{sec:conclusions}. Mathematical derivations are relegated to the Appendix.
+
+\emph{Notation:} We use the following notations in this paper. The absolute value of a complex number $x$ is denoted by $|x|$. The probability of an event $A$ and the conditional probability of $A$ given $B$ are denoted by $\prob{A}$ and $\prob{A \given B}$, respectively. For a random variable (RV) $X$, $f_{X}(x)$ denotes its probability density function (PDF), $F_{X}^{c}(x)$ denotes its complementary cumulative distribution function (CCDF), and $\explow{X}{\cdot}$ denotes its expectation. Further, $X \sim {\cal CN}(0,\sigma^2)$ means that $X$ is a circular symmetric complex Gaussian RV with zero mean and variance $\sigma^2$.  Scalar variables are written in normal font and vector variables are written in bold font. $\indic{a}$ denotes the indicator function; it is 1 if $a$ is true and is 0 otherwise. $\nullset$ denotes the null set.
+
+\section{System Model and Problem Statement}
+\label{sec:model}
+The system model is shown in Figure~\ref{fig:MODEL}. It consists of an STx with $\Nt$ antennas that transmits data to an SRx with $\Nr$ receive antennas and causes interference to a PRx with one antenna. The STx is equipped with one RF chain. It dynamically selects one antenna at a time and connects it to the available RF chain. For $i \in \nropts$ and $k \in \antopts$, $\hk{ik}$ denotes the instantaneous channel power gain from the $\kth$ transmit antenna of the STx to the $\ith$ receive antenna of the SRx. The instantaneous channel power gain from the $\kth$ antenna of the STx to the PRx is denoted by $\gk{k}$, for $k \in \antopts$. We assume that all the $\Nt\Nr$ STx-SRx channels are independent and identically distributed (i.i.d.) RVs and so are the $\Nt$ STx-PRx channels to the PRx. This is justified when the antennas are sufficiently spaced apart~\cite{Fakhan_2014_TSP,Kong_2011_JCN,Sarvendranath_2013_TCOM,Hanif_2015_globecom}. Let $\Hmx$ denote the STx-SRx channel power gain matrix $\left[\hk{ik}\right]$ and $\g\define\left[\gk{1},\ldots,\gk{\Nt}\right]$ denote the STx-PRx channel power gain vector.
+
+\begin{figure}
+\centering 
+\includegraphics[width=0.75\columnwidth]{plots/MODEL_NtxNr.eps}
+\caption{System model that consists of an STx with $\Nt$ transmit antennas and one RF chain. It transmits data to an SRx with $\Nr$ antennas and causes interference to the PRx.}
+\label{fig:MODEL}
+\end{figure}
+\newcommand{\hs}{\mathbf{\such}_{s}}
+\newcommand{\hsstar}{\mathbf{\such}_{s^{*}}}
+\subsection{Antenna Selection Options and Data Transmission}
+The STx transmits a data symbol $x$ that is drawn with equal probability from a constellation of $M$ symbols. It can select one out of $\Nt$ antennas and transmits with a fixed power $\Pt$. Further, it can also decide to transmit with none of the antennas, \ie, transmit with zero-power, in order not to interfere with the PRx. We shall denote the transmission with zero-power as transmitting from a virtual antenna $\nx$, and the corresponding channel power gains are defined to be zero, \ie, $\hk{i\nx} \define 0$, for $i\in\nropts$, and $\gk{\nx}\define 0$. 
+
+Let $s\in\allopts$ denote the antenna selected by the STx. % Thus, STx has $\Nt+1$ options to select from.
+ At the $\ith$ receive antenna of the SRx, let $\Rsrx$ denote the signal received and let $\Isrx$ denote the interference from PU transmissions. Let the interference at the PRx due to SU transmissions be $\Iprx$. Then, $\Rsrx$ and $\Iprx$ are given by
+%
+\begin{align}
+\label{eq:r_su}
+ \Rsrx &= \sqrt{\Pt}\sqrt{\hk{is}} e^{j\thetahk}x + \noise + \Isrx, \\
+ \label{eq:i}
+ \Iprx &= \sqrt{\Pt}\sqrt{\gk{s}} e^{j\thetagk}x ,
+\end{align}
+%
+where $\expect{|x|^2}=1$, $\thetahk$ and $\thetagk$ are the phases of the complex baseband STx-SRx and STx-PRx channel gains, respectively, and $\noise$ is a circular symmetric complex additive white Gaussian RV. We assume $\Isrx$ to be Gaussian. Therefore, $\noise + \Isrx\sim \CN\left(0,\noisevar\right)$. This assumption corresponds to a worst case model for interference at the SRx, and is widely assumed in the literature to ensure tractability~\cite{Sarvendranath_2013_TCOM,Wang_2011_TCom, Kashyap_2014_TCOM,Sarvendranath_2014_TCOM}. It is valid even with one PTx, if the PTx uses a constant amplitude signal to communicate with the PRx~\cite{Kashyap_2014_TCOM}. With multiple PTxs, it is justified by the central limit theorem. This is also valid when the interference seen at the SRx is negligible, which is assumed in~\cite{Zhou_2009_WCNC,musavian_2009_tcom,RZhang_2009_TWC,li_2011_pimrc,Sboui_2013_TWC}, and occurs when SRx is located geographically far from the PTx.
+
+\subsection{CSI Assumptions and Justifications}  
+Before we state the problem, we discuss the  CSI assumptions and comment on them. 
+\begin{enumerate}
+\item In order to perform TAS, we assume that the STx knows the STx-SRx channel power gains $\Hmx$, as also has been assumed in~\cite{XKang_2011_JSAC,Hanif_2015_globecom,Sarvendranath_2013_TCOM,Kong_2011_JCN,Wang_2010_TWC,RZhang_2009_TWC}. However, it is not required to know the phase information of these channels. When the secondary system operates in time division duplex mode, $\Hmx$ can be obtained at the STx without any feedback making use of reciprocity~\cite{Sarvendranath_2013_TCOM}. Alternatively, in frequency division duplexing, feedback from the SRx to STx is required. The SRx uses a coherent demodulator. Hence, it only needs to know the complex channel gains from the selected transmit antenna of the STx to itself, \ie, $\hk{is}$ and $\thetahk$, for $i\in\nropts$. These can be estimated by inserting a pilot symbol along with the data. 
+
+\item We also assume that STx knows the STx-PRx channel power gains $\g$, as has been assumed in~\cite{Hanif_2015_globecom,Sarvendranath_2013_TCOM,Kong_2011_JCN,Wang_2010_TWC,RZhang_2009_TWC}. Different techniques have been investigated in the literature to acquire $\g$. In~\cite{Zhao_2008_TSP} the STx senses the primary signal periodically to estimate $\g$. Instead, in~\cite{RZhang_2008_DSAN} power-feedback loop technique, which does not require feedback from the PRx is discussed. As we shall see the LWIIR  requires the STx to only know if the interference channel power gain of each antenna exceeds a pre-defined threshold. This is considerably simpler and more robust than accurately obtaining the real-valued interference channel power gain. The SRx does not need to know $\g$. 
+\end{enumerate}
+
+\subsection{Problem Statement}
+We now formally state our problem. Let $\SEP(\hs)$ denote the instantaneous SEP when antenna $s$ is used for transmission, where $\hs\define\left[\hk{1s},\ldots,\hk{\Nr s} \right]$. From~\cite[(14)]{Chung_2001_TCom}, it is given by  
+\begin{equation}
+\SEP(\hs) \approx \cone \exp\left({-\frac{\Pt\sum_{i=1}^{\Nr}\hk{is}}{\ctwo\noisevar} }\right), \quad\text{for} \quad 0\leq s \leq \Nt,
+\label{eq:isep}
+\end{equation} 
+where $\cone$ and $\ctwo$ are modulation specific constants. For example, $(\cone,\ctwo )=(0.5,1.7)$ for QPSk,  $(\cone,\ctwo)=(0.6,5.5)$ for 8-PSK, and  $(\cone,\ctwo )=(0.8,8.2)$ for 16-QAM.  This formula is exact for differential binary phase-shift-keying (DBPSK) with ($\cone$,~$\ctwo$) = (0.5,~1)  and non-coherent binary frequency-shift-keying (NCBFSK) with  ($\cone$,~$\ctwo$) = (0.5,~2)~\cite{Fakhan_2014_TSP}. This general formula is also applicable for several other constellations such as differential PSK (DPSK) and M-ary frequency-shift-keying (MFSK)~\cite{simon_alouini_book}. The summation term in the exponent in~\eqref{eq:isep} arises because the SRx employs maximal ratio combining (MRC).
+
+
+{\em Comments:}
+\begin{itemize}
+\item While~\eqref{eq:isep} is an approximation for some constellations,  it is accurate, applies to a large number of constellations, and is tractable. %We also note that when antenna zero is selected, $\SEP(\hk{\nx})$ tends to  $\cone$,  For the purpose of designing the TAS rule, we will use this formula for all antennas, including $s=\nx$. However, in the average SEP analysis, we will use the accurate value of the SEP defined below for $s=\nx$ as well.
+\item Even with zero transmit power ($s=\nx$), the SEP is $\cone<1$, \ie, the STx transmits a symbol which the SRx can detect correctly with a non-zero probability $1-\cone$. The SEP is lower when any of the $\Nt$ antennas are selected. Therefore, $\cone$ can be interpreted to be penalty associated with $s=\nx$. Clearly, it ensures that the optimal TAS rule is not trivial, \ie, it does not select $s=\nx$  always in order to cause less interference~\cite{Kashyap_2014_TCOM,Sarvendranath_2013_TCOM}.\footnote{For a constellation of size $M$, it can be shown that the SEP with zero transmit power is exactly $\zerosep\define 1-\left(1/M\right)$. We shall use this in the SEP analysis. We design the TAS rule using~\eqref{eq:isep} for all $\Nt+1$ options in order to ensure tractability. } 	
+\end{itemize}
+
+
+From~\eqref{eq:i}, the instantaneous interference power at the PRx is $\Pt\gk{s}$.\footnote{The interference power is effectively averaged over the different symbols in a constellation.} Therefore, the probability that it exceeds an interference power threshold $\itau$ is equal to $\prob{\Pt\gk{s}>\itau}$. Note that this probability depends on the TAS rule used through $s$. Then, the interference-outage probability constraint can be specified as 
+\begin{equation}
+\prob{\Pt\gk{s}>\itau} \leq \outmax,
+\label{eq:iop_cons}
+\end{equation}
+where $\outmax$ is the maximum interference-outage probability that can be allowed. We next define a TAS rule.
+
+{\em TAS Rule Definition:} A TAS rule $\asrule:\brac{\mathbb{R}^{+}}^{\Nr}\times\brac{\mathbb{R}^{+}}^{\Nt} \times \brac{\mathbb{R}^{+}}^{\Nt} \rightarrow \allopts$ is a mapping from $\left(\Hmx,\g\right)$ to the set of $\Nt+1$ available transmit antennas. Thus, $s = \phi(\Hmx,\g)$.
+
+Let $\asspan$ be the set of all TAS  rules. Our goal is to find the optimal TAS rule $\phi^{*}$ that minimizes the average SEP of the secondary system subject to the interference-outage probability constraint. This can be mathematically stated as the  following stochastically constrained optimization problem:
+\begin{align}
+\optproblem: \quad \min_{\asrule\,\in\,\asspan} \quad &\explow{\Hmx,\g}{\SEP(\hs)} \\
+\label{eq:objective}
+\text{s.t.} \quad &\prob{\Pt\gk{s}>\itau} \leq \outmax, \\
+ &s = \phi(\Hmx,\g). 
+\end{align}
+
+
+
+\section{LWIIR Rule Its Interference-Outage analysis and optimality}
+\label{sec:analysis}
+
+In this section, we first propose LWIIR and characterize some of its properties.  We then analyze its interference-outage probability. Using these we  prove that LWIIR is indeed the optimal solution to the problem $\optproblem$ above for a general class of continuous fading models. %We then analyze its interference-outage probability and average SEP for Rayleigh fading. We also gain insights by showing that it simplifies considerably in the high transmit power regime and that interference-outage penalty factor $\lam$ can be written in closed-form in this asymptotic regime.
+
+\subsection{LWIIR and Its Properties}
+\label{sec:lambda_rule}
+Let 
+\begin{equation}
+\yk{k} \define  \exp\left({- \frac{\Pt\sum_{i=1}^{\Nr}\hk{ik}}{\ctwo\noisevar} }\right), \quad \text{for}\,\,  0\leq k \leq\Nt,
+\label{eq:yi_def}
+\end{equation}
+and let $\y \define [\yk{1},\ldots,\yk{\Nt}]$. The LWIIR is defined in terms of a parameter $\lam \in \left[0, \cone\right]$, and is denoted by $\callamrule$. It is as follows.
+\begin{equation}
+\callamrule: \quad s=\argmin\limits_{k\in\allopts} \left\{ \ykplusgk{k} \right\}.
+\label{eq:lam_weight_rule}
+\end{equation}
+
+To understand the behavior of $\callamrule$, we introduce the following terminology. We shall refer to 
+%\begin{equation}
+$\ykplusgk{k}$
+%\label{eq:metric}
+%\end{equation}
+as the {\em selection metric} of the transmit antenna $k$, for $0\leq k \leq\Nt$. Thus, this rule selects the antenna with the smallest selection metric. Further, we shall refer to an antenna $k$ for which $\gklttaubypt{k}$ as an {\em outage-compatible} antenna. Otherwise, we shall refer to it as an {\em outage-incompatible} antenna.  Clearly, antenna zero is always outage-compatible and its selection metric is $\yk{0}=1$. We now explain how this selection metric behaves for different values of $\lam$.
+
+
+
+
+
+{\em Comments:}
+\begin{enumerate}
+\item For $\lam=0$, the selection metric of antenna $k$ is $\yk{k}$. As $\sumnr\hk{ik}\geq 0$, it follows from~\eqref{eq:yi_def} that $\yk{0}=1\geq\yk{1},\ldots,\yk{0}\geq\yk{\Nt}$. Furthermore, $\yk{1},\ldots,\yk{\Nt}$ are monotonically decreasing functions of $\sumnr\hk{ik}$. Hence, 
+\begin{equation}
+\caluncons:\quad s=\!\!\!\argmin\limits_{k\in\allopts}\!\! \left\{ \yk{k} \right\} = \!\!\!\argmin\limits_{k\in\antopts}\!\! \left\{ \yk{k} \right\} = \!\!\!\argmax\limits_{k\in\antopts}\!\! \left\{\sumnr \hk{ik} \right\}.
+\label{eq:uncons_simple}
+\end{equation}
+
+From~\eqref{eq:isep} and~\eqref{eq:objective}, $\caluncons$ is clearly the optimal TAS rule if the interference-outage constraint in~\eqref{eq:iop_cons} is not present, \ie, when $\outmax=1$. We shall, therefore, refer to $\caluncons$ as the {\em interference unconstrained} rule henceforth. Its interference-outage probability is given by
+%
+\begin{equation}
+\un= \prob{\gk{s}>\taubypt}= F^c_{\gk{1}}\!\!\left({\taubypt}\right) .
+\label{eq:uncomsoutage}
+\end{equation}
+%
+The second equality above follows because the antenna $s$ selected by $\caluncons$ does not depend on $\g$, and $\gk{1},\ldots,\gk{\Nt}$ are i.i.d. 
+
+\item For $0<\lam<\cone$, the selection metric of antenna $k$ is a linear combination of  an exponentially decreasing function of $\sumnr\hk{ik}$ and $\indic{\gkgrtaubypt{k}}$, which is a discontinuous function of $\gk{k}$. A three-dimensional view of this selection metric as a function of $\sumnr\hk{ik}$ and $\gk{k}$ is shown in Figure~\ref{fig:metric}. Notice its discontinuous behavior, which happens when $\gk{k}=\taubypt$. Thus, every outage-incompatible antenna is penalized by $\lam$ and will be selected only if its selection metric is less than $\yk{0}=1$.
+
+\item For $\lam=\cone$, the selection metric $\yk{k}+\gindic{k}$ of any outage-incompatible antenna $k$ is greater than one, which is the selection metric of antenna zero. Hence, an antenna that is outage-incompatible will not be selected. This means that the LWIIR will select an antenna with the highest $\sumnr\hk{ik}$ from the set of outage-compatible antennas. In such a case, it is equivalent to the TAS rule in~\cite{Hanif_2015_globecom}  for the peak interference power constraint, \ie, when $\outmax=0$.
+
+%\item A necessary but not sufficient condition for virtual antenna zero to be selected is that all the $\Nt$ antennas $1,\ldots,\Nt$ are outage-incompatible. This is because the selection metric of any outage-compatible antenna $i$, for $1\le i \leq \Nt$, is less than that of antenna zero, \ie, $\yk{i}<\yk{0}$.
+
+\end{enumerate}
+
+\begin{figure}
+\centering 
+\includegraphics[width=\linewidth]{plots/selection_metric_3d.eps}
+\caption{Metric of antenna $k$ as a function $\sumnr\hk{ik}$ and $\gk{k}$.}
+\label{fig:metric}
+\end{figure}
+
+\subsection{Interference-Outage Probability and Optimality Of LWIIR}
+We first derive the interference-outage probability of LWIIR in terms of the distribution of $\yk{1},\ldots,\yk{\Nt}$. Since $\yk{1},\ldots,\yk{\Nt}$ are identically distributed, we denote their CCDF and PDF by $F_{y}^{c}(\cdot)$ and $f_{y}(\cdot)$, respectively. 
+\begin{lemma}
+\label{lem:outage_Nt}
+The interference-outage probability $\outlam$ of $\callamrule$, for $0\leq\lam\leq\cone$, is given by
+\begin{equation}
+\label{eq:pr_outage_ccdf} 
+\outlam  =  \Nt\un \int_{0}^{1-\lambym} 	
+\left[ \un F_{y}^{c}\left(x\right) + \left(1 -\un\right)F_{y}^{c}\left(x+\lambym\right) \right]^{\Nt-1} f_{y}(x)\,dx.
+\end{equation}
+For the class of continuous fading models, $\outlam$ is a continuous and strictly monotonically decreasing function of $\lam$. Furthermore, for any $\outmax\in[0,\un]$, a unique $\lam\in[0,\cone]$ exists such that $\outlam=\outmax$. 
+\end{lemma}
+%
+\begin{IEEEproof}
+    The proof is given in Appendix~\ref{proof:outage_Nt}.
+\end{IEEEproof}
+%
+%Note that~\eqref{eq:pr_outage_ccdf} reduces to $\un$ when $\lam=0$, which corresponds to the interference unconstrained rule. Further, $\outlam=0$ when $\lam=\cone$, which corresponds to the peak interference constrained rule.  
+
+{\em Insights:} Replacing $x+\lambym$ with $\lambym$ in~\eqref{eq:pr_outage_ccdf}, the following closed-form upper bound for $\outlam$ can be derived: 
+\begin{equation}
+\label{eq:pr_outage_ub}
+\outlam  \leq \left[ \un + \left(1-\un\right)F_{y}^{c}\left(\lambym\right)  \right]^{\Nt} - \left[ \un F_{y}^{c}\left(1-\lambym\right) + \left(1-\un\right)F_{y}^{c}\left(\lambym\right)  \right]^{\Nt}.
+\end{equation}
+For $\Nt = 2$, the following different, simpler bound can also be derived: 
+\begin{equation}
+\label{eq:two_Nt_UB}
+\outlam \leq \un^2 + 2\un(1-\un)F_{y}^{c}\left(\lambym\right).
+\end{equation}
+
+
+Using Lemma~\ref{lem:outage_Nt}, we prove the following key result. 
+%
+\begin{theorem}
+\label{thm:selection_rule_on_off}
+The optimal TAS rule lies in the set of rules $\set{\callamrule:0\leq\lam\leq\cone}$. If $\outmax\geq\un$, then it is given by $\caluncons$. Else, for $0\leq\outmax<\un$, it is given by $\callamstarrule$, where $\lamstar>0$  is the solution of $\outlam=\outmax$. Such a choice of $\lamstar$ is unique, strictly positive, and always exists. 
+\end{theorem}
+%                
+\begin{IEEEproof}
+   The proof is given in Appendix~\ref{proof:selection_rule_on_off}.
+\end{IEEEproof}
+%
+
+Notice that the $\callamstarrule$ only needs to know if the STx-PRx channel power gain exceeds a threshold $\tau/\Pt$. This makes the optimal TAS rule robust against the estimation errors of the STx-PRx channel power gain. 
+
+\section{SEP Analysis of LWIIR}
+\label{sec:SEPanalysis}
+In this section, we derive the average SEP expression for an interference-outage constrained underlay CR when LWIIR is employed. First, we do this for a secondary system with $\Nt$ transmit antennas and $\Nr$ receive antennas for any continuous fading model. Then, we show that this average SEP expression can be simplified to a closed-form for Rayleigh fading when $\Nr=1$.
+
+\begin{theorem}
+\label{thm:SEP_exact_Nt_gen}
+The average SEP denoted by $\avgSEP$ of LWIIR for any continuous fading model is given by
+\begin{equation}
+\label{eq:SEP_Nt_gen} 
+\avgSEP= m\left[\unccdfygen{\un}{1-\lambym}\right]^{\Nt} + \termtwo,
+\end{equation}
+%
+where
+\begin{align}
+\label{eq:termtwo_gen}
+\termtwo \!&= \Nt\m(1-\un)\int_{0}^{\lambym} \left[\un + \unccdfygen{(1-\un)}{x}\right]^{\Nt-1} x\pdfyNrgen{x} dx\nonumber\\
+&\quad\quad\quad+ \Nt\m \int_{0}^{1-\lambym}
+\left[\unccdfygen{(1-\un)}{x+\lambym} + \unccdfygen{\un}{x}\right]^{\Nt-1}\nonumber\\
+&\hspace{90pt}\times\left((1-\un)\left(x + \lambym\right) \pdfyNrgen{x + \lambym}+\un x\pdfyNrgen{x}\right) dx ,
+\end{align}
+%
+$\ccdfyrv{x}$ and $\pdfyNrgen{x}$ are the CCDF and PDF, respectively, of the i.i.d RVs  $\yk{1},\ldots,\yk{\Nt}$ and $m=1-\frac{1}{M}$.
+\end{theorem}
+%
+\begin{IEEEproof}
+The proof is given in Appendix~\ref{proof:SEP_exact_Nt_gen}.
+\end{IEEEproof}
+%
+
+Note that the first term in~\eqref{eq:SEP_Nt_gen}, which corresponds to the average SEP due to $s=\nx$, increases as the interference outage penalty factor $\lam$ increases. This is because a higher $\lam$ corresponds to a tighter interference-outage constraint, which increases the probability of selecting $s=\nx$. 
+%
+%\begin{multline}\label{eq:SEP_Nt_Nr_rayleigh} \frac{\Nt\m(1-\un)}{\Gamma(Nr)}\left(\albysnr\right)^{Nr}\int_{0}^{\lambym} \left(\un + \unccdfy{(1-\un)}{x}\right)^{\Nt-1} \ytimespdfyNr dx\\ + \frac{\Nt\m}{\Gamma(Nr)}\left(\albysnr\right)^{Nr} \int_{0}^{1-\lambym} \left(\unccdfy{(1-\un)}{\left(x+\lambym\right)} + \unccdfy{\un}{x}\right)^{\Nt-1}\\ \times\left((1-\un)\ypluslamtimespdfyNr+\un\ytimespdfyNr\right) dx\\ +m\left(\unccdfy{\un}{\left(1-\lambym\right)}\right)^{\Nt}.                                     \end{multline}
+
+
+\subsection{Special Cases: Rayleigh Fading}
+Here, $\hk{ik}$ and $\gk{k}$ are i.i.d.\ exponential RVs with means $\muh$ and $\mug$, respectively. It can be shown that the interference-outage probability $\un$ is equal to $\inlccdfg[]$. This means from the inequality $\outmax\geq\un$, we see that the optimal TAS rule will be same as the interference unconstrained rule $\caluncons$ for $\Pt\leq {\tau}/{\left(\mug\ln\left(1/\outmax\right)\right)}$ or, equivalently, for $\itau\geq\Pt\mug\ln\left(1/\outmax\right)$.  Let $\snr\define\Pt\muh/\noisevar$ denote the mean signal-to-noise-ratio of the SU.
+\subsubsection{$\Nr$ Receive Antennas at SRx} From~\eqref{eq:yi_def}, $\yk{1}$ is an exponential function of a gamma RV with $\Nr$ degrees of freedom. Thus, the CCDF and PDF of the RV $\yk{1}$ are given by 
+\begin{align}
+\label{eq:ccdfyNr}
+\ccdfyrv{x} &= \ccdfyNr{x}, \quad \text{for}\,\, x \in (0,1],\\
+\label{eq:pdfyNr}
+\pdfyNrgen{x} &= \pdfyNr, \quad \text{for}\,\,  x \in (0,1],
+\end{align}
+where $\gamma(\cdot,\cdot)$ denote the lower incomplete gamma function~\cite[(8.350.1)]{gradshteyn00_book} and $\Gamma(\cdot)$ denote the gamma function~\cite[(8.339.1)]{gradshteyn00_book}. Then, $\avgSEP$ is obtained by substituting these in~\eqref{eq:SEP_Nt_gen} and \eqref{eq:termtwo_gen}. Also, substituting these in~\eqref{eq:pr_outage_ccdf} yields the interference-outage probability expression for Rayleigh fading. Note that further simplification is not possible due to the lower incomplete gamma function inside the integral.  However closed form expressions can be obtained for $\Nr=1$.
+%
+\subsubsection{Single Receive Antenna at SRx $\left(\Nr=1\right)$} 
+By substituting $\Nr=1$ in~\eqref{eq:ccdfyNr} and~\eqref{eq:pdfyNr}, we get $F_{y}^{c}(x) = 1-x^{\albysnr}$ and $f_{y}(x) = \al x^{\albysnr-1}/\snr$, for $x \in (0,1]$. Upon substituting these in~\eqref{eq:SEP_Nt_gen} and~\eqref{eq:termtwo_gen}, the following simplified expression for $\avgSEP$ can be obtained:
+%
+\begin{multline}
+\label{eq:avgSEPoneNr} 
+\avgSEP =\zerosep\un^{\Nt}\left[1-\left(1-\lambym\right)^{\albysnr[]}\right]^{\Nt}
+ + \!\frac{\Nt\un^{\Nt}\al\lam}{\snr}\!\! \sum_{k=0}^{\Nt-1}\!\sum_{n=0}^{k} \!\! \frac{\nck{\Nt-1}{k} \!\nck{k}{n}\!(-1)^{n}\!\!\left(\!\lambym\!\right)^{\!\!\!\!\albysnr[(n+1)]\!\!}\!\!\!\!\left(\!\frac{1}{\un}\!-\!1\!\right)^{\!k+1} \!}{\albysnr[(n+1)]+1}\\ + \frac{\Nt\m\al}{\snr} \sum_{k=0}^{\Nt-1} \sum_{i=0}^{k} \sum_{j=0}^{\Nt-k-1} \binom{\Nt-1}{k} \binom{k}{i} \binom{\Nt-k-1}{j} \\\times(-1)^{\!i+j} \un^{k} (1-\un)^{\Nt-k-1} \left( \un\psifun{j}{i+1} +  \left(1-\un\right) \psifun{j+1}{i} \right) 
+,
+\end{multline}
+where $\psifun{k_1}{k_2} = \int_{0}^{1-\frac{\lam}{\m}} \left(x+\lambym\right)^{\albysnr[k_1]} x^{\albysnr[k_2]} \,dx$.
+%
+In general $\psifun{k_1}{k_2}$ can be computed accurately as a sum of $n$  terms as follows: 
+\begin{equation}
+\psifun{k_1}{k_2} ={\onemlc^{\albysnr[k_2]+1}} \sum_{i=1}^{n} w_{i} {\left(\!x_i\onemlc +\lambym\right)}^{\albysnr[k_1]} x_i^{\albysnr[k_2]} + \text{o}\left(\frac{1}{n^2}\!\right),
+\label{eq:gauss_quad}
+\end{equation}
+where $x_i$ and $w_i$ are the $n$ Gauss quadrature abscissas and weights~\cite{abramowitz_stegun}, respectively. In Section~\ref{sec:results}, we will see that this approximation is accurate even for $n$ as small as four. Furthermore, for $\lam\in({\m}/{2}, \m]$, the integral can be written  in terms of a series as  follows~\cite{gradshteyn00_book}:
+%
+\begin{multline}
+\psifun{k_1}{k_2} = \frac{\left(\lambym\right)^{\albysnr[k_1]} \left(1-\lambym\right)^{\albysnr[k_2]+1}}{\albysnr[k_2]+1} \\
++ \sum_{\lidx=1}^{\infty}\! \frac{\akone\!\!\left(\akone\!-\!1\right)\!\ldots\!\left(\akone\!-\!\lidx\!+\!1\right)\!\left(\!\lambym\!\right)^{\!\!\albysnr[k_1]  - \lidx} \!\!\left(\!1\!-\!\lambym\!\right)^{\!\!\albysnr[k_2]+\lidx+1}}{\lidx ! \left(\albysnr[k_2]+\lidx+1\right)}. 
+\label{eq:inf_sum}
+\end{multline}
+
+%
+%Using Gauss quadrature~\cite{abramowitz_stegun}, 
+%
+
+%\subsection{Simpler TAS Rule and interference-outage Expressions}
+\subsection{Insights: Simpler TAS Rule and Interference-Outage Expressions}
+In this section, we gain several insights on the behavior of the LWIIR. We will show that the LWIIR and its interference-outage probability takes a simpler form when $\lam$ tends to $\cone$. This happens when the probability of all the antennas being outage-incompatible is more than $\outmax$, \ie, $\prob{\gkgrtaubypt{1}}^{\Nt}>\outmax$, in order to penalize the outage-incompatible antenna to the maximum extent.  
+%
+
+The simplified form of the LWIIR depends on the set of all outage-compatible antennas $\goodset$ is non-empty  or empty and is given by
+\begin{equation}
+\label{eq:hp_rule}
+\callamrule: s = \left\{
+\begin{array}{ll}
+\argmax\limits_{k\in\goodset}\left\lbrace \sumnr \hk{ik}\right\rbrace , & \text{if}~\goodset\neq\nullset, \\
+\argmax\left\lbrace \igamma,\sumnr\hk{i1},\dots,\sumnr\hk{i\Nt}\right\rbrace , &\text{otherwise}.
+\end{array}\right.
+\end{equation}
+
+when
+\begin{itemize}
+\item {\em $\goodset$ is Not Empty:} In this case, as $\lam/\m$ tends to one,~\eqref{eq:hp_rule} directly follows from Comment 3 in Section~\ref{sec:lambda_rule}.
+	% In this case, as $\lam/\m$ tends to one, the metric $\ykplambym{j}$ of every outage-incompatible antenna $j$ is greater than the metric $\yk{k}$ of any outage-compatible antenna $k$ because $\yk{k}\leq 1$. Hence, the optimal TAS rule will only select an outage-compatible antenna, and  reduces to $s=\argmin_{k\in\goodset} \left\{ \yk{k} \right\} = \argmax_{k\in\goodset} \left\{ \sumnr \hk{ik} \right\}$. 
+	
+\item {\em $\goodset$ is Empty:} In this case, all the antennas are outage-incompatible. LWIIR will transmit with a non-zero antenna if and only if there is at least one antenna $k$ for which $\sumnr \hk{ik}$ exceeds the threshold  $\igammainline$. Else, it selects $s=0$.
+\end{itemize}
+
+We now analyze the interference-outage probability of the TAS rule in~\eqref{eq:hp_rule} for Rayleigh fading. Here, an interference-outage happens only when $\goodset$ is empty and the STx  transmits with $s\neq\nx$. Hence,  $\outlam=\prob{{\goodset}=\nullset, s \neq 0}$. This can be shown to be equal to
+\begin{equation}
+\label{eq:pr_outage_hp}
+ \outlam = \un^{\Nt} - \un^{\Nt}\left( \frac{\gamma\left(Nr,-\albysnr[]\ln\left(1-\lambym\right)\right)}{\Gamma\left(Nr\right)}\right)^{\Nt}.
+ %\outlam  =  \un^{\Nt} - \un^{\Nt}\left[1 - \left(1-\lambym\right)^{\albysnr[]} \right]^{\Nt}.
+\end{equation}
+Note that~\eqref{eq:pr_outage_hp} is an asymptotic expression for interference-outage  as $\lam$ tends to $\cone$.
+
+{\em Simpler Expressions for $\lam$:} For $\Nr=1$, equating~\eqref{eq:pr_outage_hp} with $\outmax$ yields the following closed-form expression for $\lam$: 
+\begin{equation}
+\label{eq:lam_asym}
+ \lam  =  \m - \m\left(1 - \left(1 - \frac{\outmax}{\un^{\Nt}}\right)^{\frac{1}{\Nt}} \right)^{\snrbyal[]}, \,\,\text{for}\,\, \itau\leq-\frac{\Pt\mug}{\Nt}\ln\left({\outmax}\right).
+\end{equation}
+%
+%This expression applies only when $\un^{\Nt}$ is greater than $\outmax$, which is equivalent to .  
+Furthermore,  for $\Nt=2$ and $\Nr=1$, equating~\eqref{eq:two_Nt_UB} to $\outmax$ yields the following upper bound for $\lam$:
+\begin{equation}
+\label{eq:two_Nt_lam}
+\lam \leq \cone \left( \frac{2\un - \un^2 - \outmax}{2\un(1-\un)} \right)^{\snrbyal[]} ,\,\,\text{for}\,\, \itau\geq-\frac{\Pt\mug}{2}\ln\left({\outmax}\right).
+\end{equation} 
+%Note that the above upper bound will be less than or equal to $\cone$ only when $\frac{2\un - \un^2 - \outmax}{2\un(1-\un)}\leq 1$, which simplifies to $\un^2 \leq \outmax$, which is equivalent to $\itau\geq\left({\Pt\mug}/{2}\right)\ln\left(1/\outmax\right)$.
+%which means for $\Pt<\frac{2\tau}{\mug\ln\left(1/\outmax\right)}$. 
+
+
+
+\section{Impact of Imperfect CSI}
+\label{sec:imperfectcsi}
+We now study the behavior of LWIIR when the STx has imperfect estimates of STx-SRx and STx-PRx channel power gains for Rayleigh fading. For tractability, we assume that the SRx knows the $\Nr$  complex channel gains corresponding to the antenna selected perfectly. %We derive the analytical expressions for the interference-outage probability at the PRx and the average SEP of the SU with imperfect CSI. 
+
+
+{\em Channel Estimation Model}: Let $\sugain{ik} = \sqrt{\hk{ik}}e^{-j\suchph_{ik}}\sim\CN\left(0,\muh\right) $ denote the complex baseband channel gain of the link from $\kth$ transmit antenna of the STx to the $\ith$ receive antenna of the SRx and $\pugain{k} = \sqrt{\gk{k}}e^{-j\puchph_{k}}\sim\CN\left(0,\mug\right)$ denote the complex baseband channel gain from the $\kth$ antenna of the STx to the PRx.  It can be shown that MMSE estimates of $\sugain{ik}$ and $\pugain{k}$, which are based on pilot transmissions by SRx and PRx with powers $\hpilotpower$ and $\gpilotpower$, respectively are  $\sugainhat{ik}\sim\CN\left(0, \muhhat \right)$ and $\pugainhat{k}\sim \CN\left(0, \mughat\right) $, where  $\muhhat ={\hpilotpower\mu^2_{\such}}/{\left( \hpilotpower\muh+1\right)}$ and $\mughat = {\gpilotpower\mu^2_{\puch}}/{\left( \gpilotpower\mug+1\right)}$~\cite{Kashyap_2014_TCOM}.  
+This implies that the channel power gain estimates $\hkhat{ik}=|\sugainhat{ik}|^2$ and $\gkhat{k}=|\pugainhat{k}|^2$ are exponential RVs with means $\muhhat$ and $\mughat$, respectively. Furthermore, the correlation coefficient  of $\hk{ik}$ and $\hkhat{ik}$ is $\rhoh\define{\hpilotpower\muh}/{\left( \hpilotpower\muh + 1\right) }$, and that of $\gk{k}$ and $\gkhat{k}$ by $\rhog \define{\gpilotpower\mug}/{\left( \gpilotpower\mug + 1\right) }$. Let  $\unhat\define\ccdfghatinline$,  $\snrhat\define{\Pt\muhhat}/{\noisevar}$, and 
+\begin{equation}
+\ykhat{k} \define  \exp\left({- \frac{\Pt\sum_{i=1}^{\Nr}\hkhat{ik}}{\ctwo\noisevar} }\right), \quad \text{for} \quad 0\leq k \leq\Nt.
+\label{eq:yihat_def}
+\end{equation}
+Lastly, let $\yhatvec\define\left[\ykhat{1},\ldots,\ykhat{\Nt} \right]$ and $\ghatvec\define\left[\gkhat{1},\ldots,\gkhat{\Nt} \right]$.
+Thus, with imperfect channel information the antenna selected by LWIIR becomes 
+\begin{equation}
+s=\argmin\limits_{k\in\allopts} \left\{ \ykhatplusgkhat{k} \right\}.
+\label{eq:shat}
+\end{equation}
+%Recall that $\lamstar$ is obtained by equating interference-outage probability $\outlam$ with perfect CSI in~\eqref{eq:pr_outage_ccdf} to $\outmax$. 
+
+\newcommand{\D}{D}
+\newcommand{\pdfyhatNr}{\left(\ln\left(\frac{1}{x}\right)\right)^{\Nr-1}x^{\albysnr[]-1}} % only y terms constants taken care separately
+\newcommand{\yhattimespdfyNr}{\left(-\ln\left(x\right)\right)^{\Nr-1}x^{\D}} % only y terms constants taken care separately
+\newcommand{\yhatpluslamstartimespdfyNr}{\left(-\ln\left({x+\lamstarbym}\right)\right)^{\Nr-1}\left(x+\lamstarbym\right)^{\D}} % only y terms constants taken care separately
+\newcommand{\yhatpluslamtimespdfyNr}{\left(-\ln\left({x+\lambym}\right)\right)^{\Nr-1}\left(x+\lambym\right)^{\D}} % only y terms constants taken care separately
+\newcommand{\unccdfyhat}[2]{{#1}\,\,\ccdfyhatrv{#2}}
+
+
+\newcommand{\avgSEPhat}{\widehat{\SEP}}
+
+{\em Average SEP:} We now derive the average SEP expression of the TAS rule in~\eqref{eq:shat}. %We do not give this for general fading model because ?? 
+
+\begin{theorem}
+\label{thm:avg_SEP_imperfect}
+The $\avgSEP$ of the LWIIR for an $\Nt\times\Nr$ CR system with imperfect CSI at the STx is given by
+\begin{multline}
+\label{eq:avg_SEP_imperfect}
+\avgSEP = \frac{\Nt \T^{\Nr}\m(1-\unhat)}{\Gamma(\Nr)}\int_{0}^{\lambym} \left[\unhat + \unccdfyhat{(1-\unhat)}{x}\right]^{\Nt-1} \yhattimespdfyNr dx\\
++ \frac{\Nt \T^{\Nr}\m}{\Gamma(\Nr)} \int_{0}^{1-\lambym}
+\left[\unccdfyhat{(1-\unhat)}{x+\lambym} + \unccdfyhat{\unhat}{x}\right]^{\Nt-1}\\
+\times\left((1-\unhat)\yhatpluslamtimespdfyNr+\unhat\yhattimespdfyNr\right)\, dx\\
++m\left[\unccdfyhat{\unhat}{1-\lambym}\right]^{\Nt},
+\end{multline}
+where $F_{\yhat}^{c}\left(x\right) = \frac{\gamma\left(Nr,-\albysnrhat[]\ln(x)\right)}{\Gamma(\Nr)}$, $\T \define \Tc$, and $\D \define \Dc$.	
+\end{theorem}
+\begin{IEEEproof}
+	The proof is given in Appendix~\ref{proof:avg_SEP_imperfect_CSI}.
+\end{IEEEproof}
+
+Substituting $\snrhat=\snr$, $\rhoh=1$, and $\unhat=\un$ in~\eqref{eq:avg_SEP_imperfect} reduces it to the average SEP expression for perfect CSI case in~\eqref{eq:SEP_Nt_gen}. Further simplification of $\avgSEP$ in~\eqref{eq:avg_SEP_imperfect} for general case of $\Nr$ receive antennas at SRx is not possible. However, for $\Nr=1$ simplified expressions can be obtained similar to that of perfect CSI in~\eqref{eq:avgSEPoneNr}.
+
+
+
+{\em Interference-Outage Probability:} We now derive the interference-outage probability of the TAS rule in~\eqref{eq:shat}.
+
+\begin{theorem}
+\label{thm:outage_imperfect_CSI}
+The interference-outage probability $\outlam$ of the LWIIR with imperfect CSI at the STx is given by
+\begin{multline}
+\label{eq:pr_outage_impefect} 
+\!\outlam \!=\! \Nt \!\int_{0}^{1-\lambym} 	
+\!\left[\left(1 -\unhat\right)F_{\yhat}^{c}\left(x+\lambym\right) + \unhat F_{\yhat}^{c}\left(x\right)\right]^{\Nt-1}\!\! \left(\! \Probglt f_{\yhat}\!\left(\! x+\lambym\right) \!+\! (\un - \Probglt) f_{\yhat}\left(x\right)\!\right) dx\\
++ \frac{ \Probglt}{1 - \unhat} \left( 1 - \left[\unhat + \left(1 -\unhat\right)F_{\yhat}^{c}\left(\lambym\right)  \right]^{\Nt}  \right) ,
+\end{multline}
+%
+where $\Probglt = \un Q_1\left(\frac{\rhog}{ \gpilotpower} \sqrt{\frac{2\itau}{ \gpilotpower\Pt}},\sqrt{\frac{2 \gpilotpower\itau}{\Pt}}\right)  - \frac{\unhat}{2} \left( 1 + e^{-\frac{2\itau\rhog}{ \gpilotpower\Pt}}I_{0}\left(\frac{2\itau\rhog}{ \gpilotpower\Pt} \right) \right)$, $I_{0}(\cdot)$ is the modified Bessel function of the zeroth order~\cite[(8.406.3)]{gradshteyn00_book},  $Q_1(\cdot,\cdot)$ is the Marcum-Q function~\cite[(4.34)]{simon_alouini_book},  and $f_{\yhat}\left( x\right) = \frac{ \left( \albysnrhat \right)^{\Nr} \left(-\ln\left(x \right)\right)^{\Nr-1} x^{\albysnrhat - 1}}{\Gamma(\Nr)}$.
+\end{theorem}
+%
+\begin{IEEEproof}
+	The proof is given in Appendix~\ref{proof:outage_imperfect_CSI}.
+\end{IEEEproof}
+%
+
+Note that in the interference unconstrained case $\left(\lam=0\right)$ the $\outlam$ in~\eqref{eq:pr_outage_impefect} reduces to the unconstrained interference-outage probability $\un$, same as the perfect CSI case. This is because when $\lam=0$ the antenna selected does not depend on the  STx-PRx channel power gains. Furthermore, in the peak interference power constrained case $\left(\lam=\cone\right)$, it simplifies to a non-zero value $\frac{ \Probglt \left( 1-\unhat^{\Nt}\right) }{1-\unhat}$ unlike the $\outlam$ for perfect CSI in~\eqref{eq:pr_outage_ccdf}, for which it is zero. Along lines similar to the~\eqref{eq:pr_outage_ub}, the following closed-form upper bound can be derived for~\eqref{eq:pr_outage_impefect}. 
+\begin{multline}
+\label{eq:pr_outage_imperfect_ub}
+\outlam  \leq \left(\frac{\un - \Probglt}{\unhat}\right)\left( \left[\unhat + \left(1-\unhat\right)F_{y}^{c}\left(\lambym\right)\right]^{\Nt} - \left[ \unhat F_{y}^{c}\left(1-\lambym\right) + \left(1-\unhat\right)F_{y}^{c}\left(\lambym\right)  \right]^{\Nt}\right) \\
++  \frac{ \Probglt \left( 1-\unhat^{\Nt}\right) }{1-\unhat}.
+\end{multline}
+
+
+
+
+\section{Numerical Results and Performance Benchmarking}
+\label{sec:results}
+We now present Monte Carlo simulations that use $10^6$ data symbols to verify our analytical results  and study the behavior of LWIIR as a function of different system parameters. We also benchmark its performance against other TAS rules proposed in the literature. We use the optimal penalty factor $\lamstar$ that equates $\outlam$ in~\eqref{eq:pr_outage_ccdf} to $\outmax$ in all the plots. We set $\noisevar =1$, $\muh =\mug = 1$, and Rayleigh fading. 
+
+Figure~\ref{fig:SEP_vs_PT} plots the average SEP of the LWIIR as a function of the transmit power $\Pt$ for $\itau=8$~dB and $\Nr=2$. This is done for two values each of $\outmax$ and $\Nt$. We observe that the analysis expression in~\eqref{eq:SEP_Nt_gen} matches well with the simulations. To understand its behavior, the transmit power needs to be divided into three regions. Consider, for example, $\outmax=0.1$ and $\Nt=4$. Then: (i) When $\Pt \leq 4.4$~dB: Here, the STx is in the {\em interference-outage unconstrained} region. Hence, the LWIIR is same as the $\caluncons$ and its average SEP decreases as $\Pt$ increases. In general, this boundary value of $\Pt$ is given by ${\tau}/{\left(\mug\ln\left(1/\outmax\right)\right)}$; it is independent of $\Nt$. (ii) When $4.4~\text{dB} <\Pt \leq 9~\text{dB}$: Here, the STx is in the {\em interference-outage constrained} region, in which $\lamstar$ is positive but very close to zero. Thus, the average SEP continues to decrease as $\Pt$ increase. (iii) When $\Pt > 9$~dB: Here, $\lamstar$ is large enough ($>0.02$) so that the probability of the event that the STx selects antenna zero is significant and increases as $\lamstar$ increases further. Its SEP, which is $1- ({1}/{M})$, dominates the average SEP. Thus, in this region average SEP increases with $\Pt$. In practice, this increase can be eliminated by lowering the transmit power  $\Pt$ to $9$~dB for $\outmax=0.1$ and $\Nt=4$, and $\Pt$ to $6.7$~dB for $\outmax=0.1$ and $\Nt=2$. Notice that average SEP decreases as $\outmax$ increases, as the interference-outage constraint is relaxed. It also decreases significantly as $\Nt$ increases due to increased spatial diversity.      
+
+\begin{figure}
+  \centering \includegraphics[width=\linewidth]{plots/PCSI_gs_SEP_vs_Pt_pout_5_10_tau_8dB_Nt_4_2_Nr_2_M_4.eps}
+%\centering \includegraphics[height=3.4in]{plots/test.eps}
+  \caption{Average SEP as a function of $\Pt$ for different values of $\outmax$ and transmit antennas ($\itau = 8$~dB, $\Nr=2$, and QPSK).}
+\label{fig:SEP_vs_PT}
+\end{figure}
+
+
+Figure~\ref{fig:SEP_vs_tau_QAM} plots the average SEP as a function of interference power threshold $\tau$ for $\Pt = 13$~dB, $\Nt=8$, and $\Nr=1$. This is done for 8-PSK and 16-QAM, and for two values of $\outmax$. The simplified average SEP formula for $\Nr=1$ in~\eqref{eq:avgSEPoneNr} and its approximation in~\eqref{eq:gauss_quad} with $n = 4$ for 16-QAM and $n=8$ for 8-PSK  are shown. Also plotted are the simulations which simulate the entire transmit and receive chains and do not assume the formula in~\eqref{eq:isep}. We observe a good match between analysis and simulations. The average SEP behavior depends on regime in which the CR system operates. In the interference-outage constrained regime, the average SEP decreases as $\itau$ increases because the interference power allowed at the PRx increases. However, in the interference-outage unconstrained regime, the average SEP saturates to a fixed value, which is independent of $\outmax$. This happens because the LWIIR becomes same as the interference unconstrained TAS rule $\caluncons$. %This boundary value is independent of the  constellations size and is equal to $16.6$~dB when $\outmax=0.1$. 
+
+\begin{figure}
+	\centering \includegraphics[width=\linewidth]{plots/CURVE_FIT_SEP_vs_tau_pout_20_PT_13dB_Nt_8_M_8_16.eps}
+	\caption{Average SEP as a function of interference power threshold $\itau$ for 8-PSK and 16-QAM for different values of $\outmax$ ($\Pt = 13$~dB, $\Nt=8$, and $\Nr=1$).}
+	\label{fig:SEP_vs_tau_QAM}
+\end{figure}
+
+
+
+Figure~\ref{fig:outage_vs_lambym} plots the interference-outage probability as a function of normalized interference-outage penalty factor $\lam/\cone$,  for $\itau = 10$~dB, $\Pt = 8$~dB, $\Nt = 2$, and $\Nr=1$.  We see that the exact interference-outage expression in~\eqref{eq:pr_outage_ccdf} matches well with the simulations. Also plotted are the interference-outage upper bound expressions in~\eqref{eq:pr_outage_ub} and~\eqref{eq:two_Nt_UB} and the asymptotic expression in~\eqref{eq:pr_outage_hp}. We observe that the gap between exact value and the upper bound in~\eqref{eq:pr_outage_ub} decreases to zero as $\lam$ increases. Furthermore, the asymptotic expression in~\eqref{eq:pr_outage_hp} also matches with the exact interference-outage as $\lam$  tends to $\cone$.
+
+\begin{figure}
+  \centering \includegraphics[width=\linewidth]{plots/outage_vs_lambym_tau_10dB_PT_8dB_Nt_2_M_4.eps}
+  \caption{Interference-outage probability as a function of normalized interference-outage penalty factor $\lam/\m$ ($\itau = 10$~dB, $\Pt = 8$~dB, $\Nt = 2$, $\Nr=1$, and QPSK).}
+\label{fig:outage_vs_lambym}
+\end{figure}
+
+{\em Performance Benchmarking:} We now compare the performance of the optimal TAS rule with the enhanced minimum interference (EMI) rule~\cite{Sarvendranath_2013_TCOM}, the difference selection (DS) rule~\cite{Wang_2011_TCom},  and enhanced maximum-signal-power to leak-interference-power-ratio (EMSLIR) rules~\cite{Sarvendranath_2013_TCOM}.  The EMI rule selects the antenna with the lowest STx-PRx channel power gain. However, it selects antenna zero when all the STx-PRx channel power gains are above a threshold, which is chosen to meet interference constraint. It causes the least interference to the PRx and is the best rule from the point of view of the primary. The EMSLIR rule selects the antenna with the largest ratio of the STx-SRx channel power gain to the STx-PRx channel power gain. However, it selects antenna zero when the ratios of the channel power gains of all the antennas are below a threshold, which is chosen to meet the interference constraint with equality. It is a relevant benchmark as it maximizes the SU capacity under the peak interference power constraint~\cite{Wang_2010_TWC}. The DS rule chooses the antenna that maximizes the difference $\delta \hk{i} -(1-\delta) \gk{i} $, where $\delta$ is chosen to meet the interference constraint with equality.   
+
+Figure~\ref{fig:BM_SEP_vs_tau} compares the average SEP of the optimal TAS rule $\callamstarrule$ with that of the EMI, DS, and EMSLIR rules, for $\outmax = 0.2$, $\Pt = 12$~dB, $\Nt = 4$, and $\Nr=1$. (i)~For $\itau < 14$~dB, the optimal TAS rule is in interference-outage constrained region. Here, $\lamstar>0$ and the optimal TAS rule outperforms all the benchmark rules, with the performance gap increasing as $\itau$ increases. For example, at $\itau=11$~dB,  its average SEP is lower by a factor of $70$, $13$, and $11$ than the EMI, DS, and EMSLIR rules. (ii)~For $\itau \geq 14$~dB, the average SEP saturates for both the optimal TAS rule and the DS rule. This is because the interference-outage constraint becomes inactive and they become equivalent to the interference unconstrained rule $\caluncons$ in~\eqref{eq:uncons_simple}. We also observe that the average SEPs of EMI and EMSLIR rules saturate for $\itau$ greater than $8.5$~dB and $11$~dB, respectively. We also plot the average SEP of the optimal TAS rule using the value of $\lamstar$ that is obtained by equating the integral-free interference-outage probability upper bound in~\eqref{eq:pr_outage_ub} to $\outmax$. We see that the degradation in the average SEP  is negligible when compared to using the exact $\lamstar$ from~\eqref{eq:pr_outage_ccdf}. 
+
+\begin{figure}
+	\centering \includegraphics[width=\linewidth]{plots/BM_gs_SEP_vs_tau_pout_20_PT_12dB_Nt_4_M_4.eps}
+	\caption{Average SEP benchmark of optimal TAS rule and benchmark rules ($\outmax = 0.2$, $\Pt = 12$~dB, $\Nt = 4$, $\Nr=1$, and QPSK).}
+	\label{fig:BM_SEP_vs_tau}
+\end{figure}
+
+
+{\em Impact of Imperfect CSI:} Figures~\ref{fig:out_vs_tau_imp_CSI} and~\ref{fig:sep_vs_tau_imp_CSI} shows the impact of imperfect CSI on the interference-outage and the average SEP of $\callamstarrule$ as a function of $\tau$, for $\outmax=0.1$, $\Pt = 10$~dB, $\Nt = 2$, and $\Nr = 2$. The imperfect $\Hmx$ and imperfect $\g$ cases are compared with perfect CSI case. We observe that simulation results are in agreement with the analysis. To understand the impact we will study the behavior in two regions. 
+
+{\em Interference-Outage Constrained Region ($\itau\leq13.6$~dB):} Here, with perfect CSI. the interference-outage caused to the PRx meets $\outmax=0.1$ exactly. In the imperfect $\g$ ($\hpilotpower=\infty$~dB and $\gpilotpower=5$~dB) case, the optimal TAS rule always violates  $\outmax$, as the probability of selecting outage-incompatible antenna increases. This increase in interference-outage at the PRx results in decrease of the average SEP at the STx compared to the perfect CSI case. In the imperfect $\Hmx$ ($\hpilotpower=5$~dB and $\gpilotpower=\infty$~dB) case, the interference-outage is below $\outmax$, for $\itau\leq10.6$~dB, and exceeds $\outmax$, for $\itau>10.6$~dB unlike the imperfect $\g$ case. We also see degradation in the average SEP with imperfect $\Hmx$ compared to the perfect CSI case.    
+
+{\em Interference-Outage Unconstrained Region ($\itau>13.6$~dB):} Here, the interference unconstrained rule $\caluncons$ is the optimal TAS rule and the interference-outage probability becomes $\un$ for all the cases above, which decreases exponentially with increase in $\itau$. Thus, in this region imperfect CSI does not impact the interference-outage caused to the PRx. We also see that the average SEP with imperfect $\g$ saturates to the same value as the perfect CSI case, whereas with imperfect $\Hmx$ the average SEP saturates to a much higher value than the perfect CSI case. Thus, in this region the average SEP saturation value depends only on the quality of the STx-SRx channel.  
+
+\begin{figure}
+	\centering \includegraphics[width=\linewidth]{plots/Combined_outage_vs_tau_pout_10_PT_10dB_Nt_2_Nr_2_M_4.eps}
+	\caption{Interference-outage probability as a function of $\itau$ ($\outmax=0.1$, $\Pt = 10$~dB, $\Nt = 2$, $\Nr = 2$, and QPSK). Simulation results are shown using marker '$\times$' and analytical results using lines.}
+	\label{fig:out_vs_tau_imp_CSI}
+\end{figure}
+
+
+\begin{figure}
+	\centering \includegraphics[width=\linewidth]{plots/Combined_SEP_vs_tau_pout_10_PT_10dB_Nt_2_Nr_2_M_4.eps}
+	\caption{Average SEP as a function of $\itau$ ($\outmax=0.1$, $\Pt = 10$~dB, $\Nt = 2$, $\Nr = 2$, and QPSK). Simulation results are shown using marker $\times$ and analytical results using lines.}
+	\label{fig:sep_vs_tau_imp_CSI}
+\end{figure}
+
+
+
+
+\section{Conclusions}
+\label{sec:conclusions}
+
+
+\appendix
+\subsection{Proof of Lemma~\ref{lem:outage_Nt}}
+\label{proof:outage_Nt}
+We first derive the expression in~\eqref{eq:pr_outage_ccdf}. An interference-outage, i.e., $\Pt \gk{s} > \itau$, occurs only when $s\neq0$. Thus, using the law of total probability, we can show that the interference-outage probability $\outlam = \prob{\gkgrtaubypt{s}}$ is given by
+%
+\begin{equation}
+\outlam =  \sum_{i=1}^{\Nt}\text{Pr}\brac{s=i,\gk{i}>\taubypt}=\Nt\text{Pr}\brac{s=1,\gk{1}>\taubypt}.
+\label{eq:out_1}
+\end{equation}
+%
+The second equality above follows from the symmetry of the antennas.
+
+Let $k$ antennas out of the antennas $2,\ldots,\Nt$ be outage-compatible. The total number of ways in which such $k$ antennas can be chosen from $\Nt-1$ antennas is $\nck{\Nt-1}{k}$. Given $k$, all these combinations are equally likely because the channels are statistically identical. One such combination in which antennas $2,\ldots,k$ are outage-compatible be $\setAk=\left\{\gklttaubypt{2},\dots,\gklttaubypt{k+1},\right. $ $\left. \gkgrtaubypt{k+2},\dots,\gkgrtaubypt{\Nt}\right\}$. Therefore, using the law of total probability, we can write $\outlam$ in~\eqref{eq:out_1}  as a summation over all the values of $k$ as
+%
+\begin{equation}
+\outlam =\Nt\sum_{k=0}^{\Nt-1}\nck{\Nt-1}{k} \text{Pr}\brac{s = 1,\gk{1}>\taubypt,\setAk}. 
+\label{eq:out_3}
+\end{equation}
+%
+Let $\setGk\define\left\{\left(\gkgrtaubypt{1}\right)\cap\setAk \right\}$. By conditioning on $\setGk$ we can write 
+the probability term in~\eqref{eq:out_3} as $ \text{Pr}\brac{s = 1, \setGk} = \text{Pr}\brac{\setGk} \text{Pr}\brac{s = 1\Given \setGk} $.
+Since $\gk{1},\ldots,\gk{\Nt}$ are i.i.d., we get $\prob{\setGk} = \left(1-\un\right)^k\un^{\Nt-k}$.
+%
+
+
+{\em Expression for $\prob{s = 1\Given\setGk}$:} Given $\setGk$, $\callamrule$ in~\eqref{eq:lam_weight_rule} selects antenna 1 if $\ykplambym{1}<\yk{i}$, for $2\leq i \leq k+1$,  $\ykplambym{1}<\ykplambym{j}$, for $k+2\leq j \leq \Nt$, and $\ykplambym{1}<\yk{0}=1$. Hence,
+%
+\begin{align}
+\label{eq:out_5}
+\!\!\!\prob{s = 1\Given \setGk }&\!=\!{\bf{E}}_{\yk{1}}\!\left[\prob{s = 1\Given\setGk,\yk{1}=x}\right] ,\\
+\label{eq:out_51}
+&\!=\!{\bf{E}}_{\yk{1}}\!\left[\text{Pr}\left(\ykplambym{1} < 1, \ykplambym{1}<\yk{2}, \dots ,\ykplambym{1}<\yk{k+1},\right.\right.\nonumber\\
+&\quad\quad\quad\quad\quad\left.\left.
+\ykplambym{1}<\ykplambym{k+2}, \dots ,\ykplambym{1}<\ykplambym{\Nt}\Given\setGk,\yk{1}=x\right)\right]\!.
+\end{align} 
+%
+The equality in~\eqref{eq:out_5} is obtained by conditioning on $\yk{1}$ and taking expectation over it. 
+
+Conditioning on $\yk{1}$, the events in~\eqref{eq:out_51} are mutually independent. Furthermore, $\yk{2},\ldots,\yk{\Nt} $ are identically distributed. Hence, we get
+%
+\begin{multline}
+\text{Pr}\brac{s=1\Given \setGk, \yk{1}=x} = \indic{\yk{1}<1-\lambym}\left[\text{Pr}\brac{\yk{2}>\yk{1}+\lambym\Given\yk{1}=x}\right]^{k}\\\times \left[\text{Pr}\brac{\yk{k+2}>\yk{1}\given\yk{1}=x}\right]^{\Nt-k-1}.
+\label{eq:out_6}
+\end{multline}
+%
+Substituting this in~\eqref{eq:out_5} and writing it in terms of the CCDF and the PDF of $\yk{1}$, we get 
+\begin{equation}
+\text{Pr}\brac{s=1\Given\setGk} =\int_{0}^{1-\lambym}\left(F_{y}^{c}\left(x+\lambym\right)\right)^k \left(F_{y}^{c}\left(x\right)\right)^{\Nt-k-1}f_{y}(x)\,dx.
+\label{eq:out_7}
+\end{equation}
+Multiplying~\eqref{eq:out_7} with $\prob{\setGk}$ gives $\prob{s=1,\setGk}$. Using this in~\eqref{eq:out_3} and simplifying yields~\eqref{eq:pr_outage_ccdf}.
+
+We now use~\eqref{eq:pr_outage_ccdf} to prove the existence of $\lam$: (i) We see that for the class of continuous fading models, $\outlam$ is an integral of a continuous and strictly decreasing  function in $\lam$. Therefore, $\outlam$ is a continuous and strictly monotonically decreasing function of $\lam$. (ii) Furthermore,  we see that $\outlam=\un$ when $\lam=0$ and $\outlam=0$ when $\lam=\cone$. Thus, by the intermediate value theorem, for every $0\leq\outmax\leq\un$,  there exists a corresponding unique $\lam\in[0,\m]$ such that $\outlam=\outmax$. 
+  
+
+		
+
+\subsection{Proof of Theorem~\ref{thm:selection_rule_on_off}}
+\label{proof:selection_rule_on_off}
+In order to prove that $\callamstarrule$ is optimal, we introduce the following terminology. First, we define a feasible selection rule to be a rule that satisfies the interference-outage constraint in~\eqref{eq:iop_cons}. Let $\F$ denote the set of all feasible rules. It is non-empty as the TAS rule that always selects antenna zero has an interference-outage probability of zero and is, therefore, feasible. Any TAS rule that violates~\eqref{eq:iop_cons} cannot be optimal. Thus, we can restrict our focus to the TAS rules in $\F$. We consider the two cases $\outmax\geq\un$ and $\outmax<\un$ separately below.
+
+{\em $\outmax\geq\un$:} From the discussion in Comment 1 in Section~\ref{sec:lambda_rule}, the interference unconstrained rule $\caluncons$ is feasible and is the optimal rule. 
+
+{\em $0\leq\outmax<\un$:} Here, the interference unconstrained rule is not feasible.  Instead, consider the TAS rule $\callamstarrule$, where $\lamstar$ is chosen such that the interference-outage probability of $\callamstarrule$ is equal to $\outmax$. From Lemma~\ref{lem:outage_Nt}, such a choice of $\lamstar$ always exists, is unique, and is strictly positive. Let $\sstar$ be the antenna selected by $\callamstarrule$. Then, among all the selection rules in $\F$, $\callamstarrule$, by its definition,  minimizes $\yk{{\sstar}} + \frac{\lamstar}{\cone}\gindic{{\sstar}}$ for any given realization of $\yk{1},\ldots,\yk{\Nt}$, and $\gk{1},\ldots,\gk{\Nt}$. Therefore, it also minimizes $\explow{\Hmx,\g}{\yk{{\sstar}} + \frac{\lamstar}{\cone}\gindic{{\sstar}}}$. 
+
+Consider any feasible rule $\asrule\in\F$, such that  $s=\phi(\Hmx,\g)$. From above, we know that   
+\begin{equation}
+\label{eq:opt_rul_1}  
+   \explow{\Hmx,\g}{\yk{{\sstar}} + \frac{\lamstar}{\cone}\gindic{{\sstar}}} \leq  \explow{\Hmx,\g}{\yk{{s}} + \frac{\lamstar}{\cone}\gindic{{s}}}.
+\end{equation}
+From~\eqref{eq:isep} and~\eqref{eq:yi_def} we know that $\yk{i}={\SEP(\mathbf{\such}_{i})}/{\cone}$ and using $\explow{\Hmx,\g}{\gindic{i}}=\prob{\gk{i}>\taubypt}$, we get
+%
+\begin{equation}
+\label{eq:opt_rul_2}
+   \explow{\Hmx,\g}{\SEP(\hsstar)} + \lamstar  \prob{\gk{\sstar}>\taubypt} \leq  \explow{\Hmx,\g}{\SEP(\hs)} + \lamstar  \prob{\gk{s}>\taubypt}.
+\end{equation}
+%
+We know that $\prob{\gk{\sstar}>\taubypt}=\outmax$. By rearranging the terms, we get
+%
+\begin{equation}
+\label{eq:ineq_3}
+\explow{\Hmx,\g}{\SEP(\hsstar)} \leq \explow{\Hmx,\g}{\SEP(\hs)} + \lamstar \left( \prob{\gk{s}>\taubypt} -  \outmax \right).
+\end{equation}
+%
+Since $\phi$ is a feasible rule, we know that $\prob{\gkgrtaubypt{s}}\leq \outmax$. As $\lamstar>0$,~\eqref{eq:ineq_3} implies that $\explow{\Hmx,\g}{\SEP(\hsstar)} \leq \explow{\Hmx,\g}{\SEP(\hs)}$ for any feasible rule $\phi$. %Thus, $\callamstarrule$ is optimal.
+
+
+
+
+\subsection{Proof of Theorem~\ref{thm:SEP_exact_Nt_gen}}
+\label{proof:SEP_exact_Nt_gen}
+We start with the probability of error $\prob{\Err \given \y,\g}$ conditioned on $\y$ and $\g$. Using the law of total probability, it can be written as
+%
+\begin{equation}
+\prob{\Err \given \y,\g} =  \prob{s=\nx,\Err\given\y,\g} + \sum_{i=1}^{\Nt}\prob{s=i,\Err\given\y,\g}.
+\label{eq:Perr_all_h}
+\end{equation}
+%
+Furthermore, $\prob{s=k,\Err\given\y,\g}=\prob{s=k\given\y,\g}\prob{\Err\given\y,\g,s=k}$, for $0\leq k \leq \Nt$. Averaging over $\y$ and $\g$ and exploiting symmetry, $\avgSEP$ is given by
+\begin{multline}
+\label{eq:avg_SEP_1}
+ \avgSEP = \explow{\y,\g}{\prob{s=\nx\given\y,\g}\prob{\Err\given\y,\g,s=\nx}} \\+ \Nt\explow{\y,\g}{\prob{s=1\given\y,\g}\prob{\Err\given\y,\g,s=1}}. 
+\end{multline}
+
+Given $s=0$, the SEP is equal to $\zerosep$.\footnote{Instead of $c_1$, we use the more accurate value of $\zerosep=1-\left( 1/M\right) $ for the SEP with zero transmit power.}  Thus, $\prob{\Err\given\y,\g,s=\nx}=\zerosep$. Given $s=1$, the probability of error depends only on $\hk{1}$. Thus, by combining~\eqref{eq:isep} and~\eqref{eq:yi_def}, we get $\prob{\Err\given\y,\g,s=1}=\m \yk{1}$. Hence,
+\begin{equation}
+\label{eq:avg_SEP_3}
+\avgSEP  = \zerosep \explow{\y,\g}{\prob{s=\nx\given\y,\g}} + \Nt\m\explow{\y,\g}{\yk{1}\prob{s=1\given\y,\g}}.
+\end{equation}
+From the law of total expectation, we know that $\explow{\y,\g}{\prob{s=\nx\given\y,\g}} = \prob{s = 0}$.
+Similarly, 
+\begin{equation}
+\label{eq:avg_sep_3_one}
+\explow{\y,\g}{\yk{1}\prob{s = 1\given \y,\g} } = \explow{\yk{1}}{\yk{1} \prob{s = 1\given \yk{1}}  }.
+\end{equation}
+
+Substituting these  two results into the average SEP expression in~\eqref{eq:avg_SEP_3}, we get
+%
+\begin{equation}
+\label{eq:avg_SEP_4}
+\avgSEP  = \termone + \termtwo,
+\end{equation}
+%
+where $\termone=\zerosep \prob{s = 0}$ and $\termtwo=\Nt\m \explow{\yk{1}}{ \yk{1}\prob{s = 1\given \yk{1}}}$. We now evaluate $\termone$ and $\termtwo$.
+
+{\em First Term $\termone$:}
+From the selection rule in~\eqref{eq:lam_weight_rule}, we know that ${s=0}$ is selected when the antennas $1,\ldots,\Nt$ are outage-incompatible and their metrics exceed one. Therefore, $\termone$ can be written as 
+\begin{equation}
+\termone = \zerosep\prob{\gkgrtaubypt{1},\dots,\gkgrtaubypt{\Nt}, \yk{1}\!+\!\lambym >1,\ldots,\yk{\Nt}\!+\!\lambym >1}.
+\label{eq:termone_a}
+\end{equation}
+%
+Using the fact that channels are i.i.d., and by writing the above formula in terms of the CCDFs of $\yk{1}$ and $\gk{1}$, we get first term in~\eqref{eq:SEP_Nt_gen}.
+
+
+{\em Second Term $\termtwo$}: From the law of total probability, we have 
+%
+\begin{equation}
+\prob{s = 1\given \yk{1}} = \prob{s = 1,\gk{1}>\taubypt\Given\yk{1}}  + \prob{s = 1,\gk{1}\leq\taubypt\Given \yk{1}}. 
+\label{eq:pr_s_1}
+\end{equation}
+%
+Let  $\setLk\define\left\{\left(\gklttaubypt{1}\right)\cap\setAk \right\}$, where $\setAk$ is defined in Appendix~\ref{proof:outage_Nt}. We also recall  the definition of the event  $\setGk=\left\{\left(\gkgrtaubypt{1}\right)\cap\setAk \right\}$ from Appendix~\ref{proof:outage_Nt}.   Summing over all the events in which $k$ antennas out of the antennas $2,\ldots,\Nt$ are outage-compatible, we get in a manner similar to~\eqref{eq:out_3}:
+\begin{multline}
+\!\!\prob{s \!=\! 1\given \yk{1}}\! =\!\sum_{k=0}^{\Nt-1}\!\!\nck{\Nt-1}{k} 
+\prob{s \!=\! 1 \Given \setGk , \yk{1}} \prob{\setGk}\\ + \sum_{k=0}^{\Nt-1}\nck{\Nt-1}{k}\prob{s = 1 \Given \setLk, \yk{1}} \prob{\setLk}. 
+\label{eq:pr_s_1_2}
+\end{multline}
+% 
+%Applying the chain rule, and using the fact that the STx-PRx channels are independent of $\yk{1}$, we get
+%\begin{align} 
+%\label{eq:prgrtaubypt}
+%\prob{s = 1,\gkgrtaubypt{1},\setAk\Given \yk{1}} &= 
+%\prob{s = 1\Given\gkgrtaubypt{1},\setAk, \yk{1}} \prob{\gkgrtaubypt{1},\setAk},\\  
+%\prob{s = 1,\gklttaubypt{1},\setAk\Given \yk{1}} &= \prob{s = 1\Given \gklttaubypt{1},\setAk,\yk{1}}\prob{\gklttaubypt{1},\setAk}.
+%\label{eq:prlttaubypt}
+%\end{align}
+%
+The expression for $\prob{s = 1\given \setGk, \yk{1}}$ is given in~\eqref{eq:out_6}.  The expression for $\prob{s = 1\given \setLk, \yk{1}}$, can be derived along lines similar to that for $\prob{s = 1\given \setGk, \yk{1}}$ in~\eqref{eq:out_6}. This yields   
+\begin{equation}
+\text{Pr}\brac{s =1\given \setLk,\yk{1}} \!=\! F_{y}^{c}\brac{\yk{1}}^{k}\left[\indic{\yk{1}\leq\lambym} +\indic{\yk{1}>\lambym}F_{y}^{c}\brac{\yk{1}-\lambym}^{\Nt-k-1}\right].
+\label{eq:prob_gklt}
+\end{equation}
+%
+Substituting $\prob{\setGk}$ and~\eqref{eq:out_6} in~\eqref{eq:pr_s_1_2} simplifies the first part of~\eqref{eq:pr_s_1_2}. Similarly, using $\prob{\setLk}=\left(1-\un\right)^{k+1}\un^{\Nt-k-1}$ and~\eqref{eq:prob_gklt} simplifies the second part of~\eqref{eq:pr_s_1_2}. Substituting $\prob{s = 1\given \yk{1}}$ from~\eqref{eq:pr_s_1_2} in $\explow{\yk{1}}{ \yk{1}\prob{s = 1\given \yk{1}}}$ and averaging over $\yk{1}$ yields the final expression of $\termtwo$ in~\eqref{eq:termtwo_gen}. 
+
+
+\subsection{Brief Proof of Theorem~\ref{thm:avg_SEP_imperfect}}
+\label{proof:avg_SEP_imperfect_CSI}
+The antenna $s$ selected by the optimal TAS rule now depends on $\yhatvec$ and $\ghatvec$, while the SEP using the selected antenna $s$ is given by $\cone\yk{s}$.  Hence, to analyze the SEP, we now condition on $\y$, $\yhatvec$, and $\ghatvec$ as follows:
+%
+\begin{equation}
+\prob{\Err \given \y,\yhatvec,\ghatvec} =  \prob{s=\nx,\Err\given \y, \yhatvec,\ghatvec} + \sum_{i=1}^{\Nt}\prob{s=i,\Err\given\y,\yhatvec,\ghatvec}.
+\label{eq:Perr_all_imp_csi}
+\end{equation}  
+%
+Averaging over $\y$, $\yhatvec$, and $\ghatvec$ and simplifying further in a manner similar to the steps from~\eqref{eq:avg_SEP_1} to~\eqref{eq:avg_sep_3_one} in Appendix~\ref{proof:SEP_exact_Nt_gen}, we get
+%
+\begin{equation}
+\label{eq:avg_SEP_3_IMP_CSI}
+\avgSEP = \zerosep \prob{s=\nx} + \Nt\m\explow{\yk{1},\ykhat{1}}{\yk{1}\prob{s=1\given \ykhat{1}}}.
+\end{equation}
+%
+
+First term in~\eqref{eq:avg_SEP_3_IMP_CSI} can be obtained by replacing  $\ccdfyrv{\cdot}$ with $\ccdfyhatrv{\cdot}$ and $\un$ with $\unhat$ in~\eqref{eq:termone_a}. The expectation in the second term can be written in terms of the joint PDF $f_{\yk{1}\ykhat{1}}\left(x,\xhat\right)$ of the correlated RVs $\yk{1}$ and $\ykhat{1}$ as follows:
+%
+\begin{equation}
+\label{eq:avg_SEP_4_IMP_CSI}
+\explow{\yk{1},\ykhat{1}}{\yk{1}\prob{s=1\given \ykhat{1}}}= \int_{\xhat=0}^{1} \prob{s=1\given \ykhat{1}=\xhat} \int_{x=0}^{1} x  f_{\yk{1},\ykhat{1}}\left(x,\xhat\right)\,dx\,d\xhat.
+\end{equation}
+%
+We simplify $\prob{s=1\given\ykhat{1}=\xhat}$ in the lines similar to the steps from~\eqref{eq:pr_s_1} to~\eqref{eq:prob_gklt} in Appendix~\ref{proof:SEP_exact_Nt_gen},  by replacing $\yk{1}$ and $\gk{1}$ with $\ykhat{1}$ and $\gkhat{1}$. Thus, the final expression of $\prob{s=1\given\ykhat{1}=\xhat}$ is obtained by replacing $\ccdfyrv{\cdot}$ and $\un$ with $\ccdfyhatrv{\cdot}$ and $\unhat$, respectively, in $\prob{s=1\given\yk{1}=x}$. 
+
+{\em Joint PDF $f_{\yk{1},\ykhat{1}}\left(\cdot,\cdot\right)$:} To obtain $f_{\yk{1},\ykhat{1}}\left(\cdot,\cdot\right)$, we first consider the joint PDF of two bivariate gamma RVs $V\define\sumnr\hk{i1}$ and $W\define\sumnr\hkhat{i1}$ given by~\cite[(6.1)]{simon_alouini_book}
+\begin{multline}
+\label{eq:bivargammaPDF}
+f_{V,W}(v,w) = \frac{1}{\Gamma\left(\Nr \right) \left(1-\rhoh \right)\muh\muhhat }\left(\frac{vw}{\rhoh \muh\muhhat}\right)^{\frac{\Nr-1}{2}}\exp\left[{-\frac{1}{(1-\rhoh)}\left( \frac{v}{\muh}+\frac{w}{\muhhat}\right) } \right] \\ I_{\Nr-1}\left(\frac{2\sqrt{\rhoh vw}}{(1-\rhoh)\sqrt{\muh\muhhat}}\right),~\text{for}\; v,w>0,
+\end{multline}
+%  
+where $I_{\Nr-1}\left(\cdot \right) $ is the modified Bessel function of $(\Nr-1)^{th}$ order. Now, from~\eqref{eq:yi_def} and~\eqref{eq:yihat_def}, we know that $\yk{1}=\exp\left(-\Pt V/(\ctwo\noisevar) \right) $ and $\ykhat{1}=\exp\left(-\Pt W/(\ctwo\noisevar) \right)$.  Using these we get 
+%
+\begin{multline}
+\label{eq:bivaratey1PDF}
+f_{\yk{1},\ykhat{1}}(x,\xhat) = \frac{1}{\Gamma\left(\Nr \right)\left(1-\rhoh \right)}\frac{\ctwo^{\Nr+1}}{\snr\snrhat} \left(\frac{\ln(x)\ln(\xhat)}{\rhoh \snr\snrhat}\right)^{\frac{\Nr-1}{2}} x^{\frac{\ctwo}{(1-\rhoh)\snr}-1 } \xhat^{\frac{\ctwo}{(1-\rhoh)\snrhat}-1 } \\ I_{\Nr-1}\left(\frac{2\ctwo}{(1-\rhoh)}\sqrt{\frac{\rhoh\ln(x)\ln(\xhat)}{ \snr\snrhat}}\right).
+\end{multline}
+%
+Using this in~\eqref{eq:avg_SEP_4_IMP_CSI}, yields
+\begin{equation}
+\label{eq:y1_jpdf}
+\int_{x=0}^{1} x f_{\yk{1}\ykhat{1}}\left(x,\xhat\right)\,dx = \frac{T^{\Nr}\left(-\ln\left({\xhat} \right)\right)^{\Nr-1}\xhat^{D}}{\Gamma\left(\Nr\right)}.
+\end{equation}
+Finally, substituting~\eqref{eq:y1_jpdf} in~\eqref{eq:avg_SEP_3_IMP_CSI} and further simplification yields~\eqref{eq:avg_SEP_imperfect}.
+
+
+
+\subsection{Proof of Theorem~\ref{thm:outage_imperfect_CSI}}
+\label{proof:outage_imperfect_CSI}
+Instead of~\eqref{eq:out_1} we write using the law of total probability as follows for imperfect CSI:
+\begin{equation}
+\outlam=\Nt\text{Pr}\brac{s=1,\gk{1}>\taubypt,\gkhat{1}>\taubypt} + \Nt\text{Pr}\brac{s=1,\gk{1}>\taubypt,\gkhat{1}\leq\taubypt}.
+\label{eq:outhat_2}
+\end{equation}
+Let $k$ be the number of STx antennas for which $\gkhatlttaubypt{i}$, for $i\in\twoopts$. Similar to $\setAk$, $\setGk$, and $\setLk$ in Appendixs~\ref{proof:outage_Nt} and~\ref{proof:SEP_exact_Nt_gen}, we define $\setAkhat=\left\{\gkhatlttaubypt{2},\dots,\gkhatlttaubypt{k+1},\gkhatgrtaubypt{k+2},\dots,\gkhatgrtaubypt{\Nt}\right\}$, $\setGkhat\define\left\{\left(\gkhatgrtaubypt{1}\right)\cap\setAkhat \right\}$, and $\setLkhat\define\left\{\left(\gkhatlttaubypt{1}\right)\cap\setAkhat \right\}$. Then, along lines similar to~\eqref{eq:out_3}, we can write~\eqref{eq:outhat_2}  as
+%
+\begin{multline}
+\outlam = \Nt\sum_{k=0}^{\Nt-1} \nck{\Nt-1}{k} 
+\prob{s = 1 \Given\gkgrtaubypt{1}, \setGkhat } \prob{\gkgrtaubypt{1},\setGkhat}\\ + \Nt\sum_{k=0}^{\Nt-1}\nck{\Nt-1}{k}\prob{s = 1 \Given \gkgrtaubypt{1},\setLkhat} \prob{\gkgrtaubypt{1},\setLkhat}. 
+\label{eq:pr_s_1_2_imp}
+\end{multline}
+%
+
+We now simplify the four probability terms in the above equation:
+(i) From the definition of $s$ in~\eqref{eq:shat} we know that the selection of antenna 1 does not depend on $\gk{1}$. Thus, $\prob{s = 1 \Given\gkgrtaubypt{1},\setGkhat}=\prob{s = 1 \given \setGkhat}$  and $\prob{s = 1 \Given \gklttaubypt{1},\setLkhat}=\prob{s = 1 \given \setLkhat}$. The first term $\prob{s = 1 \given \setGkhat}$ is obtained by replacing  $\ccdfyrv{\cdot}$ and $\pdfy{\cdot}$ with $\ccdfyhatrv{\cdot}$ and $\pdfyhat{\cdot}$, respectively, in~\eqref{eq:out_7}. The second term $\prob{s=1 \given \setLkhat}$ is obtained by replacing $\ccdfyrv{\cdot}$ with $\ccdfyhatrv{\cdot}$ in~\eqref{eq:prob_gklt} and then averaging over $\yk{1}$. 
+(ii) From the definition of $\setGkhat$, $\setLkhat$, and $\setAkhat$ and using the fact that $\gkhat{2},\ldots\gkhat{\Nt}$ are independent of $\gk{1}$ and $\gkhat{1}$, we have  $\prob{\gkgrtaubypt{1},\setGkhat} =\prob{\gkgrtaubypt{1},\gkhatgrtaubypt{1}}\prob{\setAkhat}$ and $\prob{\gkgrtaubypt{1},\setLkhat} =\prob{\gkgrtaubypt{1},\gkhatlttaubypt{1}}\prob{\setAkhat}$. As $\gkhat{2},\ldots,\gkhat{\Nt}$ are i.i.d., we get $\prob{\setAkhat}=\left(1- \unhat \right)^{k} \unhat^{\Nt-k-1} $. Now we simplify $\prob{\gkgrtaubypt{1},\gkhatlttaubypt{1}}=\int_{\xhat=0}^{\tau/\Pt}\int_{x=\tau/\Pt}^{\infty}f_{\gk{1},\gkhat{1}}\left(x,\xhat \right)\,dx d\xhat$, where $f_{\gk{1},\gkhat{1}}\left(x,\xhat \right)$ is the joint PDF of the bivariate exponential RVs, $\gk{1}$ and $\gkhat{1}$. This is a special case of~\eqref{eq:bivargammaPDF} with $\Nr=1$ ans is given by
+\begin{equation}
+\label{eq:bivargPDF}
+f_{\gk{1},\gkhat{1}}\left(x,\xhat \right) = \frac{\exp\left[{-\frac{1}{(1-\rhog)}\left( \frac{x}{\mug}+\frac{\xhat}{\mughat}\right) } \right]}{\left(1-\rhog \right)\mug\mughat}  I_{0}\left(\frac{2\sqrt{\rhog x\xhat}}{(1-\rhog)\sqrt{\mug\mughat}}\right),~\text{for}\; x,\xhat>0.
+\end{equation}
+Then, evaluating the integral we get 
+\begin{equation}
+\prob{\gkgrtaubypt{1},\gkhatlttaubypt{1}} =  \un Q_1\left(\frac{\rhog}{ \gpilotpower} \sqrt{\frac{2\itau}{ \gpilotpower\Pt}},\sqrt{\frac{2 \gpilotpower\itau}{\Pt}}\right)  - \frac{\unhat}{2} \left( 1 + e^{-\frac{2\itau\rhog}{ \gpilotpower\Pt}}I_{0}\left(\frac{2\itau\rhog}{ \gpilotpower\Pt} \right) \right).
+\end{equation}
+The other probability term $\prob{\gkgrtaubypt{1},\gkhatgrtaubypt{1}}$ is obtained by using $\prob{\gkgrtaubypt{1},\gkhatgrtaubypt{1}}= \prob{\gkgrtaubypt{1}} - \prob{\gkgrtaubypt{1},\gkhatlttaubypt{1}} $. Substituting these probability terms in~\eqref{eq:pr_s_1_2_imp} yields~\eqref{eq:pr_outage_impefect}.
+
+\bibliographystyle{IEEEtran}
+\bibliography{../../../Bibtex/bibJournalList,../../../Bibtex/standard,../../../Bibtex/sarvendra,../../../Bibtex/IEEE_papers,../../../Bibtex/mimo,../../../Bibtex/salil,../../../Bibtex/book}
+
+
+%\bibliography{../../../Bibtex/sarvendra,../../../Bibtex/IEEE_papers}
+
+
+\end{document}
+
+
