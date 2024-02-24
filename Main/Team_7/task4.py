@@ -1,4 +1,4 @@
-from zero import zero
+from Main.Team_7.zero import zero
 
 
 class Task_4:
