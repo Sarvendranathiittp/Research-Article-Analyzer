@@ -11,7 +11,7 @@ class Task_4:
         z = zero(self.code, self.begin_index)
         equations = z.display_equations() + z.get_inline_equations()
         error_index = []
-        comma_index =[]
+        comma_index = []
         for eq in equations:
             comma_status = False
             newline_status = False
@@ -69,4 +69,4 @@ class Task_4:
                 count+=1
             if not(count == 1):
                 error_index2.append(ind)
-        return error_index,error_index2
+        return error_index, error_index2
