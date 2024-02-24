@@ -1,5 +1,5 @@
 class Inline:
-    def __init__(self,code,begin_index):
+    def __init__(self, code, begin_index):
         self.code=code
         self.begin_index = begin_index
     def getfrac(self):
@@ -8,7 +8,7 @@ class Inline:
         found=False
         current_fraction =[]
         for i in range(self.begin_index,len(self.code)):
-            if self.code[i:i+len("\\frac")] == "\\frac" :
+            if self.code[i:i + len("\\frac")] == "\\frac":
                 current_fraction.append(i)
                 if not found:
                     found=True
