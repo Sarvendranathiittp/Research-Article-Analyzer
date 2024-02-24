@@ -21,9 +21,7 @@ class team_7:
         s3 = inmath.get_paren(inmath.getfrac())
         s3_ = inmath.get_exp()
         t4 = Task_4(self.latex_code,self.text_begin)
-        S4 = t4.run()
-        s4 = S4[0]
-        s4_ = S4[1]
+        s4, s4_ = t4.run()
         t2 = Task_2(self.latex_code,self.text_begin)
         s2 = t2.run()
         error_string=[]
