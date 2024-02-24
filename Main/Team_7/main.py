@@ -1,8 +1,8 @@
-from Main.Team_7.Inlinemath import Inline
-from Main.Team_7.task2 import Task_2
-from Main.Team_7.task4 import Task_4
-from Main.Team_7.zero import zero
-from Main.Team_7.numstart import NumStart
+from Team_7.Inlinemath import Inline
+from Team_7.task2 import Task_2
+from Team_7.task4 import Task_4
+from Team_7.zero import zero
+from Team_7.numstart import NumStart
 
 
 class team_7:

@@ -1,67 +1,10 @@
-The first occurrence of acronym ACTION is not found on the document.
-The first occurrence of acronym AI is not found on the document.
-The first occurrence of acronym AN is not found on the document.
-The first occurrence of acronym AND is not found on the document.
-The first occurrence of acronym ANY is not found on the document.
-The first occurrence of acronym ARISING is not found on the document.
-The first occurrence of acronym BE is not found on the document.
-The first occurrence of acronym BUT is not found on the document.
-The first occurrence of acronym CONNECTION is not found on the document.
-The first occurrence of acronym COPYRIGHT is not found on the document.
-The first occurrence of acronym CV is not found on the document.
-The first occurrence of acronym DAMAGES is not found on the document.
-The first occurrence of acronym DEALINGS is not found on the document.
-The first occurrence of acronym DEFINE is not found on the document.
-The first occurrence of acronym EE is not found on the document.
-The first occurrence of acronym ELEMENTS is not found on the document.
-The first occurrence of acronym EVENT is not found on the document.
-The first occurrence of acronym EXPRESS is not found on the document.
-The first occurrence of acronym FOR is not found on the document.
-The first occurrence of acronym HERE is not found on the document.
-The first occurrence of acronym HOLDERS is not found on the document.
-The first occurrence of acronym IIT is not found on the document.
-The first occurrence of acronym IN is not found on the document.
-The first occurrence of acronym INCLUDING is not found on the document.
-The first occurrence of acronym IS is not found on the document.
-The first occurrence of acronym LIABLE is not found on the document.
-The first occurrence of acronym LIMITED is not found on the document.
-The first occurrence of acronym MATLAB is not found on the document.
-The first occurrence of acronym ML is not found on the document.
-The first occurrence of acronym NO is not found on the document.
-The first occurrence of acronym NOT is not found on the document.
-The first occurrence of acronym OF is not found on the document.
-The first occurrence of acronym OR is not found on the document.
-The first occurrence of acronym OTHER is not found on the document.
-The first occurrence of acronym PARTICULAR is not found on the document.
-The first occurrence of acronym PROVIDED is not found on the document.
-The first occurrence of acronym PURPOSE is not found on the document.
-The first occurrence of acronym RCNN is not found on the document.
-The first occurrence of acronym SHALL is not found on the document.
-The first occurrence of acronym SOFTWARE is not found on the document.
-The first occurrence of acronym STARTS is not found on the document.
-The first occurrence of acronym THE is not found on the document.
-The first occurrence of acronym TO is not found on the document.
-The first occurrence of acronym TORT is not found on the document.
-The first occurrence of acronym USE is not found on the document.
-The first occurrence of acronym WARRANTIES is not found on the document.
-The first occurrence of acronym WARRANTY is not found on the document.
-The first occurrence of acronym WHETHER is not found on the document.
-The first occurrence of acronym WITH is not found on the document.
-The first occurrence of acronym WITHOUT is not found on the document.The first occurrence of acronym HYA is not found on the document.
-The first occurrence of acronym IEEE is not found on the document.
-The first occurrence of acronym LTE is not found on the document.
-The first occurrence of acronym MI is not found on the document.
-The first occurrence of acronym MIT is not found on the document.
-The first occurrence of acronym MSLIR is not found on the document.
-The first occurrence of acronym PU is not found on the document.
-The first occurrence of acronym SU is not found on the document.
-The first occurrence of acronym USA is not found on the document.
 ==================================================
 		 Title Related Comments 
 ==================================================
 ==================================================
 		 Author Related Comments 
 ==================================================
+Comma is missing before author 'Neelesh'.
 If only two authors are present then the format should be \author{author1 and author2}
 		Here Remove comma between authors & add 'and'
 ==================================================
@@ -70,39 +13,71 @@ If only two authors are present then the format should be \author{author1 and au
 		 Title Related Comments 
 ==================================================
  Title (Processed): 
-Transmit Antenna Selection for Interference-Outage Constrained Underlay CR
- Number of words in the processed title: 8
+Optimal Transmit Antenna Selection Rule for Interference-Outage Constrained Underlay Cr and Impact
+	of Imperfect Csi
+ Number of words in the processed title: 15
 ==================================================
 		 Abstract Related Comments 
 ==================================================
- Abstract (Processed): 
-Transmit antenna selection (TAS) is a technique that achieves better performance than a single
-antenna system while using the same number of radio frequency chains. We propose a novel TAS
-rule called the $$-weighted interference indicator rule (LWIIR). We prove that for the general class of fading models with continuous cumulative distribution functions, LWIIR achieves the lowest average symbol error probability (SEP) among all TAS rules for  an underlay cognitive radio system that employs binary power control and is subject to the interference-outage constraint. This constraint imposes a limit on the probability that the interference power at the primary exceeds a threshold. It is a generalization of the widely studied peak interference constraint. We derive the average SEP of LWIIR. The insightful performance analysis applies to any number of transmit and receive antennas and to many constellations.  We also analyze the practical scenario in which the secondary transmitter has imperfect information of the channel gains from itself to the secondary and primary receivers. We show that the imperfections in these two sets of channel gains have different impacts on the system. Our benchmarking shows that LWIIR outperforms many selection rules considered in the literature.
- Number of words in the abstract: 194==================================================
+ No abstract found.==================================================
 	Scientist Names Related Comments
 ==================================================
 
-Scientist Names Used = Gauss, Gaussian
+Scientist Names Used = Gaussian, Gauss
 ==================================================
 	Index Related Comments
 ==================================================
-At Line 719 : Index terms are not in alphabetical order
+At Line 614 : Index terms are not in alphabetical order
 
  ///////////////////####punctuation at the end of equations related comments####\\\\\\\\\\\
 Warning: Punctuation not found at the end of the equation.
-%\label{eq:out_5}
-%\text{Pr}\!\left(\!s\! = \! 1 \! \Given \! \setGk \right)\!\!=&\text{Pr}\!\left(\!\xplambymcomp \! < \! 1, \xplambymcomp \!<\! \yk{2},\! \ldots,\xplambymcomp\!<\!\yk{k+1},
-%\right. \nonumber\\
-%&\!\left.\xplambymcomp\!<\!\ykplambymcomp{k+2}\!,\! \ldots\!,\xplambymcomp \!<\! \ykplambymcomp{\Nt}\!\Given\!\setGk\!\right)\!.
+$\ykplusgk{k}$
+%\label{eq:metric}
+%
+
+Warning: Punctuation not found at the end of the equation.
+\text{Pr}\brac{s =1\given \setAlt,\yk{1}=x} \!=\! F_{y}^{c}\brac{x}^{k}\left[\indic{x\leq\lamstarbym} +\indic{x>\lamstarbym}F_{y}^{c}\brac{x-\lamstarbym}^{\Nt-k-1}\right]
+\label{eq:prob_gklt}
+
+
+Warning: Punctuation not found at the end of the equation. 
+%\label{eq:prgrtaubypt}
+%\prob{s = 1,\gkgrtaubypt{1},\setB\Given \yk{1}} &= 
+%\prob{s = 1\Given\gkgrtaubypt{1},\setB, \yk{1}} \prob{\gkgrtaubypt{1},\setB},\\  
+%\prob{s = 1,\gklttaubypt{1},\setB\Given \yk{1}} &= \prob{s = 1\Given \gklttaubypt{1},\setB,\yk{1}}\prob{\gklttaubypt{1},\setB}.
+%\label{eq:prlttaubypt}
 %
 
 here , is missing at the end of one of the equation. The equation is  
+\optproblem: \quad \min_{\asrule\,\in\,\asspan} \quad &\explow{\Hmx,\g}{\SEP(\hs)} \\
 \label{eq:objective}
-\optproblem: \quad \min_{\asrule\,\in\,\asspan} \quad
-&\explow{\Hmx,\g}{\SEP(\hs)} \\
-\label{eq:cons}
 \text{s.t.} \quad &\prob{\Pt\gk{s}>\itau} \leq \outmax, \\
  &s = \phi(\Hmx,\g). 
 
-ERROR in line:932 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:991 A :   need to be in lower case since it is a   :Unknown POS TagERROR in line:1338 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:1338 lem  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1338 outage_Nt  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1402 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:1402 res  :   need to be Capitalized since it is a   :Noun, PluralERROR in line:1402 selection_rule_on_off  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1438 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:1438 thm  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1520 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:1520 thm  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1520 avg_SEP_imperfect  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1565 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:1565 thm  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1565 outage_imperfect_CSI  :   need to be Capitalized since it is a   :Noun, Singular or Mass
+here , is placed at the end of one of the equation, but it is not expexted there. The equation is   
+%\label{eq:prgrtaubypt}
+%\prob{s = 1,\gkgrtaubypt{1},\setB\Given \yk{1}} &= 
+%\prob{s = 1\Given\gkgrtaubypt{1},\setB, \yk{1}} \prob{\gkgrtaubypt{1},\setB},\\  
+%\prob{s = 1,\gklttaubypt{1},\setB\Given \yk{1}} &= \prob{s = 1\Given \gklttaubypt{1},\setB,\yk{1}}\prob{\gklttaubypt{1},\setB}.
+%\label{eq:prlttaubypt}
+%
+The math operator should not be there before \ in this equation:\label{eq:SEP_Nt_Nr_rayleigh}\frac{\Nt\m(1-\un)}{\Gamma(Nr)}\left(\albysnr\right)^{Nr}\int_{0}^{\lambym}\left(\un+\unccdfy{(1-\un)}{x}\right)^{\Nt-1}\ytimespdfyNrdx\\+\frac{\Nt\m}{\Gamma(Nr)}\left(\albysnr\right)^{Nr}\int_{0}^{1-\lambym}\left(\unccdfy{(1-\un)}{\left(x+\lambym\right)}+\unccdfy{\un}{x}\right)^{\Nt-1}\\\times\left((1-\un)\ypluslamtimespdfyNr+\un\ytimespdfyNr\right)dx\\+m\left(\unccdfy{\un}{\left(1-\lambym\right)}\right)^{\Nt}.The math operator should not be there before \ in this equation:\label{eq:SEP_Nt_Nr_rayleigh}\frac{\Nt\m(1-\un)}{\Gamma(Nr)}\left(\albysnr\right)^{Nr}\int_{0}^{\lambym}\left(\un+\unccdfy{(1-\un)}{x}\right)^{\Nt-1}\ytimespdfyNrdx\\+\frac{\Nt\m}{\Gamma(Nr)}\left(\albysnr\right)^{Nr}\int_{0}^{1-\lambym}\left(\unccdfy{(1-\un)}{\left(x+\lambym\right)}+\unccdfy{\un}{x}\right)^{\Nt-1}\\\times\left((1-\un)\ypluslamtimespdfyNr+\un\ytimespdfyNr\right)dx\\+m\left(\unccdfy{\un}{\left(1-\lambym\right)}\right)^{\Nt}.The math operator should not be there before \ in this equation:
+\label{eq:avg_SEP_imperfect}
+\avgSEPhat=\frac{\Nt\T^{\Nr}\m(1-\unhat)}{\Gamma(Nr)}\int_{0}^{\lamstarbym}\left[\unhat+\unccdfyhat{(1-\unhat)}{x}\right]^{\Nt-1}\yhattimespdfyNrdx\\
++\frac{\Nt\T^{\Nr}\m}{\Gamma(Nr)}\int_{0}^{1-\lamstarbym}
+\left[\unccdfyhat{(1-\unhat)}{\left(x+\lamstarbym\right)}+\unccdfyhat{\unhat}{x}\right]^{\Nt-1}\\
+\times\left((1-\unhat)\yhatpluslamstartimespdfyNr+\unhat\yhattimespdfyNr\right)\,dx\\
++m\left[\unccdfyhat{\unhat}{\left(1-\lamstarbym\right)}\right]^{\Nt},
+The math operator should not be there before \ in this equation:
+\label{eq:avg_SEP_imperfect}
+\avgSEPhat=\frac{\Nt\T^{\Nr}\m(1-\unhat)}{\Gamma(Nr)}\int_{0}^{\lamstarbym}\left[\unhat+\unccdfyhat{(1-\unhat)}{x}\right]^{\Nt-1}\yhattimespdfyNrdx\\
++\frac{\Nt\T^{\Nr}\m}{\Gamma(Nr)}\int_{0}^{1-\lamstarbym}
+\left[\unccdfyhat{(1-\unhat)}{\left(x+\lamstarbym\right)}+\unccdfyhat{\unhat}{x}\right]^{\Nt-1}\\
+\times\left((1-\unhat)\yhatpluslamstartimespdfyNr+\unhat\yhattimespdfyNr\right)\,dx\\
++m\left[\unccdfyhat{\unhat}{\left(1-\lamstarbym\right)}\right]^{\Nt},
+The math operator should not be there before \ in this equation:
+\label{eq:pr_outage_impefect}
+\!\outhatlamstar\!=\!\Nt\!\int_{0}^{1-\lambym}	
+\!\left[\left(1-\unhat\right)F_{\yhat}^{c}\left(x+\lamstarbym\right)+\unhatF_{\yhat}^{c}\left(x\right)\right]^{\Nt-1}\!\!\left(\!\Probgltf_{\yhat}\!\left(\!x+\lamstarbym\right)\!+\!(\un-\Probglt)f_{\yhat}\left(x\right)\!\right)dx\\
++\frac{\Probglt}{1-\unhat}\left(1-\left[\left(1-\unhat\right)F_{\yhat}^{c}\left(\lamstarbym\right)+\unhat\right]^{\Nt}\right),
+ERROR in line:645 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:887 at  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:896 at  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:924 interference-outage  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:962 at  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:1150 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:1150 lem  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1150 outage_Nt  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1211 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:1211 thm  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1211 selection_rule_on_off  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1243 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:1243 thm  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1321 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:1321 thm  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1321 avg_SEP_imperfect  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1366 of  :   need to be Capitalized since it is a   :Preposition or Subordinating ConjunctionERROR in line:1366 thm  :   need to be Capitalized since it is a   :Noun, Singular or MassERROR in line:1366 outage_imperfect_CSI  :   need to be Capitalized since it is a   :Noun, Singular or Mass
