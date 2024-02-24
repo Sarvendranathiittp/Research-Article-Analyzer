@@ -16,9 +16,10 @@ class team_6:
     
 
     def run(self):
-
-        output=[] #creating a list to store the output errors.
         
+        output=[] #creating a list to store the output errors.
+
+        output.append('='*50+"\n\t Sections and Subsections related Comments \n"+'='*50+'\n')
         #the words we are looking for.
         word_1="\subsection" 
         word_2="\subsubsection"
@@ -49,7 +50,7 @@ class team_6:
             postag = pos_tag(tokens) #tagging parts of speech.
             #output.append(postag)
             #Conditions on list of Nouns, pronouns, adjectives ,verbs and adverbs
-            pos_list1={'NN', 'NNS', 'NNP', 'PRP', 'PRP$', 'IN', 'RBR', 'RBS', 'JJ', 'JJR', 'JJS', 'VB', 'RB'}
+            pos_list1={'NN', 'NNS', 'NNP', 'PRP', 'PRP$', 'RBR', 'RBS', 'JJ', 'JJR', 'JJS', 'VB', 'RB'}
             #Articles and Co-ordinating conjuctions
             pos_list2={'CC','DT'}
             #Prepositions of more than three words
@@ -58,18 +59,19 @@ class team_6:
             
             for word, pos in postag:
                 if pos in pos_list1 and word[0].islower():
-                    output.append(('ERROR in line:'+str(index)+" "+word+' '+" :   need to be Capitalized since it is a   :"+ get_pos_full_form(pos) ))
+                    output.append(('ERROR in line:'+str(index)+"   "+"Word {"+word+'}'+" need to be Capitalized since it is a "+ get_pos_full_form(pos)+"\n"))
             # for word,pos in postag:
                 elif pos in pos_list2 :
                     if word[0].islower() and word!=tokens[0] and word!=tokens[-1]:
                         pass
                     else:
-                        output.append(('ERROR in line:'+str(index)+" "+word+' '+":   need to be in lower case since it is a   :"+ get_pos_full_form(pos)))
+                        output.append(('ERROR in line:'+str(index)+"   "+"Word {"+word+'}'+" need to be in lower case since it is a "+ get_pos_full_form(pos)+"\n"))
             # for word in tokens:
                  #finding prepostions of length greater than 3
                 elif pos=='IN' and len(word)>3 :
                         if not word[0].isUpper():
-                            output.append(('ERROR in line:'+str(index)+" "+word+' '+":  need to be capitalised since it is a  :"+ get_pos_full_form(pos)))
+                            output.append(('ERROR in line:'+str(index)+"   "+"Word {"+word+'}'+" need to be capitalised since it is a "+ get_pos_full_form(pos)+"\n"))
+        output.append('='*50+"\n")
         return output
 
 
@@ -91,7 +93,7 @@ def get_pos_full_form(pos_tag):
         # Add more POS tags as needed
     }
 
-     return pos_full_forms.get(pos_tag, 'Unknown POS Tag')
+     return pos_full_forms.get(pos_tag, 'remote POS Tag')
 
 
     # def lineNumber(self,target_index):
