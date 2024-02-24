@@ -21,7 +21,7 @@ class team_7:
         s3 = inmath.get_paren(inmath.getfrac())
         s3_ = inmath.get_exp()
         t4 = Task_4(self.latex_code,self.text_begin)
-        s4, s4_ = t4.run()
+        s4, s4_ = t4.run
         t2 = Task_2(self.latex_code,self.text_begin)
         s2 = t2.run()
         error_string=[]
@@ -32,8 +32,12 @@ class team_7:
         error_string = error_string + self.create_error_msg(s3_, "Long Exponential expression warning")
         error_string = error_string + self.create_error_msg(s4, "No comma before condition warning")
         error_string = error_string + self.create_error_msg(s4_, "No required space at expression and condition")
-        return error_string
-
+        str= ''
+        pruned_error_str = []
+        for i in error_string:
+            if i not in pruned_error_str:
+                pruned_error_str.append(i)
+        return pruned_error_str
     # Calculates the line at which the index is present
     def get_line(self, index):
         line = 1
