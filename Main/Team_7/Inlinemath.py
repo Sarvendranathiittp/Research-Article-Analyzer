@@ -30,7 +30,7 @@ class Inline:
             len_expr = 0
             for ind in range(current_fraction[0], current_fraction[1] + 1):
                 paren_status = False
-                op_status = false
+                op_status = False
                 left = ind
                 if self.code[ind] == '{':
                     while not(self.code[ind] == '}'):
