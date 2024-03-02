@@ -119,6 +119,8 @@ class team_5:
                     if(line_no==None):
                             continue
                     # print(equation)
+                    # print(char_next)
+                    # print(equation[len(equation)-2])
                     result.append(f"Warning: punction (',') is missing at the end of an equation whose line no is: {line_no}\n")
                 char_next=False
                 punc=False   
@@ -172,7 +174,9 @@ class team_5:
                     # print(equation)
                     line_no = self.find_line_number_for_equation(latex_content,equation)
                     if(line_no==None):
-                            continue                    
+                            continue           
+                    print(char_next)  
+                    print(equation[len(equation)-1])       
                     result.append(f"Warning: punction (',') is missing at the end of an equation whose line no is: {line_no}\n")
                 char_next=False
                 punc=False   
@@ -229,6 +233,10 @@ class team_5:
                     # match = re.search(r'\w+', text_after_end)
                     match = re.search(r'\S+', text_after_end)
                     word_after_end = match.group()
+                    
+                    # print(word_after_end)
+                    # print('@@@@')
+                    # print(equation)
                     # print(word_after_end)
                     
                     
@@ -249,27 +257,49 @@ class team_5:
                     #         # Handle the case where '%' is followed by another '%'
                     #         word_after_end = remaining_text.split()[a]
                     #         a += 1
-                    if word_after_end[0] == '%':
+                    if word_after_end[0] == '%' or word_after_end == "%" :
                         end_index = match.end()  # Get the end index of the matched substring    
                         word_after_end = text_after_end[end_index:].split()[0]  # Get the next word after the matched substring
                         end_index_dupe=end_index
                         next_line_start_index = text_after_end.find('\n', end_index_dupe)
                         word_after_end=text_after_end[next_line_start_index:].split()[0]
                         text_after_end=text_after_end[next_line_start_index:]
-                        while(word_after_end[0]=='%'):
+                        while(word_after_end[0]=='%' or word_after_end==" "):
                         
                            next_line_start_index = text_after_end.find('\n', end_index_dupe)
                            end_index_dupe=next_line_start_index
                            word_after_end=text_after_end[next_line_start_index:].split()[0]
                            text_after_end=text_after_end[next_line_start_index:]
 
-
+                        # print(word_after_end)
+                        # print(equation)
                         if word_after_end==r"{\em":
                             index2 =  text_after_end.index(word_after_end)
                             start_index_next_word = index2 + len(word_after_end) + 1
                             word_after_end = text_after_end[start_index_next_word]
                             # print(word_after_end)
                             
+                        if word_after_end[0:11]=="\\subsection":
+                           next_line_start_index = text_after_end.find('\n', end_index_dupe)
+                           end_index_dupe=next_line_start_index
+                           word_after_end=text_after_end[next_line_start_index:].split()[0]
+                           text_after_end=text_after_end[next_line_start_index:]                           
+                           
+                        if word_after_end[0:8]=="\\section":
+                           next_line_start_index = text_after_end.find('\n', end_index_dupe)
+                           end_index_dupe=next_line_start_index
+                           word_after_end=text_after_end[next_line_start_index:].split()[0]
+                           text_after_end=text_after_end[next_line_start_index:]
+                        #    print(word_after_end)
+                           
+                        if word_after_end[0:6]=="\\label":
+                           next_line_start_index = text_after_end.find('\n', end_index_dupe)
+                           end_index_dupe=next_line_start_index
+                           word_after_end=text_after_end[next_line_start_index:].split()[0]
+                           text_after_end=text_after_end[next_line_start_index:]       
+                        #    print(word_after_end)                    
+                           
+                        
                         if last_char=='.' and word_after_end[0]== '(':
                             pass
                         elif word_after_end[0].isalnum() and word_after_end[0].isupper():
@@ -286,6 +316,8 @@ class team_5:
                                 if(line_no==None):
                                     continue
                                 # print("The word after \\end{equation} does not start with a capital letter, but the punctuation is not a comma.")
+                                # print(word_after_end)
+                                # print(equation)
                                 result.append(f"Error: '.' is seen instead of ',' of at the end of equation whose line no is {line_no}\n")
                     
                     elif word_after_end:
@@ -301,6 +333,25 @@ class team_5:
                             index2 =  text_after_end.index(word_after_end)
                             start_index_next_word = index2 + len(word_after_end) + 1
                             word_after_end = text_after_end[start_index_next_word]
+                        
+                        if word_after_end[0:11]=="\\subsection":
+                           next_line_start_index = text_after_end.find('\n', end_index_dupe)
+                           end_index_dupe=next_line_start_index
+                           word_after_end=text_after_end[next_line_start_index:].split()[0]
+                           text_after_end=text_after_end[next_line_start_index:]                           
+                           
+                        if word_after_end[0:8]=="\\section":
+                           next_line_start_index = text_after_end.find('\n', end_index_dupe)
+                           end_index_dupe=next_line_start_index
+                           word_after_end=text_after_end[next_line_start_index:].split()[0]
+                           text_after_end=text_after_end[next_line_start_index:]
+                        #    print(word_after_end)
+                           
+                        if word_after_end[0:6]=="\\label":
+                           next_line_start_index = text_after_end.find('\n', end_index_dupe)
+                           end_index_dupe=next_line_start_index
+                           word_after_end=text_after_end[next_line_start_index:].split()[0]
+                           text_after_end=text_after_end[next_line_start_index:]
                             
                         if last_char=='.' and word_after_end[0]== '(':
                             pass
@@ -317,6 +368,8 @@ class team_5:
                         else:
                             if last_char != ',':
                                 line_no = self.find_line_number_for_equation(latex_content,equation)
+                                # print(word_after_end)
+                                # print("***")
                                 # result.append("Warning: ',' is not seen at the end of equation whose line no is {line_no}\n")
                                 if(line_no==None):
                                   continue
@@ -378,14 +431,14 @@ class team_5:
                     word_after_end = match.group()
                     # print(word_after_end)
                     
-                    if word_after_end == '%':
+                    if word_after_end[0] == '%' or word_after_end == "%" :
                         end_index = match.end()  # Get the end index of the matched substring    
                         word_after_end = text_after_end[end_index:].split()[0]  # Get the next word after the matched substring
                         end_index_dupe=end_index
                         next_line_start_index = text_after_end.find('\n', end_index_dupe)
                         word_after_end=text_after_end[next_line_start_index:].split()[0]
                         text_after_end=text_after_end[next_line_start_index:]
-                        while(word_after_end[0]=='%'):
+                        while(word_after_end[0]=='%' or word_after_end==" "):
                         
                            next_line_start_index = text_after_end.find('\n', end_index_dupe)
                            end_index_dupe=next_line_start_index
@@ -397,6 +450,25 @@ class team_5:
                             start_index_next_word = index2 + len(word_after_end) + 1
                             word_after_end = text_after_end[start_index_next_word]
                             # print(word_after_end)
+                        
+                        if word_after_end[0:11]=="\\subsection":
+                           next_line_start_index = text_after_end.find('\n', end_index_dupe)
+                           end_index_dupe=next_line_start_index
+                           word_after_end=text_after_end[next_line_start_index:].split()[0]
+                           text_after_end=text_after_end[next_line_start_index:]
+                           
+                        if word_after_end[0:8]=="\\section":
+                           next_line_start_index = text_after_end.find('\n', end_index_dupe)
+                           end_index_dupe=next_line_start_index
+                           word_after_end=text_after_end[next_line_start_index:].split()[0]
+                           text_after_end=text_after_end[next_line_start_index:]   
+                           
+                        if word_after_end[0:6]=="\\label":
+                           next_line_start_index = text_after_end.find('\n', end_index_dupe)
+                           end_index_dupe=next_line_start_index
+                           word_after_end=text_after_end[next_line_start_index:].split()[0]
+                           text_after_end=text_after_end[next_line_start_index:]
+                        
                             
                         if last_char=='.' and word_after_end[0]== '(':
                             pass
@@ -415,6 +487,7 @@ class team_5:
                                 line_no = self.find_line_number_for_equation(latex_content,equation)
                                 if(line_no==None):
                                     continue
+                                # print(word_after_end)
                                 # print("The word after \\end{equation} does not start with a capital letter, but the punctuation is not a comma.")
                                 result.append(f"Error: '.' is seen instead of ',' of at the end of equation whose line no is {line_no}\n")
                     
@@ -431,6 +504,25 @@ class team_5:
                             index2 =  text_after_end.index(word_after_end)
                             start_index_next_word = index2 + len(word_after_end) + 1
                             word_after_end = text_after_end[start_index_next_word]
+                        
+                        if word_after_end[0:11]=="\\subsection":
+                           next_line_start_index = text_after_end.find('\n', end_index_dupe)
+                           end_index_dupe=next_line_start_index
+                           word_after_end=text_after_end[next_line_start_index:].split()[0]
+                           text_after_end=text_after_end[next_line_start_index:]                           
+                           
+                        if word_after_end[0:8]=="\\section":
+                           next_line_start_index = text_after_end.find('\n', end_index_dupe)
+                           end_index_dupe=next_line_start_index
+                           word_after_end=text_after_end[next_line_start_index:].split()[0]
+                           text_after_end=text_after_end[next_line_start_index:]
+                        #    print(word_after_end)
+                           
+                        if word_after_end[0:6]=="\\label":
+                           next_line_start_index = text_after_end.find('\n', end_index_dupe)
+                           end_index_dupe=next_line_start_index
+                           word_after_end=text_after_end[next_line_start_index:].split()[0]
+                           text_after_end=text_after_end[next_line_start_index:]
                             
                         if last_char=='.' and word_after_end[0]== '(':
                             pass
@@ -449,6 +541,8 @@ class team_5:
                         else:
                             if last_char != ',':
                                 line_no = self.find_line_number_for_equation(latex_content,equation)
+                                # print(word_after_end)
+                                # print("***")
                                 # result.append("Warning: ',' is not seen at the end of equation whose line no is {line_no}\n")
                                 if(line_no==None):
                                     continue
