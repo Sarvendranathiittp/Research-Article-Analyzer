@@ -249,14 +249,21 @@ class team_5:
                     #         # Handle the case where '%' is followed by another '%'
                     #         word_after_end = remaining_text.split()[a]
                     #         a += 1
-                    if word_after_end == '%':
-                        end_index = match.end()  # Get the end index of the matched substring
+                    if word_after_end[0] == '%':
+                        end_index = match.end()  # Get the end index of the matched substring    
                         word_after_end = text_after_end[end_index:].split()[0]  # Get the next word after the matched substring
-                        a = 1
-                        while word_after_end == '%':
-                             word_after_end = text_after_end[end_index:].split()[a]
-                             a=a+1 
-                        # print(word_after_end)
+                        end_index_dupe=end_index
+                        next_line_start_index = text_after_end.find('\n', end_index_dupe)
+                        word_after_end=text_after_end[next_line_start_index:].split()[0]
+                        text_after_end=text_after_end[next_line_start_index:]
+                        while(word_after_end[0]=='%'):
+                        
+                           next_line_start_index = text_after_end.find('\n', end_index_dupe)
+                           end_index_dupe=next_line_start_index
+                           word_after_end=text_after_end[next_line_start_index:].split()[0]
+                           text_after_end=text_after_end[next_line_start_index:]
+
+
                         if word_after_end==r"{\em":
                             index2 =  text_after_end.index(word_after_end)
                             start_index_next_word = index2 + len(word_after_end) + 1
@@ -372,13 +379,19 @@ class team_5:
                     # print(word_after_end)
                     
                     if word_after_end == '%':
-                        end_index = match.end()  # Get the end index of the matched substring
+                        end_index = match.end()  # Get the end index of the matched substring    
                         word_after_end = text_after_end[end_index:].split()[0]  # Get the next word after the matched substring
-                        a = 1
-                        while word_after_end == '%':
-                             word_after_end = text_after_end[end_index:].split()[a]
-                             a=a+1 
-                        # print(word_after_end)
+                        end_index_dupe=end_index
+                        next_line_start_index = text_after_end.find('\n', end_index_dupe)
+                        word_after_end=text_after_end[next_line_start_index:].split()[0]
+                        text_after_end=text_after_end[next_line_start_index:]
+                        while(word_after_end[0]=='%'):
+                        
+                           next_line_start_index = text_after_end.find('\n', end_index_dupe)
+                           end_index_dupe=next_line_start_index
+                           word_after_end=text_after_end[next_line_start_index:].split()[0]
+                           text_after_end=text_after_end[next_line_start_index:]
+                        
                         if word_after_end==r"{\em":
                             index2 =  text_after_end.index(word_after_end)
                             start_index_next_word = index2 + len(word_after_end) + 1
