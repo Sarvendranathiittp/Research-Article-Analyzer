@@ -29,7 +29,7 @@ class team_7:
         error_string =error_string + self.create_error_msg(s1,"Leading zero error.")
         error_string = error_string + self.create_error_msg(s1_, "Trailing zero error.")
         error_string = error_string + self.create_error_msg(s2, "Sentence starting with number warning.")
-        error_string = error_string + self.create_error_msg(s3, "Extra Parenthesis warning.")
+        error_string = error_string + self.create_error_msg(s3, "No Parenthesis warning.")
         error_string = error_string + self.create_error_msg(s3_, "Long Exponential expression warning.")
         error_string = error_string + self.create_error_msg(s4, "No comma before condition warning.")
         error_string = error_string + self.create_error_msg(s4_, "No required space at expression and condition.")
