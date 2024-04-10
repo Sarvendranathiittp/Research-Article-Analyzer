@@ -11,26 +11,28 @@ class team_8:
     def __init__(self, latex_code,bbl_code,text_begin):
         self.latex_code = latex_code  # The entire LaTex code is in the form of string in the latex_code string
         self.text_begin = text_begin  # location of \begin
-        self.bbl_code=bbl_code
-
+        self.bbl_code = bbl_code
+        
     def run(self):  # will be invoked by wrapper, shouldn't take arguments
         output = []
         text = self.latex_code
-        text2=self.bbl_code
+        text1 = self.bbl_code
+
         # use self
         str_line = '=' * 50
         output.append(str_line + '\n\tSyntax related comments\n' + str_line + '\n')
-        bibliography = self.extract_bibliography(text2)
+        output.append('Reference'+str(' '*21)+'Number'+str(' '*3)+'Comments\n')
+        bibliography = self.extract_bibliography(text1)
         # Split the text by \bibitem{
         split_text = bibliography.split('\\bibitem{') 
         # Create a dictionary with keys and lists starting from 1
         my_dictionary = {item.split('}')[0]: [index + 1] for index, item in enumerate(split_text[1:])}
-
         for key in my_dictionary:
             my_dictionary[key].append(0)
         self.syntax(bibliography,output)
         
         output.append(str_line + '\n\tAcronym related comments\n' + str_line + '\n')
+        output.append('Reference'+str(' '*21)+'Number'+str(' '*3)+'Comments\n')
         EE=[]
         self.acronym(bibliography,output,EE)
         
@@ -40,16 +42,22 @@ class team_8:
         
         output.append(str_line + '\n\tCitation related comments\n' + str_line + '\n')
         self.cite(text,output,my_dictionary)
+        output.append('Reference'+str(' '*21)+'Number'+str(' '*5)+'No. of times cited\n')
+        x=0
         
         for key in my_dictionary:
-            output.extend(["Reference number [",str(my_dictionary[key][0]),"], has been cited ",str(my_dictionary[key][1])," times\n"])
+            if my_dictionary[key][0]<=9:
+                x=10
+            else:
+                x=9
+            output.extend([key+str(' '*(30-len(key)))+str(my_dictionary[key][0])+str(' '*x)+str(my_dictionary[key][1])+"\n"])
         output.extend(["\nTotal number of references = ",str(len(my_dictionary)),"\n"])
         
         return output
 
-    def extract_bibliography(self, text2):
+    def extract_bibliography(self, text):
         bibliography_pattern = re.compile(r'\\begin{thebibliography}(.*?)\\end{thebibliography}', re.DOTALL)
-        match = bibliography_pattern.search(text2)
+        match = bibliography_pattern.search(text)
         if match:
             return(match.group(1).strip())
         else:
@@ -78,19 +86,21 @@ class team_8:
             split2.append(i[:i.find("``")])
             split2.append(i[i.find("``")+2:i.find("''")])
             split2.append(i[i.find("''")+2:])
+            refname=split2[0][1:split2[0].find('}')]
+            
             split2[0]=split2[0][split2[0].find('}')+1:len(i)]
             split2[0]=split2[0].strip()
             split2[1]=split2[1].strip()
             split2[2]=split2[2].strip()
             if ("``" not in i and "''" in i) or ("''" not in i and "``" in i):
-                output.extend(["In reference number [",str(split1.index(i)+1),"], quotes are missing\n"])
+                output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        quotes are missing\n")
              
             elif "``" in i and "''" in i:
                 #Author names check
                 if '.' not in split2[0]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], Author names should be in should be in short form like K.~Mehta or A.~N. Mishra\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        Author names should be in should be in short form like K.~Mehta or A.~N. Mishra\n")
                 if '~' not in split2[0]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], Author names should contain ~ like K.~Mehta or A.~N. Mishra\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        Author names should contain ~ like K.~Mehta or A.~N. Mishra\n")
                 
                 xi = None
                 index_counter = 0
@@ -98,7 +108,7 @@ class team_8:
                     x = split2[0][index_counter]   
                     if x in ['\t', ' ', '~'] and index_counter + 1 < len(split2[0]):
                         if split2[0][index_counter + 1].isalpha() and split2[0][index_counter + 1].islower() and (index_counter + 2 < len(split2[0]) and split2[0][index_counter + 2] != 'n'):
-                            output.extend(["In reference number [",str(split1.index(i)+1),"], Author names should be in should be in short form and capital like K.~Mehta\n"])
+                            output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+str(y)+"        Author names should be in should be in short form and capital like K.~Mehta\n")
                     index_counter += 1
                 #comma check
                 (ct,cc)=(0,0)
@@ -108,60 +118,60 @@ class team_8:
                     if x==',':
                         cc+=1
                 if cc<ct:
-                    split2[0]=split2[0].strip()
+                    
                     if split2[0][-1]!=',':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], comma is missing before opening quote\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        comma is missing before opening quote\n")
                         cc+=1
                     if split2[1][-1]!=',':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], comma is missing before opening quote\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        comma is missing before opening quote\n")
                     if 'and' in split2[0]:
                         y=split2[0].find('and')
                         if ct>2 and split2[0][y-2]!=',' :
-                            output.extend(["In reference number [",str(split1.index(i)+1),"], comma is missing before and\n"])
+                            output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        comma is missing before and\n")
                             cc+=1
                     if cc<ct and ct>2:
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], comma is missing between author names\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        comma is missing between author names\n")
             
             #journal,
             if 'Trans.' in split2[2]:
                 #full form check
                 if 'volume' in split2[2] or 'Volume' in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], volume should be in short form like vol.~\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        volume should be in short form like vol.~\n")
                 if 'number' in split2[2] or 'Number' in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], number should be in short form like no.~\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        number should be in short form like no.~\n")
                 if 'page number' in split2[2] or 'Page Number' in split2[2] or 'page number range' in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], page number should be in short form like pp. 11--22\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        page number should be in short form like pp. 11--22\n")
                 if 'January' in split2[2] or 'February' in split2[2] or 'March' in split2[2] or 'April' in split2[2] or 'June' in split2[2] or 'July' in split2[2] or 'August' in split2[2] or 'September' in split2[2] or 'October' in split2[2] or 'November' in split2[2] or 'December' in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], month should be in short form like Jan. (except May)\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        month should be in short form like Jan. (except May)\n")
                 #vol missing check
                 if 'vol' not in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], volume is missing\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        volume is missing\n")
                 else:
                     j=split2[2].rfind('vol')
                     if split2[2][j+3]!='.':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], full stop is missing after vol\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        full stop is missing after vol\n")
                     if split2[2][j+4]!='~' and split2[2][j+3]!='~':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], ~ is missing after vol.\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        Warning:~ is missing after vol.\n")
                 #no missing check
                 if 'no' not in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], number is missing\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        number is missing\n")
                 else:
                     j=split2[2].rfind('no')
                     if split2[2][j+2]!='.':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], full stop is missing after no\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        full stop is missing after no\n")
                     if split2[2][j+2]!='~' and split2[2][j+3]!='~':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], ~ is missing after no.\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        Warning:~ is missing after no.\n")
                 if 'pp' not in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], pp is missing\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        pp is missing\n")
                 else:
                     j=split2[2].rfind('pp')
                     if split2[2][j+2]!='.':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], full stop is missing after pp\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        full stop is missing after pp\n")
                     if '--' not in split2[2]:
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], double hyphen should be used for page number range\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        double hyphen should be used for page number range\n")
                 #date missing check
                 if 'Jan' not in split2[2] and 'Feb' not in split2[2] and 'Mar' not in split2[2] and 'Apr' not in split2[2] and 'May' not in split2[2] and 'Jun' not in split2[2] and 'Jul' not in split2[2] and 'Aug' not in split2[2] and 'Sep' not in split2[2] and 'Oct' not in split2[2] and 'Nov' not in split2[2] and 'Dec' not in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], month is missing \n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"     month is missing \n")
                 else:
                     f=0
                     for m in ['Jan.','Feb.','Mar.','Apr.','May','Jun.','Jul.','Aug.','Sep.','Oct.','Nov.','Dec.']:
@@ -169,20 +179,20 @@ class team_8:
                             f=1
                             break
                     if f==0:
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], full stop is missing after month in short form\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        full stop is missing after month in short form\n")
             #Conference check
             if 'Proc.' in split2[2]:
                 if 'page number' in split2[2] or 'Page Number' in split2[2] or 'page number range' in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], page number should be in short form like pp. 11--22\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"         page number should be in short form like pp. 11--22\n")
                 if 'January' in split2[2] or 'February' in split2[2] or 'March' in split2[2] or 'April' in split2[2] or 'June' in split2[2] or 'July' in split2[2] or 'August' in split2[2] or 'September' in split2[2] or 'October' in split2[2] or 'November' in split2[2] or 'December' in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], month should be in short form like Jan. (except May)\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"     month should be in short form like Jan. (except May)\n")
                 if 'volume' in split2[2] or 'Volume' in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], volume should be in short form like vol.~\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"         volume should be in short form like vol.~\n")
                 if 'number' in split2[2] or 'Number' in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], number should be in short form like no.~\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        number should be in short form like no.~\n")
 
                 if 'Jan' not in split2[2] and 'Feb' not in split2[2] and 'Mar' not in split2[2] and 'Apr' not in split2[2] and 'May' not in split2[2] and 'Jun' not in split2[2] and 'Jul' not in split2[2] and 'Aug' not in split2[2] and 'Sep' not in split2[2] and 'Oct' not in split2[2] and 'Nov' not in split2[2] and 'Dec' not in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], month is missing \n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"     month is missing \n")
                 else:
                     f=0
                     for m in ['Jan.','Feb.','Mar.','Apr.','May','Jul.','Aug.','Sep.','Oct.','Nov.','Dec.']:
@@ -190,66 +200,66 @@ class team_8:
                             f=1
                             break
                     if f==0:
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], full stop is missing after month in short form\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        full stop is missing after month in short form\n")
 
                 if 'pp' not in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], pp is missing\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        pp is missing\n")
                 else:
                     j=split2[2].rfind('pp')
                     if split2[2][j+2]!='.':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], full stop is missing after pp\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        full stop is missing after pp\n")
                     if '--' not in split2[2]:
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], double hyphen should be used for page number range\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        double hyphen should be used for page number range\n")
                 if 'vol' not in split2[2]:
                     pass
                 else:
                     j=split2[2].rfind('vol')
                     if split2[2][j+3]!='.':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], full stop is missing after vol\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        full stop is missing after vol\n")
                     if split2[2][j+4]!='~' and split2[2][j+3]!='~':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], ~ is missing after vol.\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        Warning:~ is missing after vol.\n")
                 if 'no' not in split2[2]:
                     pass
                 else:
                     j=split2[2].rfind('no')
                     if split2[2][j+2]!='.':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], full stop is missing after no\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        full stop is missing after no\n")
                     if split2[2][j+2]!='~' and split2[2][j+3]!='~':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], ~ is missing after no.\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        Warning:~ is missing after no.\n")
             #Others check
             if 'Trans' not in split2[2] and'Proc.' not in split2[2]:
                 if 'volume' in split2[2] or 'Volume' in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], volume should be in short form like vol.~\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        volume should be in short form like vol.~\n")
                 if 'number' in split2[2] or 'Number' in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], number should be in short form like no.~\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        number should be in short form like no.~\n")
                 if 'page number' in split2[2] or 'Page Number' in split2[2] or 'page number range' in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], page number should be in short form like pp. 11--22\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        page number should be in short form like pp. 11--22\n")
                 if 'January' in split2[2] or 'February' in split2[2] or 'March' in split2[2] or 'April' in split2[2] or 'June' in split2[2] or 'July' in split2[2] or 'August' in split2[2] or 'September' in split2[2] or 'October' in split2[2] or 'November' in split2[2] or 'December' in split2[2]:
-                    output.extend(["In reference number [",str(split1.index(i)+1),"], month should be in short form like Jan. (except May)\n"])
+                    output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        month should be in short form like Jan. (except May)\n")
                 if 'vol' not in split2[2]:
                     pass
                 else:
                     j=split2[2].rfind('vol')
                     if split2[2][j+3]!='.':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], full stop is missing after vol\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        full stop is missing after vol\n")
                     if split2[2][j+4]!='~' and split2[2][j+3]!='~':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], ~ is missing after vol.\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        Warning:~ is missing after vol.\n")
                 if 'no' not in split2[2]:
                     pass
                 else:
                     j=split2[2].rfind('no')
                     if split2[2][j+2]!='.':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], full stop is missing after no\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        full stop is missing after no\n")
                     if split2[2][j+2]!='~' and split2[2][j+3]!='~':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], ~ is missing after no.\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        Warning:~ is missing after no.\n")
                 if 'pp' not in split2[2]:
                     pass
                 else:
                     j=split2[2].rfind('pp')
                     if split2[2][j+2]!='.':
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], full stop is missing after pp\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        full stop is missing after pp\n")
                     if '--' not in split2[2]:
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], double hyphen should be used for page number range\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        double hyphen should be used for page number range\n")
                 if 'Jan' not in split2[2] and 'Feb' not in split2[2] and 'Mar' not in split2[2] and 'Apr' not in split2[2] and 'May' not in split2[2] and 'Jun' not in split2[2] and 'Jul' not in split2[2] and 'Aug' not in split2[2] and 'Sep' not in split2[2] and 'Oct' not in split2[2] and 'Nov' not in split2[2] and 'Dec' not in split2[2]:
                     pass
                 else:
@@ -259,7 +269,7 @@ class team_8:
                             f=1
                             break
                     if f==0:
-                        output.extend(["In reference number [",str(split1.index(i)+1),"], full stop is missing after month in short form\n"])
+                        output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        full stop is missing after month in short form\n")
     
     def acronym(self,bibliography,output,EE):
         #more ee acronyms can be added to this list in future if required
@@ -330,6 +340,7 @@ class team_8:
             split2.append(i[:i.find("``")].strip())
             split2.append(i[i.find("``")+2:i.find("''")].strip())
             split2.append(i[i.find("''")+2:].strip())
+            refname=split2[0][1:split2[0].find('}')]
             split2[0]=split2[0][split2[0].find('}')+1:]
             
             if "``" in i and "''" in i:
@@ -349,11 +360,11 @@ class team_8:
                             c+=1
                     if c>=2:
                         if word[0]!='{' and word[-1]!='}':
-                            output.extend(["In reference number [",str(split1.index(i)+1),"], acronym ",word," should be in curly braces\n"])
+                            output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        Warning:acronym ",word," should be in curly braces\n")
                         elif word[0]!='{':
-                            output.extend(["In reference number [",str(split1.index(i)+1),"], opening brace is missing before acronym ",word,"\n"])
+                            output.extend(refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        opening brace is missing before acronym ",word,"\n")
                         elif '}' not in word:
-                            output.extend(["In reference number [",str(split1.index(i)+1),"], closing brace is missing after acronym ",word,"\n"])
+                            output.extend([refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        closing brace is missing after acronym ",word,"\n"])
                 for word in sp:
                     delimiters1 = ['{', '}', '-','/']
                     # Construct a regular expression pattern with the delimiters
@@ -368,9 +379,10 @@ class team_8:
                             if wdd.isalpha() and wdd.isupper():
                                 c+=1
                         if c>=2 and c!=len(wd):
-                            output.extend(["In reference number [",str(split1.index(i)+1),"], acronym ",wd," should be in capitals\n"])
+                            output.extend([refname+str(' '*(30-len(refname)))+str(split1.index(i)+1)+"        Warning:acronym ",wd," should be in capitals\n"])
                         if wd.upper() in ee_acronyms and wd.upper() not in EE:
                             EE.append(wd.upper())
 
                 
 
+                                                                                                            
