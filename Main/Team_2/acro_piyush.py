@@ -1,8 +1,6 @@
-#Make list of full form of acronyms , acronym and occurance
-#make warnings for acro. that are  1) not defined entirely  2) defined but not at first occurrence
-#cronym must be followed by parentheses for the first time
-#NOTE : If the acronym is not repeated the whole body then no need to add parentheses.
-'''Brief of TO DO LIST
+'''Pending tasks 
+    
+    NOTE : If the acronym is not repeated the whole body then no need to add parentheses.
 
 1) Output in form of Name of acr -Acro -Occurrence 
      # This includes plural and singular both 
@@ -10,9 +8,9 @@
 Comments Type 
 2) If apostrophe is present ,then " Check whether this is for possessive form or mistaken by user for plural "
     # eliminate the confusion between the actual symbol of ’ and the mistaken symbol  ' 
-3)If acronym has been defined but not at the first occurrence then " Acronym is defined on line ___ but not on the first occurrence ,i.e. line___ " otherwise "Acronyms is not defined ,Define it on the line ____ ,i.e. the first occurrence 
-  # Also check whether if its a common acronym mentioned in a list we have created ,then don't give the warning if its not defined anywhere but     I    if its defined then it should be at first occurrence
-'''
+ '''
+#Instructions: pip install tabulate
+
 import re   
 from tabulate import tabulate
 acronyms_dict = {
