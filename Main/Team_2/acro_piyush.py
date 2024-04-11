@@ -250,21 +250,22 @@ class team_2:
 
         # Use re.sub to replace the matched patterns with an empty string
         cleaned_text = re.sub(pattern, '', text_withoutcommands)
+        # Split the cleaned text into words
+        words = cleaned_text.split()
         
+        if words:
+            # Get the first word
+            first_word = words[0]
+            
+            # Find the index of the first occurrence of the first word in the original text
+            end_index = text.find(first_word)
+            
+            # Count the number of newline characters before the first word
+            count_newlines = text[:end_index].count('\n')
+            
+            # Update the line number
+            self.line_number += count_newlines
         
-        first_word = cleaned_text.split()[0]
-        end_index = text.find(first_word)
-       
-        count_newlines = 0
-
-        index = 0
-        while index != end_index:
-            if text[index] == '\n':
-                count_newlines += 1
-            index += 1
-
-        self.line_number = self.line_number + count_newlines
-    
         return cleaned_text
 
     def count_words(self, text):
