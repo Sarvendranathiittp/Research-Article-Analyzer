@@ -1,50 +1,35 @@
-The first occurrence of acronym ACTION is not found on the document.
-The first occurrence of acronym AI is not found on the document.
-The first occurrence of acronym AN is not found on the document.
-The first occurrence of acronym AND is not found on the document.
-The first occurrence of acronym ANY is not found on the document.
-The first occurrence of acronym ARISING is not found on the document.
-The first occurrence of acronym BE is not found on the document.
-The first occurrence of acronym BUT is not found on the document.
-The first occurrence of acronym CONNECTION is not found on the document.
-The first occurrence of acronym COPYRIGHT is not found on the document.
-The first occurrence of acronym CV is not found on the document.
-The first occurrence of acronym DAMAGES is not found on the document.
-The first occurrence of acronym DEALINGS is not found on the document.
-The first occurrence of acronym DEFINE is not found on the document.
-The first occurrence of acronym EE is not found on the document.
-The first occurrence of acronym ELEMENTS is not found on the document.
-The first occurrence of acronym EVENT is not found on the document.
-The first occurrence of acronym EXPRESS is not found on the document.
-The first occurrence of acronym FOR is not found on the document.
-The first occurrence of acronym HERE is not found on the document.
-The first occurrence of acronym HOLDERS is not found on the document.
-The first occurrence of acronym IIT is not found on the document.
-The first occurrence of acronym IN is not found on the document.
-The first occurrence of acronym INCLUDING is not found on the document.
-The first occurrence of acronym IS is not found on the document.
-The first occurrence of acronym LIABLE is not found on the document.
-The first occurrence of acronym LIMITED is not found on the document.
-The first occurrence of acronym MATLAB is not found on the document.
-The first occurrence of acronym ML is not found on the document.
-The first occurrence of acronym NO is not found on the document.
-The first occurrence of acronym NOT is not found on the document.
-The first occurrence of acronym OF is not found on the document.
-The first occurrence of acronym OR is not found on the document.
-The first occurrence of acronym OTHER is not found on the document.
-The first occurrence of acronym PARTICULAR is not found on the document.
-The first occurrence of acronym PROVIDED is not found on the document.
-The first occurrence of acronym PURPOSE is not found on the document.
-The first occurrence of acronym RCNN is not found on the document.
-The first occurrence of acronym SHALL is not found on the document.
-The first occurrence of acronym SOFTWARE is not found on the document.
-The first occurrence of acronym STARTS is not found on the document.
-The first occurrence of acronym THE is not found on the document.
-The first occurrence of acronym TO is not found on the document.
-The first occurrence of acronym TORT is not found on the document.
-The first occurrence of acronym USE is not found on the document.
-The first occurrence of acronym WARRANTIES is not found on the document.
-The first occurrence of acronym WARRANTY is not found on the document.
-The first occurrence of acronym WHETHER is not found on the document.
-The first occurrence of acronym WITH is not found on the document.
-The first occurrence of acronym WITHOUT is not found on the document.
+TEAM 1
+
+==================================================
+ Title Related Comments 
+==================================================
+ Title (Processed): 
+Transmit Antenna Selection for Interference-Outage Constrained Underlay CR
+
+ Number of words in the processed title: 8
+==================================================
+ Abstract Related Comments 
+==================================================
+ Abstract (Processed): 
+Transmit antenna selection (TAS) is a technique that achieves better performance than a single
+antenna system while using the same number of radio frequency chains. We propose a novel TAS
+rule called the $$-weighted interference indicator rule (LWIIR). We prove that for the general class of fading models with continuous cumulative distribution functions, LWIIR achieves the lowest average symbol error probability (SEP) among all TAS rules for  an underlay cognitive radio system that employs binary power control and is subject to the interference-outage constraint. This constraint imposes a limit on the probability that the interference power at the primary exceeds a threshold. It is a generalization of the widely studied peak interference constraint. We derive the average SEP of LWIIR. The insightful performance analysis applies to any number of transmit and receive antennas and to many constellations.  We also analyze the practical scenario in which the secondary transmitter has imperfect information of the channel gains from itself to the secondary and primary receivers. We show that the imperfections in these two sets of channel gains have different impacts on the system. Our benchmarking shows that LWIIR outperforms many selection rules considered in the literature.
+
+ Number of words in the abstract: 194
+==================================================
+  List of Acronyms: 
+==================================================
+ +-----------+---------------+----------------------------+
+| Acronym   |   Occurrences | Full Form                  |
++===========+===============+============================+
+| TAS       |             3 | Transmit antenna selection |
++-----------+---------------+----------------------------+
+| LWIIR     |             4 | Not Defined                |
++-----------+---------------+----------------------------+
+| SEP       |             2 | symbol error probability   |
++-----------+---------------+----------------------------+
+==================================================
+ Warnings  
+==================================================
+Line 0714 [Warning]: Acronym 'LWIIR' is not properly defined at the first occurrence.
+
