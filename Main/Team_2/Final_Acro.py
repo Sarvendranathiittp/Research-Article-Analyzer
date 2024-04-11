@@ -2,7 +2,7 @@ import re
 
 class AcronymProcessor:
 
-    #exclude_path = r'C:\Users\rashm\Downloads\lab1\lab1\Research-Article-Analyzer\Main\Team_2\latex_example.txt'
+    #exclude_path = r'C:\Users\rashm\Downloads\lab1\lab1\Research-Article-Analyzer\Main\Team_2\list.csv'
 
     def __init__(self, input_string):
         self.input_string = input_string
@@ -117,7 +117,7 @@ for match in tches:
     substring_before_word = input_string[:match_position]
 
     # Find the n words before the word (excluding '(')
-    words_before = re.findall(r'\b\w+\b', substring_before_word)[-num_uppercase:]
+    words_before = re.findall(r'\b\w+\b', substring_before_word)[-num_uppercase-1:]
 
     # Print the result
     print(f"Word {match}")
