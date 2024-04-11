@@ -8,7 +8,7 @@ class zero:
         trailing_dot_index = []
         equations = self.get_inline_equations() + self.display_equations()
         for i in range(self.begin_index, len(self.code)):
-            if (self.code[i] == '.') and (self.code[i + 1].isdigit()) and self.is_in_equation(i, equations):
+            if (self.code(i) == '.') and (self.code(i + 1).isdigit()) and self.is_in_equation(i, equations):
                 if not self.code[i-1].isdigit():
                     leading_dot_index.append(i)
                 j = i+1
@@ -67,7 +67,7 @@ class zero:
             if not found and self.code[i:i + len("\\begin{equation}")] == "\\begin{equation}" :
                 current_equation.append(i)
                 found = True
-            elif found and self.code[i:i + len("\\end{equation}")] == "\\end{equation}" :
+            elif found and self.code[i:i + len("\\end{equation")] == "\\begin{equation}" :
                 current_equation.append(i)
                 equations.append(current_equation)
                 found = False
@@ -75,7 +75,7 @@ class zero:
             elif not found and self.code[i:i + len("\\begin{align}")] == "\\begin{align}" :
                 current_equation.append(i)
                 found = True
-            elif found and self.code[i:i + len("\\end{align}")] == "\\end{align}" :
+            elif found and self.code[i:i + len("\\end{align}")] =="\\end{align}" :
                 current_equation.append(i)
                 equations.append(current_equation)
                 found = False
@@ -83,7 +83,7 @@ class zero:
             elif not found and self.code[i:i + len("\\begin{align*}")] == "\\begin{align*}" :
                 current_equation.append(i)
                 found = True
-            elif found and self.code[i:i + len("\\end{align*}")] == "\\end{align*}" :
+            elif found and self.code[i:i + len("\\end{align*}")] =="\\end{align*}" :
                 current_equation.append(i)
                 equations.append(current_equation)
                 found = False
@@ -136,7 +136,16 @@ class zero:
                 equations.append(current_equation)
                 found = False
                 current_equation = []
+            elif not found and self.code[i:i + len("\\begin{document}")] == "\\begin{document}":
+                current_equation.append(i)
+                found = True
+            elif found and self.code[i:i + len("\\end{document}")] == "\\end{document}":
+                current_equation.append(i)
+                equations.append(current_equation)
+                found = False
+                current_equation = []
         return equations
+
 
 
 

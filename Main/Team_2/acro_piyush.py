@@ -1,4 +1,3 @@
-
 #Make list of full form of acronyms , acronym and occurance
 #make warnings for acro. that are  1) not defined entirely  2) defined but not at first occurrence
 #cronym must be followed by parentheses for the first time
@@ -14,7 +13,158 @@ Comments Type
 3)If acronym has been defined but not at the first occurrence then " Acronym is defined on line ___ but not on the first occurrence ,i.e. line___ " otherwise "Acronyms is not defined ,Define it on the line ____ ,i.e. the first occurrence 
   # Also check whether if its a common acronym mentioned in a list we have created ,then don't give the warning if its not defined anywhere but     I    if its defined then it should be at first occurrence
 '''
-import re    
+import re   
+from tabulate import tabulate
+acronyms_dict = {
+    "AF": "Audio frequency",
+    "AFC": "Automatic frequency control",
+    "AGC": "Automatic gain control",
+    "AM": "Amplitude modulation",
+    "APD": "Avalanche photodiode",
+    "AR": "Antireflection",
+    "ARMA": "Autoregressive moving average",
+    "ASIC": "Application-specified integrated circuit",
+    "ASK": "Amplitude shift keying",
+    "ATM": "Asynchronous transfer mode",
+    "AWGN": "Additive white Gaussian noise",
+    "BER": "Bit error rate",
+    "BPSK": "Binary phase-shift keying",
+    "BWO": "Backward-wave oscillator",
+    "CCD": "Charge-coupled device",
+    "CDMA": "Code division multiple access",
+    "CD-ROM": "Compact disk read-only memory",
+    "CIM": "Computer integrated manufacturing",
+    "CIR": "Carrier-to-interference ratio",
+    "CMOS": "Complimentary metal–oxide–semiconductor",
+    "CPFSK": "Continuous phase frequency-shift keying",
+    "CPM": "Continuous phase modulation",
+    "CPSK": "Continuous phase-shift keying",
+    "CPU": "Central processing unit",
+    "CRT": "Cathode-ray tube",
+    "CT": "Current transformer",
+    "CV": "Capacitance–voltage",
+    "CW": "Continuous wave",
+    "DC": "Direct current",
+    "DFT": "Discrete Fourier transform",
+    "DMA": "Direct memory access",
+    "DPCM": "Differential pulse code modulation",
+    "DPSK": "Differential phase-shift keying",
+    "EDP": "Electronic data processing",
+    "EHF": "Extremely high frequency",
+    "ELF": "Extremely low frequency",
+    "EMC": "Electromagnetic compatibility",
+    "EMF": "Electromotive force",
+    "EMI": "Electromagnetic interference",
+    "FDM": "Frequency division multiplexing",
+    "FDMA": "Frequency division multiple access",
+    "FET": "Field-effect transistor",
+    "FFT": "Fast Fourier transform",
+    "FIR": "Finite-impulse response",
+    "FM": "Frequency modulation",
+    "FSK": "Frequency-shift keying",
+    "FTP": "File transfer protocol",
+    "FWHM": "Full-width at half-maximum",
+    "GUI": "Graphical user interface",
+    "HBT": "Heterojunction bipolar transistor",
+    "HEMT": "High-electron mobility transistor",
+    "HF": "High frequency",
+    "HTML": "Hypertext markup language",
+    "HV": "High voltage",
+    "HVdc": "High voltage direct current",
+    "IC": "Integrated circuit",
+    "IDP": "Integrated data processing",
+    "IF": "Intermediate frequency",
+    "IGFET": "Insulated-gate field-effect transistor",
+    "IM": "Intermediate modulation",
+    "IMPATT": "Impact ionization avalanche transit time (diode)",
+    "I/O": "Input–output",
+    "IR": "Infrared",
+    "ISI": "Intersymbol interference",
+    "JFET": "Junction field-effect transistor",
+    "JPEG": "Joint Photographers Expert Group",
+    "LAN": "Local area network",
+    "LC": "Inductance–capacitance",
+    "LED": "Light-emitting diode",
+    "LHS": "Left-hand side",
+    "LMS": "Least mean square",
+    "LO": "Local oscillator",
+    "LP": "Linear programming",
+    "LPE": "Liquid phase epitaxy",
+    "LR": "Inductance–resistance",
+    "MESFET": "Metal–semiconductor field-effect transistor",
+    "MF": "Medium frequency",
+    "MFSK": "Minimum frequency-shift keying",
+    "MHD": "Magnetohydrodynamics",
+    "MIS": "Metal–insulator–semiconductor",
+    "MLE": "Maximum-likelihood estimator",
+    "MLSE": "Maximum-likelihood sequence estimator",
+    "MMF": "Magnetomotive force",
+    "MOS": "Metal–oxide–semiconductor",
+    "MOSFET": "Metal–oxide–semiconductor field-effect transistor",
+    "MOST": "Metal–oxide–semiconductor transistor",
+    "MPEG": "Motion Pictures Expert Group",
+    "NIR": "Near infrared response",
+    "NMR": "Nuclear magnetic resonance",
+    "NRZ": "Nonreturn to zero",
+    "OD": "Outside diameter",
+    "OEIC": "Optoelectronic integrated circuit",
+    "OOP": "Object-oriented programming",
+    "PAM": "Pulse-amplitude modulation",
+    "PC": "Personal computer",
+    "PCM": "Pulse-code modulation",
+    "PDF": "Probability density function",
+    "PDM": "Pulse-duration modulation",
+    "PF": "Power factor",
+    "PID": "Proportional-integral differential",
+    "PLL": "Phase-locked loop",
+    "PM": "Phase modulation",
+    "PML": "Perfectly matched layer",
+    "PP": "Peak-to-peak",
+    "PPM": "Pulse-position modulation",
+    "PRF": "Pulse-repetition frequency",
+    "PRR": "Pulse-repetition rate",
+    "PSK": "Phase-shift keying",
+    "PTM": "Pulse–time modulation",
+    "PWM": "Pulse width modulation",
+    "Q": "Quality factor",
+    "QoS": "Quality of service",
+    "QPSK": "Quaternary phase-shift keying",
+    "RAM": "Random access memory",
+    "RC": "Resistance–capacitance",
+    "RF": "Radio frequency",
+    "RFI": "Radio frequency interference",
+    "RIN": "Relative intensity noise",
+    "RL": "Resistance–inductance",
+    "R&D": "Research and development",
+    "RV": "Random variable",
+    "SAW": "Surface acoustic wave",
+    "SGML": "Standard generalized markup language",
+    "SHF": "Super high frequency",
+    "SI": "International System of Units",
+    "SIR": "Signal-to-interference ratio",
+    "S/N": "Signal-to-noise ratio",
+    "SOC": "System-on-a-chip",
+    "SSB": "Single sideband",
+    "SW": "Short wave",
+    "SWR": "Standing-wave ratio",
+    "TDM": "Time-division modulation",
+    "TDMA": "Time-division multiple access",
+    "TE": "Transverse electric",
+    "TEM": "Transverse electromagnetic",
+    "TFT": "Thin-film transistor",
+    "TM": "Transverse magnetic",
+    "TVI": "Television interference",
+    "TWA": "Traveling-wave amplifier",
+    "UHF": "Ultrahigh frequency",
+    "UV": "Ultraviolet",
+    "VCO": "Voltage-controlled oscillator",
+    "VHF": "Very high frequency",
+    "VLSI": "Very large scale integration",
+    "WAN": "Wide area network",
+    "WDM": "Wavelength division multiplexing",
+}
+
+
 class team_2:
     def __init__(self, latex_content, begin_document_index):        
 
@@ -34,11 +184,13 @@ class team_2:
         self.begin_document_index = begin_index
 
         self.text=""
+        self.work=""
+        self.line_number=0
         self.acronyms = []
-        self.first_occurrence_line = {}
+        self.acro_count={}
+        self.acro_full={}
         self.warnings = []
-        self.common_acronyms = ['DIY', 'NASA', 'HTML']
-           
+
     def extract_abstract(self):
         # Find the index of \begin{abstract} using the given begin_document_index
         begin_abstract_index = self.latex_content.find(r'\begin{abstract}', self.begin_document_index)
@@ -48,11 +200,17 @@ class team_2:
 
         # Extract the abstract content without \begin{abstract} and \end{abstract}
         if begin_abstract_index != -1 and end_abstract_index != -1:
-            abstract_content = self.latex_content[begin_abstract_index + len(r'\\begin{abstract}'):end_abstract_index].strip()
+            abstract_content = self.latex_content[begin_abstract_index + len(r'\begin{abstract}'):end_abstract_index].strip()
+            
+            # Find the index of the first non-empty line after \begin{abstract}
+            abstract_start_index = self.latex_content.find('\n', begin_abstract_index) + 1
+            # Count the number of newlines before the abstract_start_index to get the line number
+            self.line_no = self.latex_content.count('\n', 0, abstract_start_index) + 1
+            
             return abstract_content
         else:
             return None
-        
+       
     def remove_latex_commands(self,text):
 
         # Function to remove LaTeX commands
@@ -64,7 +222,6 @@ class team_2:
         cleaned_text = re.sub(pattern, '', text_withoutcommands)
     
         return cleaned_text
-    
 
     def extract_acronyms(self):
         # Extract acronyms with all capital letters (e.g., TASD)
@@ -79,61 +236,115 @@ class team_2:
         # Combine the results into a single list
         self.acronyms = capital_acronyms + s_suffix_acronyms + apostrophe_acronyms
 
-    def verify_acronyms(self):
-        lines = self.text.split('\n')
+    def count_acronyms_occurrences(self):
+        
+        for word in self.acronyms:
+            if word in self.acro_count:
+                self.acro_count[word] += 1
+            else:
+                self.acro_count[word] = 1
 
-        for acronym in self.acronyms:
-            first_occurrence_line = None
-            defined_at_first_occurrence = False
-            defined_without_parentheses = False
-            is_common_acronym = acronym in self.common_acronyms
+    def check_enclosed_in_parentheses(self,acronym):
+        # Check if the acronym is properly enclosed within parentheses 
+        pattern = re.compile(rf'\({re.escape(acronym)}\)')
+        return bool(pattern.search(self.work))
 
-            for line_number, line in enumerate(lines, start=1):
-                if re.search(fr'\b{re.escape(acronym)}\b', line):
-                    first_occurrence_line = line_number
+    def acro_defined(self,acronym):
+        # Count the number of uppercase letters in the acronym
+        num_uppercase = sum(1 for char in acronym if char.isupper())
 
-                    if '(' in line and ')' in line:
-                        defined_at_first_occurrence = True
+       # Find the position of the acronym in the text
+        acronym_position = self.work.find(acronym)
 
-                    if not defined_at_first_occurrence and '(' not in line and ')' not in line:
-                        defined_without_parentheses = True
+       # Count the number of newline characters before the acronym
+        num_newlines_before_acronym = self.work.count('\n', 0, acronym_position)
 
-                    break
+        # Increment the line number by the number of newline characters before the acronym
+        self.line_number = '{:04d}'.format(self.line_number + num_newlines_before_acronym)
+       
+       # Find the substring before the acronym
+        substring_before_acronym = self.work[:acronym_position]
+        
+       # Remove the substring before the acronym position, including the acronym
+        self.work = self.work[acronym_position + len(acronym):]
+        
+        # Find the n words before the acronym (excluding non-alphabetic characters)
+        words_before = re.findall(r'\b\w+\b', substring_before_acronym)[-num_uppercase:]
 
-            if first_occurrence_line is None and not is_common_acronym:
-                self.warnings.append(f"\n Warning: Acronym '{acronym}' is not defined at all.")
-            elif not defined_at_first_occurrence:
-                if not is_common_acronym:
-                    self.warnings.append(f"\n Warning: Acronym '{acronym}' is defined, but not at the first occurrence (Line {first_occurrence_line}).")
-                else:
-                    self.warnings.append(f"\n Acronym '{acronym}' is a common acronym and is not defined at the first occurrence.")
-            elif defined_without_parentheses:
-                if not is_common_acronym:
-                    self.warnings.append(f"\n Acronym '{acronym}' is defined without parentheses at Line {first_occurrence_line}.")
-                else:
-                    self.warnings.append(f"\n Acronym '{acronym}' is a common acronym and is defined without parentheses at Line {first_occurrence_line}.")
-            elif is_common_acronym:
-                self.warnings.append(f"\n Acronym '{acronym}' is a common acronym and is defined at Line {first_occurrence_line}, but within parentheses.")
+        # Check if the words before the acronym match its initial characters
+        if words_before == [char.upper() for char in acronym]:
+            # If the number of matching words is equal to the number of uppercase letters in the acronym
+             if len(words_before) == num_uppercase:
+                # Add the full form of the acronym to the dictionary
+                self.acro_full = ' '.join(words_before)
+                return True
+        else:
+            # Return False if the acronym is not defined
+            return False
 
-            
-            self.first_occurrence_line[acronym] = first_occurrence_line
-          
+
+    def verify_acronyms(self):       
+        is_common_acronym = acronym in self.common_acronyms
+        for acronym, count in self.acro_count.items():
+            self.work=self.text
+            is_common_acronym = acronym in acronyms_dict
+            for i in range(count):                
+                enclosed_in_parentheses = self.check_enclosed_in_parentheses(acronym)
+                full_form =self.acro_defined(acronym)                
+                # Check if the acronym is properly defined at the first occurrence                      
+                if i == 0: 
+                    if full_form and not enclosed_in_parentheses:
+                        self.warnings.append(f"Line {self.line_number} [Warning]: Acronym '{acronym}' is properly defined but not enclosed in parentheses at the first occurrence.")
+                    elif not full_form and enclosed_in_parentheses:
+                        if is_common_acronym:
+                            # Use the full form from the common acronym dictionary
+                            full_form = acronyms_dict[acronym]
+                            self.warnings.append(f"Line {self.line_number} [Warning]: '{acronym}' is a common acronym. Its definition might be redundant ,thus remove parentheses.\n\t\t\t\t\t Full form: {full_form}.Define if it doesn't matched with your defination.")
+                        else:
+                            self.warnings.append(f"Line {self.line_number} [Warning]: Acronym '{acronym}' is not properly defined at the first occurrence.")
+                    elif not full_form and not enclosed_in_parentheses:
+                        if is_common_acronym:
+                            # Use the full form from the common acronym dictionary
+                            full_form = acronyms_dict[acronym]
+                            self.warnings.append(f"Line {self.line_number} [Warning]: '{acronym}' is a common acronym. Its definition might be redundant.\n\t\t\t\t\t Full form: {full_form}.Define if it doesn't matched with your defination.")
+                        else:
+                            self.warnings.append(f"Line {self.line_number} [Warning]: Acronym '{acronym}' is not properly defined and not enclosed in parentheses at the first occurrence.")
+                # For occurrences other than the first occurrence 
+                else:     
+                    if full_form or enclosed_in_parentheses:
+                        self.warnings.append(f"Line {self.line_number} [Warning]: Acronym '{acronym}' should be defined and enclosed in parentheses only at the first occurrence.") 
+    
     def run(self):
         abstract = self.remove_latex_commands(self.extract_abstract())
         output = []  # The output would be updated with the extracted title and abstract along with the word counts respectively.
 
 
-        output.append('\n' + '=' * 50 + "\n\t\t Abstract Related Comments \n" + '=' * 50)
+        output.append('\n' + '=' * 50 + "\n Abstract Related Comments \n" + '=' * 50)
+        output.append(f"\n {abstract}")
 
         self.text = abstract
         self.extract_acronyms()
 
+    #    acronyms_occurrences = self.count_acronyms_occurrences()
+
         if self.acronyms:
             self.verify_acronyms()
-            output.append("\n List of Acronyms: " + str(self.acronyms))
+            
+            acronym_data = {}
+            for acronym, count in self.acro_count.items():
+                full_form = self.acro_full.get(acronym, "Not Defined")
+                acronym_data[acronym] = {"Occurrences": count, "Full Form": full_form}
+
+            data = [[acronym, values["Occurrences"], values["Full Form"]] for acronym, values in acronym_data.items()]
+
+            # Generate table
+            table = tabulate(data, headers=["Acronym", "Occurrences", "Full Form"]
+, tablefmt="grid")
+            output.append('\n' + '=' * 50 + "\n  List of Acronyms: \n" + '=' * 50)
+        
 
             if self.warnings:
-                output.append("\nWarnings:")
+                output.append('\n' + '=' * 50 +" Warnings:" + '=' * 50)
                 for warning in self.warnings:
                     output.append(warning)
         else:
