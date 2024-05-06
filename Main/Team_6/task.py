@@ -16,9 +16,10 @@ class team_6:
     
 
     def run(self):
-
-        output=[] #creating a list to store the output errors.
         
+        output=[] #creating a list to store the output errors.
+
+        output.append('='*50+"\n\t Sections and Subsections related Comments \n"+'='*50+'\n')
         #the words we are looking for.
         word_1="\subsection" 
         word_2="\subsubsection"
@@ -39,9 +40,9 @@ class team_6:
 
             # Finding the substring between '}' or '~' and the end of the line
             a = 12 if word_1 in line1 else 15 if word_2 in line1 else 0
-            b = line1.find(char1, a) if char1 in line1[a:] else line1.find(char2, a)
+            b = line1.find(char2, a) if char2 in line1[a:] else line1.find(char1, a)
             
-            if b != -1:
+            if b != -1 and line1[0] != '%':
                   line = line1[a:b]
             #output.append(line)
            # output.append(line+'\n')
@@ -49,27 +50,34 @@ class team_6:
             postag = pos_tag(tokens) #tagging parts of speech.
             #output.append(postag)
             #Conditions on list of Nouns, pronouns, adjectives ,verbs and adverbs
-            pos_list1={'NN', 'NNS', 'NNP', 'PRP', 'PRP$', 'IN', 'RBR', 'RBS', 'JJ', 'JJR', 'JJS', 'VB', 'RB'}
+            pos_list1={'NN', 'NNS', 'NNP', 'PRP', 'PRP$', 'RBR', 'RBS', 'JJ', 'JJR', 'JJS', 'VB', 'RB'}
             #Articles and Co-ordinating conjuctions
             pos_list2={'CC','DT'}
             #Prepositions of more than three words
          #   list3={'before','from','through','with','versus','among','under','between','without'}
             index+=1
-            
+            x=0 
             for word, pos in postag:
                 if pos in pos_list1 and word[0].islower():
-                    output.append(('ERROR in line:'+str(index)+" "+word+' '+" :   need to be Capitalized since it is a   :"+ get_pos_full_form(pos) ))
+                    output.append(('ERROR in line:'+str(index)+"   "+"Word {"+word+'}'+" need to be Capitalized since it is a "+ get_pos_full_form(pos)+"\n"))
+                    x=1
             # for word,pos in postag:
                 elif pos in pos_list2 :
                     if word[0].islower() and word!=tokens[0] and word!=tokens[-1]:
                         pass
                     else:
-                        output.append(('ERROR in line:'+str(index)+" "+word+' '+":   need to be in lower case since it is a   :"+ get_pos_full_form(pos)))
+                        output.append(('ERROR in line:'+str(index)+"   "+"Word {"+word+'}'+" need to be in lower case since it is a "+ get_pos_full_form(pos)+"\n"))
+                        x = 2
             # for word in tokens:
                  #finding prepostions of length greater than 3
                 elif pos=='IN' and len(word)>3 :
                         if not word[0].isUpper():
-                            output.append(('ERROR in line:'+str(index)+" "+word+' '+":  need to be capitalised since it is a  :"+ get_pos_full_form(pos)))
+                            output.append(('ERROR in line:'+str(index)+"   "+"Word {"+word+'}'+" need to be capitalised since it is a "+ get_pos_full_form(pos)+"\n"))
+                            x=3
+        if x == 0:
+         output.append("No errors found in Subsections and Subsubsections")
+                           
+        output.append('='*50+"\n")
         return output
 
 
