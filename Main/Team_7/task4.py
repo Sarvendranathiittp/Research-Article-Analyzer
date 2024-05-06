@@ -52,11 +52,13 @@ class Task_4:
                         error_index.append(i)
         error_index2 = []
         for ind in comma_index:
-            count = 0
-            i = ind
-            while self.code[i] == ' ':
-                count += 1
-                i += 1
-            if count != 1:
-                error_index2.append(ind)
+            if z.is_in_equation(ind, z.display_equations()):
+                count = 0
+                i = ind+1
+                while self.code[i] == ' ':
+                    count += 1
+                    i += 1
+                else:
+                    if (self.code[i] not in ['\n', '\\']) and (self.code[ind-1] != "\\") and count != 1:
+                        error_index2.append(ind)
         return [error_index, error_index2]
