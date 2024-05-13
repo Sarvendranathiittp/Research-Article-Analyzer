@@ -45,25 +45,6 @@ class wrapper:
                     begin_index = bbl_text.find(r'\begin{document}')
 
         # Calling all team run() files
-
-        # obj_team_0 = team_0(text,begin_index)
-        # output.append(obj_team_0.run())
-        # obj_team_1 = team_1(text,begin_index)
-        # output.append(obj_team_1.run())
-        # obj_team_2 =team_2(text,0)
-        # output.append(obj_team_2.run())
-        # obj_team_3 = team_3(text,begin_index)
-        # output.append(obj_team_3.run())
-        # #obj_team_4 = team_4(text,begin_index)
-        # #output.append(obj_team_4.run())
-        # obj_team_5 = team_5(text,begin_index)
-        # output.append(obj_team_5.run())
-        # obj_team_6 = team_6(text,begin_index)
-        # output.append(obj_team_6.run())
-        # obj_team_7 = team_7(text,begin_index)
-        # output.append(obj_team_7.run())
-        # obj_team_8 = team_8(text,begin_index)
-        # output.append(obj_team_8.run())
         
         team_classes = [team_1, team_2, team_3, team_5, team_6, team_7, team_8]
         for team_class in team_classes:
@@ -76,14 +57,10 @@ class wrapper:
         # Writing all the output logs to the log file
         with open ("LOGII", "w") as logw:
             for logs in output:
-                logw.write("TEAM {}".format(teamno))
-                logw.write("\n")
                 for log in logs:
                     logw.write(log)
                 logw.write("\n")
                 logw.write("\n")
-                teamno+=1
-                if (teamno==4): teamno+=1
 
 obj = wrapper()
 obj.run()
