@@ -76,7 +76,8 @@ class team_6:
                             x=3
         if x == 0:
          output.append("No errors found in Subsections and Subsubsections")
-                           
+        output.append("\n")
+                                   
         output.append('='*50+"\n")
         return output
 
