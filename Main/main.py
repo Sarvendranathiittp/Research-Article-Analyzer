@@ -62,8 +62,8 @@ class wrapper:
         output.append(obj_team_6.run())
         obj_team_7 = team_7(text,begin_index)
         output.append(obj_team_7.run())
-        # obj_team_8 = team_8(text,begin_index)
-        # output.append(obj_team_8.run())
+        obj_team_8 = team_8(text,begin_index)
+        output.append(obj_team_8.run())
 
         # Writing all the output logs to the log file
         with open ("LOGII", "w") as logw:
