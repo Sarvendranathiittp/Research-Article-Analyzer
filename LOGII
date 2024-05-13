@@ -1,25 +1,96 @@
-TEAM 1
+==================================================
+		 Title Related Comments 
+==================================================
+==================================================
+		 Author Related Comments 
+==================================================
+If only two authors are present then the format should be \author{author1 and author2}
+		Here Remove comma between authors & add 'and'
+==================================================
+
+
+
+==================================================
+ Title Related Comments 
+==================================================
+ Title (Processed): 
+Transmit Antenna Selection for Interference-Outage Constrained Underlay CR
+
+ Number of words in the processed title: 8
+==================================================
+ Abstract Related Comments 
+==================================================
+ Abstract (Processed): 
+Transmit antenna selection (TAS) is a low hardware complexity technique that improves the performance of an interference-constrained underlay cognitive radio (CR) system by exploiting spatial diversity. We propose a novel TAS rule called the $$-weighted interference indicator rule (LWIIR). We prove that it is optimal in terms of minimizing the average symbol error probability (SEP) of an underlay CR system that is subject to the interference-outage constraint. This constraint imposes a limit on the probability that the interference power at the primary exceeds a threshold. It is a generalization of the widely studied peak interference constraint, and is practically and theoretically well motivated. We derive the average SEP of LWIIR for any given number of transmit and receive antennas. The rule and its performance analysis apply to a general class of fading models with continuous distributions and to many constellations. We also analyze the practically important scenario in which the secondary transmitter has imperfect channel state information of the channel gains from itself to the secondary receiver and from itself to the primary receiver. We show that the imperfections in these two sets of channel gains have different impacts on the CR system. Our extensive benchmarking shows that LWIIR markedly outperforms many selection rules considered in the literature.
+
+ Number of words in the abstract: 208
+==================================================
+  List of Acronyms: 
+==================================================
+ +-----------+---------------+----------------------------+
+| Acronym   |   Occurrences | Full Form                  |
++===========+===============+============================+
+| TAS       |             2 | Transmit antenna selection |
++-----------+---------------+----------------------------+
+| CR        |             3 | cognitive radio            |
++-----------+---------------+----------------------------+
+| LWIIR     |             3 | Not Defined                |
++-----------+---------------+----------------------------+
+| SEP       |             2 | symbol error probability   |
++-----------+---------------+----------------------------+
+==================================================
+ Warnings  
+==================================================
+Line 0638 [Warning]: Acronym 'LWIIR' is not properly defined at the first occurrence.
+
 ==================================================
 	Scientist Names Related Comments
 ==================================================
-No Scientist Names Used
+
+Scientist Names Used = Gaussian, Gauss
 ==================================================
 	Index Related Comments
 ==================================================
-Index Terms not present in document
+At Line 644 : Index terms are not in alphabetical order
 
-TEAM 2
 
 ===============================================================
                 Equation related comments
 ===============================================================
+Error: '.' is seen instead of ',' of at the end of equation whose line no is 938
+Warning: Punctuation not found at the end of the equation whose line no is 1352
+Warning: punction (',') is missing at the end of an equation whose line no is: 784
 
 ===============================================================
                 Math operator related comments
 ===============================================================
 
 
-TEAM 3
 ==================================================
+	 Sections and Subsections related Comments 
+==================================================
+ERROR in line:906   Word {A} need to be in lower case since it is a Unknown POS Tag
+ERROR in line:1090   Word {now} need to be Capitalized since it is a Adverb
+ERROR in line:1090   Word {interference-outage} need to be Capitalized since it is a Adjective
+ERROR in line:1090   Word {probability} need to be Capitalized since it is a Noun, Singular or Mass
+ERROR in line:1090   Word {rule} need to be Capitalized since it is a Noun, Singular or Mass
+No errors found in Subsections and Subsubsections
+==================================================
+
+
+==================================================
+Line 888: No Parenthesis warning.
+Line 999: No Parenthesis warning.
+Line 1020: No Parenthesis warning.
+Line 1099: No Parenthesis warning.
+Line 1116: No Parenthesis warning.
+Line 1404: No Parenthesis warning.
+Line 738: Long Exponential expression warning.
+Line 740: Long Exponential expression warning.
+Line 1037: Long Exponential expression warning.
+Line 1108: Long Exponential expression warning.
+Line 985: No required space at expression and condition.
+Line 987: No required space at expression and condition.
+Line 1404: No required space at expression and condition.
 
 
