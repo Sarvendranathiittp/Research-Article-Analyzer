@@ -7,15 +7,15 @@ import os
 
 # Teams' main file import
 
-from Team_0.task import team_0
-from Team_1.Task import team_1
+#from Team_0.task import team_0
+#from Team_1.Task import team_1
 from Team_2.task import team_2
-from Team_3.task import team_3
-from Team_4.task import team_4
-from Team_5.task import team_5
-from Team_6.task import team_6
-from Team_7.main import team_7
-from Team_8.code_tex import team_8
+#from Team_3.task import team_3
+#from Team_4.task import team_4
+#from Team_5.task import team_5
+#from Team_6.task import team_6
+#from Team_7.main import team_7
+#from Team_8.code_tex import team_8
 
 class wrapper:
 
@@ -58,7 +58,15 @@ class wrapper:
         if filepath:
             # Creating a LOGII file in the same directory as the input file
             ip_dir = os.path.dirname(filepath)
-            out_filepath = os.path.join(ip_dir, "LOGII")
+            
+            # Get the base name of the input file without extension
+            ip_file_basename = os.path.splitext(os.path.basename(filepath))[0] 
+
+            # Define the new log filename
+            log_filename =ip_file_basename +"_comments.log"
+            
+              # Construct the full path for the new log file in the same directory as the input file
+            out_filepath = os.path.join(ip_dir,log_filename )
             
             # Checking if .bbl file exists in the same directory as the input file
             ip_dir_ext = os.path.splitext(os.path.basename(filepath))[0]
@@ -70,7 +78,7 @@ class wrapper:
                     begin_index = bbl_text.find(r'\begin{document}')
 
         # Calling all team run() files
-        team_classes = [team_1, team_2, team_3, team_5, team_6, team_7, team_8]
+        team_classes = [ team_2]
         for team_class in team_classes:
             try:
                 obj_team = team_class(text, begin_index)
@@ -104,15 +112,15 @@ class wrapper:
         output_text_area = Text(output_screen)
         output_text_area.pack(fill=BOTH, expand=YES)
 
-        # Display contents of LOGII file if it exists
+        # Display contents of LOG file if it exists
         if os.path.exists(output_file_path):
             with open(output_file_path, "r") as log_file:
                 output_text = log_file.read()
             output_text_area.insert(END, output_text)
             output_text_area.config(state=DISABLED)
             
-            # Add download button if LOGII file exists
-            download_button = Button(output_screen, text="Download LOGII File", command=lambda: self.download_log(output_file_path))
+            # Add download button if LOG file exists
+            download_button = Button(output_screen, text="Download LOG File", command=lambda: self.download_log(output_file_path))
             download_button.pack(pady=10)
 
         else:
@@ -127,11 +135,11 @@ class wrapper:
         # Open file dialog to choose download location
         download_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text Files", "*.txt")])
         if download_path:
-            # Copy content of LOGII to the selected location
+            # Copy content of LOG to the selected location
             with open(output_file_path, "r") as log_file:
                 with open(download_path, "w") as download_file:
                     download_file.write(log_file.read())
-            messagebox.showinfo("Download Complete", "LOGII downloaded successfully.")
+            messagebox.showinfo("Download Complete", "LOG downloaded successfully.")
 
 
 # obj = wrapper()

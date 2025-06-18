@@ -1,0 +1,65 @@
+
+==================================================
+ Title Related Comments 
+==================================================
+ Title (Processed): 
+Transmit Antenna Selection for Interference-Outage Constrained Underlay CR
+
+ Number of words in the processed title: 8
+==================================================
+ Abstract Related Comments 
+==================================================
+ Abstract (Processed): 
+
+ Number of words in the abstract: 203
+==================================================
+ keywords Related Comments 
+==================================================
+ keywords (Processed): 
+cognitive radio, underlay, antenna selection, interference-outage constraint, symbol error probability, imperfect CSI.
+
+ Number of words in the keywords: 12
+==================================================
+  List of Acronyms: 
+==================================================
+ +-----------+---------------+----------------------------+
+| Acronym   |   Occurrences | Full Form                  |
++===========+===============+============================+
+| TAS       |             4 | Transmit antenna selection |
++-----------+---------------+----------------------------+
+| CR        |             2 | cognitive radio            |
++-----------+---------------+----------------------------+
+| LWIIR     |             3 | Not Defined                |
++-----------+---------------+----------------------------+
+| SEP       |             2 | symbol error probability   |
++-----------+---------------+----------------------------+
+| VLSI      |             1 | Not Defined                |
++-----------+---------------+----------------------------+
+| CSI       |             1 | Not Defined                |
++-----------+---------------+----------------------------+
+==================================================
+ Warnings  
+==================================================
+Line 0644 [Warning] : IEEE Style Violation: Keywords are not in alphabetical order.
+Line 0644 [warning] : IEEE Style Violation: The first keyword should begin with a capital letter.
+Line 0638 [Warning]: Acronym 'TAS' The acronym is defined multiple times or enclosed in parantheses multiple times.
+Line 0638 [Warning]: Acronym 'TAS' The acronym is defined multiple times or enclosed in parantheses multiple times.
+Line 0638 [Warning]: Acronym 'TAS' should be defined and enclosed in parentheses only at the first occurrence.
+Line 0638 [Warning]: Acronym 'TAS' The acronym is defined multiple times or enclosed in parantheses multiple times.
+Line 0638 [Warning]: Acronym 'TAS' should be defined and enclosed in parentheses only at the first occurrence.
+Line 0638 [Warning]: Acronym 'TAS' The acronym is defined multiple times or enclosed in parantheses multiple times.
+Line 0638 [Warning]: Acronym 'TAS' should be defined and enclosed in parentheses only at the first occurrence.
+Line 0638 [Warning]: Acronym 'CR' The acronym is defined multiple times or enclosed in parantheses multiple times.
+Line 0638 [Warning]: Acronym 'CR' The acronym is defined multiple times or enclosed in parantheses multiple times.
+Line 0638 [Warning]: Acronym 'LWIIR' The acronym is defined multiple times or enclosed in parantheses multiple times.
+Line 0638 [Warning]: Acronym 'LWIIR' is not properly expanded at the first occurrence.
+Line 0638 [Warning]: Acronym 'LWIIR' The acronym is defined multiple times or enclosed in parantheses multiple times.
+Line 0638 [Warning]: Acronym 'LWIIR' The acronym is defined multiple times or enclosed in parantheses multiple times.
+Line 0638 [Warning]: Acronym 'SEP' The acronym is defined multiple times or enclosed in parantheses multiple times.
+Line 0638 [Warning]: Acronym 'SEP' The acronym is defined multiple times or enclosed in parantheses multiple times.
+Line 0638 [Warning]: Acronym 'VLSI' The acronym is defined multiple times or enclosed in parantheses multiple times.
+Line 0638 [Warning]: 'VLSI' is a common acronym and not properly expanded its not enclosed in parentheses at the first occurrence.
+					 Full form: Very large scale integration.Expand if it doesn't matched with your defination.
+Line 0644 [Warning]: Acronym 'CSI' The acronym is defined multiple times or enclosed in parantheses multiple times.
+Line 0644 [Warning]: Acronym 'CSI' is not properly expanded and not enclosed in parentheses at the first occurrence.
+
