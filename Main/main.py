@@ -7,15 +7,15 @@ import os
 
 # Teams' main file import
 
-#from Team_0.task import team_0
-#from Team_1.Task import team_1
+from Team_0.task import team_0
+from Team_1.Task import team_1
 from Team_2.task import team_2
-#from Team_3.task import team_3
-#from Team_4.task import team_4
-#from Team_5.task import team_5
-#from Team_6.task import team_6
-#from Team_7.main import team_7
-#from Team_8.code_tex import team_8
+from Team_3.task import team_3
+from Team_4.task import team_4
+from Team_5.task import team_5
+from Team_6.task import team_6
+from Team_7.main import team_7
+from Team_8.code_tex import team_8
 
 class wrapper:
 
@@ -56,16 +56,16 @@ class wrapper:
         begin_index = text.find(r'\begin{document}')
 
         if filepath:
-            # Creating a LOGII file in the same directory as the input file
+            # Creating a LOG file in the same directory as the input file
             ip_dir = os.path.dirname(filepath)
             
-            # Get the base name of the input file without extension
+            # Get the original file name of the input  without extension
             ip_file_basename = os.path.splitext(os.path.basename(filepath))[0] 
 
-            # Define the new log filename
+            # creating the new log file
             log_filename =ip_file_basename +"_comments.log"
             
-              # Construct the full path for the new log file in the same directory as the input file
+            # Construction of full path for the new log file in the same directory as the input file
             out_filepath = os.path.join(ip_dir,log_filename )
             
             # Checking if .bbl file exists in the same directory as the input file
@@ -78,7 +78,7 @@ class wrapper:
                     begin_index = bbl_text.find(r'\begin{document}')
 
         # Calling all team run() files
-        team_classes = [ team_2]
+        team_classes = [team_1, team_2, team_3, team_4, team_5, team_6, team_7, team_8]
         for team_class in team_classes:
             try:
                 obj_team = team_class(text, begin_index)
