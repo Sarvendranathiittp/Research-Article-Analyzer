@@ -56,11 +56,18 @@ class wrapper:
         begin_index = text.find(r'\begin{document}')
 
         if filepath:
-            # Creating a LOGII file in the same directory as the input file
+            # Get the directory of the input file
             ip_dir = os.path.dirname(filepath)
-            out_filepath = os.path.join(ip_dir, "LOGII")
+
+            # Get the base filename without extension
+            base_name = os.path.splitext(os.path.basename(filepath))[0]  # e.g., 'myfile.tex' → 'myfile'
+
+            # Create the output filename with '_comments.log' appended
+            output_filename = base_name + "_comments.log"
+
+            # Create the full output path
+            out_filepath = os.path.join(ip_dir, output_filename)
             
-            # Checking if .bbl file exists in the same directory as the input file
             ip_dir_ext = os.path.splitext(os.path.basename(filepath))[0]
             bbl_path = os.path.join(ip_dir, ip_dir_ext+".bbl")
 
@@ -104,15 +111,15 @@ class wrapper:
         output_text_area = Text(output_screen)
         output_text_area.pack(fill=BOTH, expand=YES)
 
-        # Display contents of LOGII file if it exists
+        # Display contents of LOG file if it exists
         if os.path.exists(output_file_path):
             with open(output_file_path, "r") as log_file:
                 output_text = log_file.read()
             output_text_area.insert(END, output_text)
             output_text_area.config(state=DISABLED)
             
-            # Add download button if LOGII file exists
-            download_button = Button(output_screen, text="Download LOGII File", command=lambda: self.download_log(output_file_path))
+            # Add download button if LOG file exists
+            download_button = Button(output_screen, text="Download LOG File", command=lambda: self.download_log(output_file_path))
             download_button.pack(pady=10)
 
         else:
@@ -131,7 +138,7 @@ class wrapper:
             with open(output_file_path, "r") as log_file:
                 with open(download_path, "w") as download_file:
                     download_file.write(log_file.read())
-            messagebox.showinfo("Download Complete", "LOGII downloaded successfully.")
+            messagebox.showinfo("Download Complete", "LOG downloaded successfully.")
 
 
 # obj = wrapper()
