@@ -31,7 +31,7 @@ class team_1:
         output = []     # The output list with the errors to be returned
         text=self.latex_code
         self.author_analysis(text,output)
-        #self.title_analysis(text,output)
+        self.title_analysis(text,output)
         return output
     
     #function to analyse title text. 
