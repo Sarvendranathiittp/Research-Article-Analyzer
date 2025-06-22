@@ -19,7 +19,7 @@ class team_3:
         # use self
         str = '='*50
         output.append(str+'\n\tScientist Names Related Comments\n'+str+'\n')
-       # self.scientistName(text,output)
+        self.scientistName(text,output)
         output.append(str+'\n\tIndex Related Comments\n'+str+'\n')
         output.extend(self.indexCheck())
         #output.append('\n'+str+'\n\tAcronym Related Comments\n'+str)
