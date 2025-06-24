@@ -49,13 +49,6 @@ class team_4:
             'sec': 's', 'amps': 'A', 'sq.': '^2', 'cu.': '^3'
         }
         
-        # Mapping of special characters to their LaTeX-friendly equivalents.
-        self.latex_equivalents = {
-            'Ω': r'\Omega',
-            '°C': r'^{\circ}C',
-            '%': r'\%'
-        }
-        
         # Pre-compile regex patterns for efficiency
         math_environments = ['equation', 'align', 'gather', 'multline', 'flalign', 'alignat']
         self.begin_env_pattern = re.compile(fr'\\begin\{{({"|".join(math_environments)})\*?}}')
@@ -179,14 +172,12 @@ class team_4:
         issues = []
         for match in self.regex_no_space.finditer(line):
             value, unit = match.groups()
-            latex_unit = self.latex_equivalents.get(unit, unit)
-            issues.append(f"Line {line_num}: [Spacing] Insert a tilde (~) between the quantity and the unit : {value}~{latex_unit}.")
+            issues.append(f"Line {line_num}: [Spacing] Insert non-breaking space: {value}~{unit}.")
 
         for match in self.regex_wrong_space.finditer(line):
             if '~' not in match.group(0):
                 value, unit = match.groups()
-                latex_unit = self.latex_equivalents.get(unit, unit)
-                issues.append(f"Line {line_num}: [Spacing] Insert a tilde (~) between the quantity and the unit : {value}~{latex_unit}.")
+                issues.append(f"Line {line_num}: [Spacing] Insert non-breaking space: {value}~{unit}.")
         return issues
 
     def _check_full_unit_names(self, line, line_num):
@@ -200,8 +191,7 @@ class team_4:
         for match in self.regex_full_names.finditer(line):
             value, unit_name = match.groups()
             correct_unit = self.unit_full_names.get(unit_name.lower(), unit_name)
-            latex_unit = self.latex_equivalents.get(correct_unit, correct_unit)
-            issues.append(f"Line {line_num}: [Symbol Use] Use the unit symbol instead of spelling out the unit name: {value}~{latex_unit}.")
+            issues.append(f"Line {line_num}: [Symbol Use] Use correct unit symbol: {value}~{correct_unit}.")
         return issues
 
     def _check_ellipsis(self, line, line_num):
@@ -218,7 +208,7 @@ class team_4:
 
             # Rule: Detect literal '...' or '…' and suggest replacement.
             if ellipsis_str in ['...', '…']:
-                issues.append(f"Line {line_num}: [Three dots] Replace the dots written manually (...) with the correct LaTeX command : \\ldots.")
+                issues.append(f"Line {line_num}: [Ellipsis] Replace with LaTeX ellipsis: \\ldots.")
                 continue
 
             # Determine if the ellipsis is used in an operational context (e.g., sums, products).
@@ -228,10 +218,10 @@ class team_4:
             # Rule: Flag incorrect ellipsis command for the context.
             # Suggests \cdots for operational use and \ldots for sequential use.
             if is_operational and ellipsis_str == r'\ldots':
-                issues.append(f"Line {line_num}: [Math Formatting] Replace the dots (...) with \\cdots when they appear between mathematical operators.")
+                issues.append(f"Line {line_num}: [Math Formatting] Fix punctuation and command usage: Use \\cdots for operations.")
             
             if not is_operational and ellipsis_str == r'\cdots':
-                issues.append(f"Line {line_num}: [Math Formatting]Replace the dots (...) with \\ldots when they appear between mathematical operators")
+                issues.append(f"Line {line_num}: [Math Formatting] Fix punctuation and command usage: Use \\ldots for sequences.")
 
             # Rule: Ensure at least two terms precede an ellipsis.
             # This applies to both \ldots and \cdots.
@@ -240,14 +230,14 @@ class team_4:
                 elements = [e for e in elements if e and not e.endswith('(')]
                 if len(elements) < 2:
                     if not pre_text.endswith('('):
-                        issues.append(f"Line {line_num}: [Math Formatting] Make sure to write at least two terms before using the ellipsis (e.g., write a + b + \cdots instead of just a + \cdots).")
+                        issues.append(f"Line {line_num}: [Math Formatting] Fix punctuation and command usage: Use at least two terms before {ellipsis_str}.")
 
             # Rule: Check for missing commas around \ldots in sequences.
             # This ensures proper punctuation in lists like 'x_1, ..., x_n'.
             if ellipsis_str == r'\ldots' and not is_operational:
                 if pre_text and post_text and pre_text[-1].isalnum() and post_text[0].isalnum():
                      if not (pre_text.endswith(',') or post_text.startswith(',')):
-                        issues.append(f"Line {line_num}: [Math Formatting]Add commas around \\ldots when it appears in a list (e.g., x_1, x_2, \ldots, x_n).")
+                        issues.append(f"Line {line_num}: [Math Formatting] Fix punctuation and command usage: Add commas around \\ldots.")
 
         return list(set(issues))
 
@@ -256,5 +246,5 @@ class team_4:
         issues = []
         for match in self.cdot_regex.finditer(line):
             var1, var2 = match.groups()
-            issues.append(f"Line {line_num}: [Math Formatting] Use \cdot between two variables to show multiplication: {var1} \\cdot {var2}.")
+            issues.append(f"Line {line_num}: [Math Formatting] Fix punctuation and command usage: {var1} \\cdot {var2}.")
         return issues
