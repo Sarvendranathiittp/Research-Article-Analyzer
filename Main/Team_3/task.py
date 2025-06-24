@@ -67,9 +67,8 @@ class team_3:
         #key contains the index number 'character index'
         for key,value in location.items():
             if text[key:key+len(value)]!=value:
-                
                 line=self.lineNumber(key)
-                output.append("At Line "+str(line)+' : '+text[key:key+len(value)]+" is not in proper format ")
+                output.append(" Line "+str(line)+': '+text[key:key+len(value)]+" is not in the correct format.\n")
         #"At line "+self.line_number(text,key)+":"+
         for element in scientist_names:
                 # Check if the element is a list
@@ -91,52 +90,16 @@ class team_3:
                 str1=str1+', '+word
         for word in scientist_names_used:
             if word[0].islower() is True: # can directly check True/False is True not required
-                output.append(word+" should start with a capital letter as it is a proper name ")
+                output.append(" Line " + str(line) + ": The word '" + word + "' should begin with a capital letter.\n")
         if str1=='':
-            output.append('No Scientist Names Used\n')
+            output.append(' No Scientist Names Identified.\n')
         else:
-            output.append('\nScientist Names Used = '+str1+'\n')        
+            output.append('\n Scientist Names Identified = '+str1+'.\n')        
             
-        # Misspelled names
-        """
-        misspelled_names = set()
-        strings=text.split()
-        for name in strings:
-            for correct_names in scientist_names2:
-                if self.is_approximate_match(name,correct_names)=='same':
-                    a=1
-                elif self.is_approximate_match(name,correct_names) is True:
-                    #if self.is_string_in_lists(name, scientist_names2,scientist_names1,scientist_names_used,scientist_names_used2):    
-                    #if name not in scientist_names2 or scientist_names1 or scientist_names_used or scientist_names_used1 or scientist_names_used2:
-                    if name not in scientist_names2 :
-                        if name not in scientist_names1:
-                            if name[-1]!='.':
-                                misspelled_names.add(name)
-        if misspelled_names:
-            output.append("Spelling mistakes found for the following names:")
-            for name in misspelled_names:
-                output.append("At Line "+str(self.lineNumber(text.find(name)))+" : "+name)
 
-        for word in text.split():
-            for scientist_name in scientist_names2:
-                if isinstance(scientist_name, list):
-                    correct_name, variations = scientist_name[0], scientist_name[1:]
-                else:
-                    correct_name, variations = scientist_name, []
-
-                if any(self.is_approximate_match(variation, word) for variation in [correct_name] + variations):
-                     if word not in scientist_names2 :
-                            if word not in scientist_names1:
-                               if word[-1]!='.':
-                                    print(f"Found match: {word} -> {correct_name}")
-"""
     def is_string_in_lists(self,search_string, *lists):
         return any(search_string in my_list for my_list in lists)
    
-   
-    """
-    Make seperate functions for whatever you do and call it in run
-    """
     def acron(self,text,output):
         start_index = text.find(r"\begin{IEEEkeywords}")        
         end_index = text.find(r"\end{IEEEkeywords}") 
@@ -154,11 +117,6 @@ class team_3:
             else:
                 pass
         unique_words = []
-        """
-        for word in acronym_word:
-            if word not in unique_words:
-                output.append("\n"+word)
-        """
 
     def indexCheck(self):
         text = self.latex_code
@@ -166,23 +124,20 @@ class team_3:
         
         start_index = text.find(r"\begin{IEEEkeywords}")
         if start_index == -1:
-            output.append("Index Terms not present in document")
-            return output
+            output.append(f" Line {line}: No Index Terms Were Found in the Document.\n")
+            
         
         end_index = text.find(r"\end{IEEEkeywords}") 
         
         index_text = text[start_index+21:end_index].rstrip() # 21 is to offset \begin{IEEEkeywords}
         index_text = index_text.strip()
-        """
-        Checking if any enumeration/ list / formatting is used
-        """
 
         pattern = re.compile(r'\\.*?{.*?}') # check for \${$} where $ is placeholder for anything of any length
         pattern_matches = re.findall(pattern,index_text)
         
         if len(pattern_matches)>0:
             line = self.lineNumber(start_index+21)
-            output.append(f"At Line {line} : Index must be a sentence and should not use any formatting.")
+            output.append(f"At Line {line} : Index must be a sentence and should not use any formatting.\n")
             return output
         
         
@@ -192,48 +147,36 @@ class team_3:
         reference_text = index_text.capitalize()
         reference_text_list = reference_text.replace(","," ").split(" ")
         reference_text_list = [i.strip(" .") for i in reference_text_list if len(i)>=1]
-        
-        """
-        Checking if the index terms have newlines in them
-        """
+
         pattern = re.compile(r'.*?\n\n.*?')
         pattern_matches = re.findall(pattern,index_text)
 
         if len(pattern_matches)>0:
             line = self.lineNumber(start_index+21)
-            output.append(f"At Line {line} : Index must be a sentence")
+            output.append(f"At Line {line} : Index must be a sentence.\n")
             return output
 
-        """
-        Checking alphabetical order 
-        """
 
         comma_list = [i.strip()[0].lower() for i in index_text.split(",") if len(i)>=1 and i.strip()[0].isalpha()]
         if comma_list != sorted(comma_list):
             line = self.lineNumber(start_index+21)
-            output.append(f"At Line {line} : Index terms are not in alphabetical order")
+            output.append(f"At Line {line} : Index terms are not in alphabetical order.\n")
         
-        """
-        Checking if index terms are in Sentence case
-        Considering any word with >=2 upper case characters as Acronyms
-        """
         
         for i,j in zip(index_text_list,reference_text_list):
             if not sum([1 for _ in i if _.isupper()])>=2:
                 if i != j:
                     line = self.lineNumber(start_index+21 + index_text.find(i))
                     if j[0].isupper():
-                        output.append(f"At Line {line} : First letter of first word must be in Capital Case")
+                        output.append(f"At Line {line} : First letter of first word {i.strip()} must be in Capital Case.\n")
                     else:
-                        output.append(f"At Line {line} : Word {i.strip()} is in the middle of the sentence, so should be in lower case ")
-        """
-        Checking for full stop at the end of index terms
-        """
+                        output.append(f"At Line {line} : Word {i.strip()} is in the middle of the sentence, so should be in lower case.\n ")
+
         
         if full_stop_check_list[-1][-1] !=".":  # last character should be .
             line = self.lineNumber(start_index+21 + index_text.find(full_stop_check_list[-1][-1]))
-            output.append(f"At Line {line} : Full stop not present at the end of index")
-        return output if len(output)>=1 else ["No errors in Index"]
+            output.append(f"At Line {line} : Full stop not present at the end of index.\n")
+        return output if len(output)>=1 else output.append("No errors in Index.\n")
     
     def lineNumber(self,target_index):
         line_count=0
