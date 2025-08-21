@@ -20,7 +20,6 @@ class team_3:
         str = '='*50
         output.append(str+'\n\tScientist Names Related Comments\n'+str+'\n')
         self.scientistName(text,output)
-        #output.append('\n'+str+'\n\tAcronym Related Comments\n'+str)
         self.acron(text,output)
         return output
     
@@ -43,7 +42,7 @@ class team_3:
                          "Planck's Constant", "Maxwell's Equations", "Heisenberg Uncertainty Principle", "Feynman Diagrams", "Schrödinger's Cat", "Fermi Paradox", "Hawking Radiation", "Faraday's Law of Induction", "Mendeleev's Periodic Table", 
                          "Sagan's Drake Equation Contributions", "Sakharov Conditions", "Meitner–Hahn Hypothesis", "Hubble's Law", "Bell–Burnell Pulsar Discovery", "Gaussian Distribution", "Chandrasekhar Limit", "Doppler Effect", "Euler's Formula", 
                          "Atiyah–Singer Index Theorem", "Lovelace Algorithm", "Turing Machine", "Mendelian Genetics", "Tesla Coil", "Darwin's Theory of Evolution", "Franklin's X-ray Diffraction Work", "Fleming's Penicillin Discovery", "McClintock's Transposons",
-                           "Noether's Theorem", "Gould's Punctuated Equilibrium Theory", "Shannon's Information Theory", "Dirac Equation", "Leavitt's Law", "Goodall's Chimpanzee Behavior Studies"]
+                           "Noether's Theorem", "Gould's Punctuated Equilibrium Theory", "Shannon's Information Theory", "Dirac Equation", "Leavitt's Law", "Goodall’s Chimpanzee Behavior Studies"]
         
         for element in scientist_names:
             if isinstance(element, list):
@@ -82,20 +81,23 @@ class team_3:
                 str1=str1+', '+word
 
         for word in scientist_names_used:
-            word_parts = word.split(' ')
-            has_lowercase = False
+            word_parts=word.split(' ')
+            lower_case=False
             for part in word_parts:
-                if part and part[0].islower():
-                    has_lowercase = True
+                if part[0].islower():
+                    lower_case=True
                     break
-            
-            if has_lowercase:  # Only print once per scientist name
+            if lower_case:
                 pattern = r'\b' + re.escape(word) + r'\b'
-                for match in re.finditer(pattern, text):
-                    line = self.lineNumber(match.start())
-                    output.append(" Line " + str(line) + " : All words in scientist name '" + word + "' should start with a capital letter.\n")
-                    break  # Only print once per occurrence
+                for match in re.finditer(pattern,text):
+                    line=self.lineNumber(match.start())
+                    if len(word_parts)>1:
+                        output.append(" Line " + str(line) + " : [Casing] All Words in the name of scientist '" + word + "' should start with a capital letter.\n") 
+                    else:
+                        output.append(" Line " + str(line) + " : [Casing] Name of scientist '" + word + "' should start with a capital letter.\n") 
 
+
+                    
         if str1=='':
             output.append('\n No scientist names found.\n')
         else:

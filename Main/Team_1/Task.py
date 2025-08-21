@@ -30,8 +30,8 @@ class team_1:
     def run(self):      # will be invoked by wrapper, shouldn't take arguments
         output = []     # The output list with the errors to be returned
         text=self.latex_code
-        self.author_analysis(text,output)
         self.title_analysis(text,output)
+        self.author_analysis(text,output)
         return output
     
     #function to analyse title text. 
@@ -46,11 +46,16 @@ class team_1:
         # Remove all comments (anything after % on a line) for processing
         lines = self.latex_code.split('\n')
         no_comment_lines = []
+        a='first_line'
+        no_comment_lines.append(a)
         for line in lines:
-            if '%' in line:
-                line = line.split('%', 1)[0]
-            no_comment_lines.append(line)
-        latex_content = '\n'.join(no_comment_lines)
+            stripped_line = line.strip()
+            if (stripped_line.startswith('%') and 
+                ('\\title' in stripped_line or '\\author' in stripped_line)):
+                no_comment_lines.append('')
+            else:
+                no_comment_lines.append(line)
+                latex_content = '\n'.join(no_comment_lines)
         
          # Define a regular expression to match LaTeX Title
         title_pattern = re.compile(r'\\title{([^}]+)}')
@@ -153,25 +158,25 @@ class team_1:
                 error_triggered=False
                 if word == words[0] or word == words[-1]:   # initial & final word should be capital in a title
                     if not word.istitle() and (not word.isupper() and not word.istitle()):
-                        error += f" Line {self.line_number} : In Word {word} first letter need to be capitalized.\n"
+                        error += f" Line {self.line_number} : [Casing] In Word {word} first letter need to be capitalized.\n"
                         error_triggered = True
                         # checking if it's a plural acronym
                         if (word[:len(word)-1].isupper() and not word[len(word)-1].islower()) or (not word[:len(word)-1].isupper() and not word[len(word)-1].islower()):
-                            error += f" Line {self.line_number} : In Word {word} last letter should be in lowercase if it's an acro.\n"
+                            error += f" Line {self.line_number} : [Casing] In Word {word} last letter should be in lowercase if it's an acro.\n"
                 # Finding Nouns, Adjectives, Verbs, Adverbs & Pronouns and checking the condition
                 elif pos.startswith('N') or pos.startswith('J') or pos.startswith('V') or pos.startswith('R') or pos.startswith('P'):
                     if not word[0].isupper():
-                        error += f" Line {self.line_number} : In Word {word} first letter need to be capitalized.\n"
+                        error += f" Line {self.line_number} : [Casing] In Word {word} first letter need to be capitalized.\n"
                         error_triggered = True
                 # Finding Coordinate Conjunctions, Articles, prepositions         
                 elif pos == 'CC' or pos == 'DT' or (pos == 'IN' and len(word) < 4):
                     if not word.islower() and not (i > 0 and words[i-1] == ':'):
-                        error += f" Line {self.line_number} : Word {word} need to be in lower case.\n"
+                        error += f" Line {self.line_number} : [Casing] Word {word} need to be in lower case.\n"
                         error_triggered = True
                 # finding prepositions of length greater than 3
                 elif pos == 'IN' and len(word) > 3:
                     if not word[0].isupper():
-                        error += f" Line {self.line_number} : In Word {word} first letter need to be capitalized.\n"
+                        error += f" Line {self.line_number} : [Casing] In Word {word} first letter need to be capitalized.\n"
                         error_triggered = True
                 count = 0
                 for i in range(1, len(word)):
@@ -181,9 +186,9 @@ class team_1:
                     count_word=num_to_words(count)
                     plural="letter is" if count==1 else "letters are"
                     if error_triggered:
-                        error+=f"            In the word {word}, {count_word} {plural} unnecessarily capitalized.\n"
+                        error+=f"            [Casing] In the word {word}, {count_word} {plural} unnecessarily capitalized.\n"
                     else:
-                        error+=f" Line {self.line_number} : In the word {word}, {count_word} {plural} unnecessarily capitalized.\n"
+                        error+=f" Line {self.line_number} : [Casing] In the word {word}, {count_word} {plural} unnecessarily capitalized.\n"
 
              #Checking Whether extra spaces are added in title text.
             self.spaces_count(title_text,output) 
@@ -271,11 +276,11 @@ class team_1:
                     full_name=' '.join(name_parts)
                     if re.match(r'^[a-zA-Z]+$', words[i]) and not words[i]=='and':
                         if not words[i][0].isupper():
-                            output.append(f" Line {self.line_number} : In Word '"+words[i]+"' first letter need to be capitalized.\n")
+                            output.append(f" Line {self.line_number} : [Casing] In Word '"+words[i]+"' first letter need to be capitalized.\n")
                     if words[i]=='{':
                         author_flag =1
                         if not words[i-1]==',':
-                            output.append(f" Line {self.line_number} : A comma is missing after the author name '{full_name}', and before the author affiliation.\n")
+                            output.append(f" Line {self.line_number} : [Puntuations] A comma is missing after the author name '{full_name}', and before the author affiliation.\n")
                         if not words[i+1]=='\\it':
                             output.append(f" Line {self.line_number} : [Warning] Use \\it for italic style when writing the author affiliation.\n")
                     if words[i]==',':
@@ -284,7 +289,7 @@ class team_1:
                     if words[i]=='}'and not i==len(words)-1 and not words[i+1]=='}':
                         author_flag=0
                         if not words[i+1]==',' and not words[i+1]=='and' :
-                            output.append(f" Line {self.line_number} : Insert a comma between author names.\n")
+                            output.append(f" Line {self.line_number} : [Puntuations] Insert a comma between author names.\n")
                             author_indices.append(i+1)
                     if words[i]=='and' and not words[i-1]==',':
                         author_indices.append(i)
@@ -312,28 +317,23 @@ class team_1:
         #verifying conditions if only two authors are present 
         if len(author_indices)==2: 
             if not words[author_indices[1]]=='and':
-                output.append(f" Line {self.line_number} : If only two authors are present, the format should be \\author(author1 and author2).\n\t    Remove the comma between the authors and add 'and'.\n")
+                output.append(f" Line {self.line_number} : [Puntuations] If only two authors are present, the format should be \\author(author1 and author2).\n\t    Remove the comma between the authors and add 'and'.\n")
             
             elif words[author_indices[1]-1]==',':
-                output.append(f" Line {self.line_number} : If only two authors are present, then the format should be \\author(author1 and author2).\n\t    Here comma should be removed.\n")
+                output.append(f" Line {self.line_number} : [Puntuations] If only two authors are present, then the format should be \\author(author1 and author2).\n\t    Here comma should be removed.\n")
     
     #verifying conditions if more than two authors are present 
         else:
             for i in author_indices:
                 if words[i]=='and' and not i==author_indices[-1]:
-                    output.append(f" Line {self.line_number} : If number of authors are more than 2 then format is : \\author(author1, author2, and author3).\n\t    Try to remove 'and' between  all authors except last author.\n")
+                    output.append(f" Line {self.line_number} : [Puntuations] If number of authors are more than 2 then format is : \\author(author1, author2, and author3).\n\t    Try to remove 'and' between  all authors except last author.\n")
                     break
             
             #checking whether there is ", and " before last author   
             if not words[author_indices[-1]]=='and' or not words[author_indices[-1]-1]==',':
-                    output.append(f" Line {self.line_number} : If number of authors are more than 2 then format is : \\author(author1, author2, and author3).\n\t    So make sure there is ', and' before last author.\n") 
+                    output.append(f" Line {self.line_number} : [Puntuations] If number of authors are more than 2 then format is : \\author(author1, author2, and author3).\n\t    So make sure there is ', and' before last author.\n") 
         
 def num_to_words(n):
     num_words={1:"one",2:"two",3:"three",4:"four",5:"five",6:"six",7:"seven",8:"eight",9:"nine",10:"ten"}
     return num_words.get(n, str(n))
     
-
-            
-
-
-                
